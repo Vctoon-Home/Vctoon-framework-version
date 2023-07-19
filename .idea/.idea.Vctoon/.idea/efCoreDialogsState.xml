@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EfCoreDialogsState">
+    <option name="keyValueStorage">
+      <map>
+        <entry key="Common:861dc842-4736-4f48-9d93-1350442c286a:dbContext" value="VctoonCore.EntityFrameworkCore.VctoonCoreDbContext" />
+        <entry key="Common:b9d7242a-0c3f-470a-be88-837aa9062770:dbContext" value="VctoonCore.EntityFrameworkCore.VctoonCoreDbContext" />
+        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:noBuild" value="false" />
+        <entry key="Common:outputFolder" value="Migrations" />
+      </map>
+    </option>
+  </component>
+</project>

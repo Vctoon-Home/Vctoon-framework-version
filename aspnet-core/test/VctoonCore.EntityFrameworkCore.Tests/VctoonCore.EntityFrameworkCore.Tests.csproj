@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+   <Import Project="..\..\..\core.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    
+    <RootNamespace>VctoonCore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\VctoonCore.EntityFrameworkCore\VctoonCore.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\VctoonCore.TestBase\VctoonCore.TestBase.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+  </ItemGroup>
+
+</Project>

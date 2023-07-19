@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+   <Import Project="..\..\..\core.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    
+    <RootNamespace>VctoonCore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VctoonCore.Domain.Shared\VctoonCore.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.8" />
+    <PackageReference Include="SharpCompress" Version="0.33.0" />
+    <PackageReference Include="Volo.Abp.Emailing" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="$(AbpPackageVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="$(AbpPackageVersion)" />
+  </ItemGroup>
+
+</Project>

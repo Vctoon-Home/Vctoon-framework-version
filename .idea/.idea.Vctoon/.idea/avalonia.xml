@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="client/src/VctoonClient/App.axaml" value="client/src/VctoonClient.Browser/VctoonClient.Browser.csproj" />
+        <entry key="client/src/VctoonClient/Views/MainView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Views/MainWindow.axaml" value="client/src/VctoonClient.Browser/VctoonClient.Browser.csproj" />
+        <entry key="client/src/VctoonClient/Views/Users/LoginView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

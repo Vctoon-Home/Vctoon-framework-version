@@ -1,0 +1,14 @@
+<Project>
+
+	<Import Project="base.props" />
+	<PropertyGroup>
+		<Version>0.0.1</Version>
+		<AbpProjectType>app</AbpProjectType>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json"/>
+	</ItemGroup>
+
+</Project>
