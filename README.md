@@ -15,6 +15,6 @@ Vctoon is an open-source app built with ABP Framework and Avalonia for managing 
 
 This project is licensed under the terms of the **MIT** license.
 
-### Author
+## Author
 
 [Zyknow](https://github.com/zyknow)

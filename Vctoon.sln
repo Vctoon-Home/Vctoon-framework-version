@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{7A5BCB73-F
 		base.props = base.props
 		client.props = client.props
 		core.props = core.props
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnet-core", "aspnet-core", "{816BDEF4-5440-4FB5-A98E-03D903BD8305}"
