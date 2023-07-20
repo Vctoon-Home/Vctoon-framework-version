@@ -1,5 +1,6 @@
 ﻿using System;
 using VctoonCore.Consts;
+using VctoonCore.Resources.DataResolves;
 using Volo.Abp.Guids;
 using Xunit;
 

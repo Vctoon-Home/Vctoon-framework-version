@@ -1,19 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using VctoonCore.ArchiveDataHandlers;
 using VctoonCore.Consts;
-using VctoonCore.Handlers;
-using VctoonCore.Handlers.Resources;
 using VctoonCore.JobModels;
-using VctoonCore.Libraries;
-using VctoonCore.Resources;
+using VctoonCore.Resources.Handlers;
 using Volo.Abp.BackgroundJobs;
-using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Guids;
 using Volo.Abp.Uow;
 
-namespace VctoonCore.Jobs;
+namespace VctoonCore.Libraries.Jobs;
 
 public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITransientDependency
 {

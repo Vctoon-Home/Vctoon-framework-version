@@ -1003,6 +1003,7 @@ namespace VctoonCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ArchivePath = table.Column<string>(type: "text", nullable: true),
                     Path = table.Column<string>(type: "text", nullable: true),
                     ComicChapterId = table.Column<Guid>(type: "uuid", nullable: false)
                 },

@@ -1,6 +1,6 @@
 ﻿using VctoonCore.Libraries;
 
-namespace VctoonCore.Handlers;
+namespace VctoonCore.Resources.Handlers;
 
 public interface IScanHandler : ITransientDependency
 {

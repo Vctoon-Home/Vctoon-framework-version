@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using JetBrains.Annotations;
-using VctoonCore.Consts;
 using VctoonCore.Libraries;
-using VctoonCore.Resources;
 using Volo.Abp.Guids;
-using Volo.Abp.Http;
 
-namespace VctoonCore.Handlers.Resources;
+namespace VctoonCore.Resources.Handlers;
 
 public class ComicScanHandler : IScanHandler
 {

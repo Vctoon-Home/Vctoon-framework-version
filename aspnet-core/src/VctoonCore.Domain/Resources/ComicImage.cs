@@ -1,4 +1,7 @@
 ﻿using System.IO;
+using JetBrains.Annotations;
+using SharpCompress.Archives;
+using VctoonCore.Helpers;
 
 namespace VctoonCore.Resources;
 
@@ -8,13 +11,17 @@ public class ComicImage : Entity<Guid>
     {
     }
 
-    public ComicImage(Guid id, string path, Guid comicChapterId) : base(id)
+    public ComicImage(Guid id, string path, Guid comicChapterId, string archivePath = null) : base(id)
     {
         Path = path;
+        ArchivePath = archivePath;
         ComicChapterId = comicChapterId;
     }
+
+    public string ArchivePath { get; protected set; }
     public string Path { get; protected set; }
     public Guid ComicChapterId { get; set; }
+
     public void SetPath(string path)
     {
         Check.NotNullOrWhiteSpace(path, nameof(path));
@@ -24,4 +31,21 @@ public class ComicImage : Entity<Guid>
     }
 
 
+    [CanBeNull]
+    public Stream GetImageStream()
+    {
+        if (!ArchivePath.IsNullOrEmpty())
+        {
+            var volumes = ArchiveHelper.GetArchiveVolumeFiles(ArchivePath);
+            var streams = volumes.Select(v => v.OpenRead()).ToList();
+            var archive = ArchiveFactory.Open(streams);
+
+            var entry = archive.Entries.FirstOrDefault(x => x.Key == Path);
+            return entry?.OpenEntryStream();
+        }
+        else
+        {
+            return File.OpenRead(Path);
+        }
+    }
 }

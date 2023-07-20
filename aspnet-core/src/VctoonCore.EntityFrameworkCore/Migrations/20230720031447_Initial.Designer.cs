@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace VctoonCore.Migrations
 {
     [DbContext(typeof(VctoonCoreDbContext))]
-    [Migration("20230719020443_Initial")]
+    [Migration("20230720031447_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -229,6 +229,9 @@ namespace VctoonCore.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("ArchivePath")
+                        .HasColumnType("text");
 
                     b.Property<Guid>("ComicChapterId")
                         .HasColumnType("uuid");

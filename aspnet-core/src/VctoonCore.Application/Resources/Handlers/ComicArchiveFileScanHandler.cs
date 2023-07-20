@@ -1,26 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using VctoonCore.ArchiveDataHandlers;
 using VctoonCore.Consts;
+using VctoonCore.Helpers;
 using VctoonCore.Libraries;
-using VctoonCore.Resources;
-using Volo.Abp.Domain.Repositories;
+using VctoonCore.Resources.DataResolves;
 using Volo.Abp.Guids;
 
-namespace VctoonCore.Handlers.Resources;
+namespace VctoonCore.Resources.Handlers;
 
 public class ComicArchiveFileScanHandler : IScanHandler
 {
     private readonly IGuidGenerator _guidGenerator;
     private readonly IComicChapterRepository _comicChapterRepository;
     private readonly IComicRepository _comicRepository;
-    static readonly List<string> AllVolumeExtensions = new List<string>();
-
-    static ComicArchiveFileScanHandler()
-    {
-        Init();
-    }
 
 
     public ComicArchiveFileScanHandler(IGuidGenerator guidGenerator, IComicChapterRepository comicChapterRepository,
@@ -60,7 +53,7 @@ public class ComicArchiveFileScanHandler : IScanHandler
     async Task<(List<ComicChapter> addChapters, List<ComicChapter> deleteChapters, List<ComicChapter> updateChapters)>
         GetArchiveFileData(LibraryFile libraryFile, Guid libraryPathId)
     {
-        var volumes = await GetArchiveVolumeFiles(new FileInfo(libraryFile.FilePath));
+        var volumes = ArchiveHelper.GetArchiveVolumeFiles(new FileInfo(libraryFile.FilePath));
 
         using var archiveResolver = new ArchiveDataResolve(volumes.Select(v => v.FullName),
             ResourceSupportFileExtensions.ComicImageExtensions);
@@ -105,67 +98,6 @@ public class ComicArchiveFileScanHandler : IScanHandler
         if (oldComicChapter.Images.Count != newComicChapter.Images.Count)
             return true;
 
-        foreach (var comicImage in oldComicChapter.Images)
-        {
-            if (newComicChapter.Images.All(i => i.Path != comicImage.Path))
-                return true;
-        }
-
-        return false;
-    }
-
-
-    /// <summary>
-    /// get archive volumes and main volume files by main volume
-    /// </summary>
-    /// <param name="archiveFile"></param>
-    /// <returns></returns>
-    async Task<List<FileInfo>> GetArchiveVolumeFiles(FileInfo archiveFile)
-    {
-        var dirInfo = archiveFile.Directory;
-
-        // Assume you've already obtained all FileInfo in the directory
-        FileInfo[] files = dirInfo.GetFiles();
-
-        // Create a list to store the volumes   
-        List<FileInfo> volumes = new List<FileInfo>();
-
-        // The name of the main volume, without extension
-        string mainVolumeName = archiveFile.Name.Replace(archiveFile.Extension, "");
-
-
-        foreach (FileInfo file in files)
-        {
-            // The file name without extension
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file.Name);
-
-            // If the file name starts with the main volume name, and the file's extension is in the volume extension list, then it might be a volume
-            if (fileNameWithoutExtension.StartsWith(mainVolumeName) && AllVolumeExtensions.Contains(file.Extension))
-            {
-                volumes.Add(file);
-            }
-        }
-
-        // Now, the volumes list contains all the volumes
-        return volumes.OrderByDescending(f => f.Name).ToList();
-    }
-
-    static void Init()
-    {
-        // Possible extensions for RAR volumes
-        List<string> rarVolumeExtensions = Enumerable.Range(0, 100).Select(i => $".r{i:D2}").ToList();
-        rarVolumeExtensions.Insert(0, ".rar"); // Insert .rar as the main volume
-
-        // Possible extensions for ZIP volumes
-        List<string> zipVolumeExtensions = Enumerable.Range(1, 100).Select(i => $".z{i:D2}").ToList();
-        zipVolumeExtensions.Add(".zip"); // .zip is the last volume
-
-        // Possible extensions for 7z volumes
-        List<string> sevenZVolumeExtensions = Enumerable.Range(1, 100).Select(i => $".7z.{i:D3}").ToList();
-
-        // Merge all volume extensions
-        AllVolumeExtensions.AddRange(rarVolumeExtensions);
-        AllVolumeExtensions.AddRange(zipVolumeExtensions);
-        AllVolumeExtensions.AddRange(sevenZVolumeExtensions);
+        return oldComicChapter.Images.Any(comicImage => newComicChapter.Images.All(i => i.Path != comicImage.Path));
     }
 }

@@ -227,6 +227,9 @@ namespace VctoonCore.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ArchivePath")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("ComicChapterId")
                         .HasColumnType("uuid");
 

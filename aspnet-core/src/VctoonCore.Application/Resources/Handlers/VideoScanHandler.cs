@@ -1,6 +1,6 @@
 ﻿using VctoonCore.Libraries;
 
-namespace VctoonCore.Handlers.Resources;
+namespace VctoonCore.Resources.Handlers;
 
 public class VideoScanHandler : IScanHandler
 {

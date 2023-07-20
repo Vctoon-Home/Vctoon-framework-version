@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="SharpCompress">
       <HintPath>C:\Users\zy\.nuget\packages\sharpcompress\0.33.0\lib\net7.0\SharpCompress.dll</HintPath>
     </Reference>

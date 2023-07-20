@@ -32,8 +32,8 @@ public class ComicChapter : Entity<Guid>
 
     // public ComicArchiveInfo ArchiveInfo { get; protected set; }
 
-    public Guid ComicId { get; internal protected set; }
-    public Guid LibraryPathId { get; internal protected set; }
+    public Guid ComicId { get; protected internal set; }
+    public Guid LibraryPathId { get; protected internal set; }
 
     public virtual ICollection<ComicImage> Images { get; set; } = new List<ComicImage>();
 

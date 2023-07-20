@@ -3,11 +3,9 @@ using System.IO;
 using System.Linq;
 using SharpCompress.Archives;
 using VctoonCore.Consts;
-using VctoonCore.DataResolves;
-using VctoonCore.Resources;
 using Volo.Abp.Guids;
 
-namespace VctoonCore.ArchiveDataHandlers;
+namespace VctoonCore.Resources.DataResolves;
 
 public class ArchiveDataResolve : IDisposable
 {
@@ -70,7 +68,7 @@ public class ArchiveDataResolve : IDisposable
             if (_archiveEntries == null)
             {
                 var dataTree = BuildTree(Archive.Entries.Where(a => a.IsDirectory).Select(x => x.Key).ToList(),
-                    ArchiveFileName);
+                    ArchivePath);
                 _archiveEntries = dataTree;
             }
 
@@ -90,7 +88,7 @@ public class ArchiveDataResolve : IDisposable
 
         var title = Path.GetDirectoryName(treeData.Key);
 
-        if (title.IsNullOrEmpty())
+        if (title.IsNullOrEmpty() || treeData == TreeData)
         {
             title = Path.GetFileName(treeData.Key);
 
@@ -101,10 +99,11 @@ public class ArchiveDataResolve : IDisposable
             }
         }
 
-        var chapter = new ComicChapter(guidGenerator.Create(), title, treeData.Key, true, comicId,
+        var chapter = new ComicChapter(guidGenerator.Create(), title, TreeData.Key, true, comicId,
             libraryPathId);
 
-        chapter.AddImages(treeData.Entries.Select(e => new ComicImage(guidGenerator.Create(), e.Key, chapter.Id))
+        chapter.AddImages(treeData.Entries
+            .Select(e => new ComicImage(guidGenerator.Create(), e.Key, chapter.Id, TreeData.Key))
             .ToList());
 
         if (!chapter.Images.IsNullOrEmpty())

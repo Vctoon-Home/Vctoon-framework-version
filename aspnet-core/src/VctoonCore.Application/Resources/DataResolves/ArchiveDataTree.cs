@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SharpCompress.Archives;
 
-namespace VctoonCore.DataResolves;
+namespace VctoonCore.Resources.DataResolves;
 
 public class ArchiveDataTree
 {
