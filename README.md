@@ -1,8 +1,8 @@
 # Vctoon
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://mit-license.org/)
-[![GitHub Stars](https://img.shields.io/github/stars/zyknow/AbpMicroservice.svg)](https://github.com/zyknow/Vctoon/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/zyknow/AbpMicroservice.svg)](https://github.com/zyknow/Vctoon/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/zyknow/Vctoon.svg)](https://github.com/zyknow/Vctoon/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/zyknow/Vctoon.svg)](https://github.com/zyknow/Vctoon/issues)
 
 ## Introduction
 
