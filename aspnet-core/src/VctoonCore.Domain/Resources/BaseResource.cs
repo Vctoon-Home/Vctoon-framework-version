@@ -37,7 +37,6 @@ public abstract class BaseResource : AggregateRoot<Guid>
 
     public int ReadCount { get; protected set; }
 
-
     public Guid LibraryId { get; internal set; }
 
     public virtual ICollection<Tag> Tags { get; } = new List<Tag>();

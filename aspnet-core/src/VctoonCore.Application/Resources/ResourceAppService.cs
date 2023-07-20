@@ -15,7 +15,7 @@ public class ResourceAppService : VctoonCoreAppService, IResourceAppService
         _comicImageRepository = comicImageRepository;
     }
 
-    public async Task<Stream> GetComicImage(Guid comicImageId, int? width = null, int? height = null)
+    public async Task<Stream> GetComicImageStream(Guid comicImageId, int? width = null, int? height = null)
     {
         await CheckPermissionAsync();
 
@@ -45,7 +45,6 @@ public class ResourceAppService : VctoonCoreAppService, IResourceAppService
 
 
     // check permission
-
     public async Task CheckPermissionAsync()
     {
         // throw new BusinessException("permission denied");

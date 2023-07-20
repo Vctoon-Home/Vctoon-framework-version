@@ -18,7 +18,7 @@ public class ResourceController : VctoonCoreController
     [HttpGet("comic-image")]
     public async Task<IActionResult> GetComicImage(Guid comicImageId, int? width = null, int? height = null)
     {
-        var stream = await _resourceAppService.GetComicImage(comicImageId, width, height);
+        var stream = await _resourceAppService.GetComicImageStream(comicImageId, width, height);
 
         return new FileStreamResult(stream, "application/octet-stream")
         {

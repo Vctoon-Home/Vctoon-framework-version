@@ -16,8 +16,10 @@ public class ComicImage : Entity<Guid>
         Path = path;
         ArchivePath = archivePath;
         ComicChapterId = comicChapterId;
+        Title = System.IO.Path.GetFileName(Path);
     }
 
+    public string Title { get; set; }
     public string ArchivePath { get; protected set; }
     public string Path { get; protected set; }
     public Guid ComicChapterId { get; set; }
@@ -29,7 +31,11 @@ public class ComicImage : Entity<Guid>
         //     throw new Exception(@$"${nameof(path)} is not valid path. {path} is not exist.");
         Path = path;
     }
-
+    public void SetTitle(string title)
+    {
+        Check.NotNullOrWhiteSpace(title, nameof(title));
+        Title = title;
+    }
 
     [CanBeNull]
     public Stream GetImageStream()

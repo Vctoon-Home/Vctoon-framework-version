@@ -11,4 +11,6 @@ public class ComicChapterDto : EntityDto<Guid>
     public Guid ComicId { get; set; }
 
     public Guid LibraryPathId { get; set; }
+
+    public List<ComicImageDto> Images { get; set; }
 }

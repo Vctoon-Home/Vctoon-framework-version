@@ -2,6 +2,7 @@
 using VctoonCore.Libraries;
 using VctoonCore.Libraries.Dtos;
 using AutoMapper;
+using VctoonCore.Resources;
 using Volo.Abp.AutoMapper;
 
 namespace VctoonCore;
@@ -18,5 +19,9 @@ public class VctoonCoreApplicationAutoMapperProfile : Profile
 
         CreateMap<CreateUpdateLibraryDto, Library>(MemberList.Source)
             .Ignore(b => b.Paths);
+
+
+        CreateMap<Tag, TagDto>();
+        CreateMap<Tag, TagDto>();
     }
 }

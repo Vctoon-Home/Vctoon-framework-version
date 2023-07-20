@@ -23,10 +23,7 @@ public class ArchiveHelper
         AllVolumeExtensions.AddRange(zipVolumeExtensions);
         AllVolumeExtensions.AddRange(sevenZVolumeExtensions);
     }
-
     static readonly List<string> AllVolumeExtensions = new List<string>();
-
-
     public static List<FileInfo> GetArchiveVolumeFiles(string archiveFilePath)
     {
         if (!File.Exists(archiveFilePath))
@@ -34,7 +31,6 @@ public class ArchiveHelper
 
         return GetArchiveVolumeFiles(new FileInfo(archiveFilePath));
     }
-
     /// <summary>
     /// get archive volumes and main volume files by main volume
     /// </summary>

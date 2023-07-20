@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SharpCompress.Archives;
+﻿using SharpCompress.Archives;
 
 namespace VctoonCore.Resources.DataResolves;
 

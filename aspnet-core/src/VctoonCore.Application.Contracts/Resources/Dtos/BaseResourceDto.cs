@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace VctoonCore.Resources.Dtos;
+﻿namespace VctoonCore.Resources.Dtos;
 
 public abstract class BaseResourceDto : EntityDto<Guid>
 {
@@ -13,8 +11,6 @@ public abstract class BaseResourceDto : EntityDto<Guid>
     public string CoverPath { get; set; }
 
     public string Author { get; set; }
-
-    public long Size { get; set; }
 
     public int ReadCount { get; set; }
 
