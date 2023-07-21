@@ -48,7 +48,7 @@ public class LibraryManager : DomainService, ILibraryManager
 
         library = await _libraryRepository.UpdateAsync(library);
 
-        await _backgroundJobManager.EnqueueAsync(new ScanLibraryFolderArgs(library.Id));
+        await _backgroundJobManager.EnqueueAsync(new ScanLibraryFolderArgs(library.Id),BackgroundJobPriority.High);
 
         return library;
     }

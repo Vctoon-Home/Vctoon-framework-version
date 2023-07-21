@@ -54,10 +54,13 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
         {
             await ResolveDirectoryFiles(libraryPath);
         }
+
         await _libraryRepository.UpdateAsync(library);
+
         #endregion
     }
 
+    // TODO: signalR notification
     async Task ScanDirectoryStructureAndFiles(LibraryPath libraryPath)
     {
         if (!libraryPath.ExistInRealFileSystem())

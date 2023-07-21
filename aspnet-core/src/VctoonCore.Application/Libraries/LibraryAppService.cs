@@ -1,5 +1,9 @@
 using System.Linq;
+using VctoonCore.JobModels;
 using VctoonCore.Libraries.Dtos;
+using Volo.Abp;
+using Volo.Abp.BackgroundJobs;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Guids;
 
 namespace VctoonCore.Libraries;
@@ -20,14 +24,33 @@ public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, Libra
     private readonly ILibraryRepository _repository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly ILibraryManager _libraryManager;
+    private readonly IBackgroundJobManager _backgroundJobManager;
+    private readonly IBackgroundJobStore _backgroundJobStore;
 
     public LibraryAppService(ILibraryRepository repository,
         IGuidGenerator guidGenerator,
-        ILibraryManager libraryManager) : base(repository)
+        ILibraryManager libraryManager,
+        IBackgroundJobManager backgroundJobManager,
+        IBackgroundJobStore backgroundJobStore) : base(repository)
     {
         _repository = repository;
         _guidGenerator = guidGenerator;
         _libraryManager = libraryManager;
+        _backgroundJobManager = backgroundJobManager;
+        _backgroundJobStore = backgroundJobStore;
+    }
+
+    public async Task SyncLibraryAsync(Guid id)
+    {
+        // check the job is running
+        var library = await Repository.GetAsync(id);
+
+
+        if (library == null)
+            throw new BusinessException("Library is not found");
+
+        if (!library.Paths.IsNullOrEmpty())
+            await _backgroundJobManager.EnqueueAsync(new ScanLibraryFolderArgs(library.Id), BackgroundJobPriority.High);
     }
 
     protected override async Task<IQueryable<Library>> CreateFilteredQueryAsync(LibraryGetListInput input)
