@@ -42,12 +42,12 @@ public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, Libra
 
     public async Task SyncLibraryAsync(Guid id)
     {
-        // check the job is running
         var library = await Repository.GetAsync(id);
-
 
         if (library == null)
             throw new BusinessException("Library is not found");
+
+        // TODO: check the job is running
 
         if (!library.Paths.IsNullOrEmpty())
             await _backgroundJobManager.EnqueueAsync(new ScanLibraryFolderArgs(library.Id), BackgroundJobPriority.High);
@@ -64,7 +64,7 @@ public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, Libra
     public override async Task<LibraryDto> CreateAsync(CreateUpdateLibraryDto input)
     {
         await CheckGetPolicyAsync();
-        var library = await _libraryManager.CreateAsync(input.Name, input.Paths);
+        var library = await _libraryManager.CreateAsync(input.Name, input.Paths, input.LibraryType);
         return await MapToGetOutputDtoAsync(library);
     }
 

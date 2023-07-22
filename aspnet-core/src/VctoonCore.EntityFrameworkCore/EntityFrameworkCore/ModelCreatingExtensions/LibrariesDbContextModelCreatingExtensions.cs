@@ -1,4 +1,5 @@
-﻿using VctoonCore.Libraries;
+﻿using VctoonCore.Enums;
+using VctoonCore.Libraries;
 using VctoonCore.Resources;
 
 namespace VctoonCore.EntityFrameworkCore.ModelCreatingExtensions;
@@ -26,6 +27,9 @@ public static class LibrariesDbContextModelCreatingExtensions
             b.HasMany(e => e.Paths).WithOne().OnDelete(DeleteBehavior.Cascade);
             b.HasMany<Video>().WithOne().HasForeignKey(e => e.LibraryId).OnDelete(DeleteBehavior.Cascade);
             b.HasMany<Comic>().WithOne().HasForeignKey(e => e.LibraryId).OnDelete(DeleteBehavior.Cascade);
+
+            b.Property(e => e.LibraryType).HasConversion(v => v.ToString(), v => (LibraryType)Enum.Parse(typeof(LibraryType), v));
+
         });
 
         builder.Entity<LibraryPath>(b => {

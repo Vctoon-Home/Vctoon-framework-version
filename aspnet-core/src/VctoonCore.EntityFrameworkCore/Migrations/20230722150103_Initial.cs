@@ -376,6 +376,7 @@ namespace VctoonCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
+                    LibraryType = table.Column<string>(type: "text", nullable: false),
                     ExtraProperties = table.Column<string>(type: "text", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true)
                 },
@@ -927,7 +928,7 @@ namespace VctoonCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: true),
                     Path = table.Column<string>(type: "text", nullable: true),
                     IsArchive = table.Column<bool>(type: "boolean", nullable: false),
                     ComicId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -1003,6 +1004,7 @@ namespace VctoonCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
                     ArchivePath = table.Column<string>(type: "text", nullable: true),
                     Path = table.Column<string>(type: "text", nullable: true),
                     ComicChapterId = table.Column<Guid>(type: "uuid", nullable: false)

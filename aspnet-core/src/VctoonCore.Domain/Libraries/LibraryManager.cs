@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using VctoonCore.Enums;
 using VctoonCore.JobModels;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.DependencyInjection;
@@ -9,7 +10,6 @@ public class LibraryManager : DomainService, ILibraryManager
 {
     private readonly ILibraryRepository _libraryRepository;
     private readonly ILibraryPathRepository _libraryPathRepository;
-    private readonly IBackgroundJobManager _backgroundJobManager;
 
     public LibraryManager(ILibraryRepository libraryRepository,
         ILibraryPathRepository libraryPathRepository,
@@ -17,14 +17,14 @@ public class LibraryManager : DomainService, ILibraryManager
     {
         _libraryRepository = libraryRepository;
         _libraryPathRepository = libraryPathRepository;
-        _backgroundJobManager = backgroundJobManager;
     }
 
-    public virtual async Task<Library> CreateAsync(string name, string[] paths)
+    public virtual async Task<Library> CreateAsync(string name, string[] paths, LibraryType libraryType)
     {
         var library = new Library(
             GuidGenerator.Create(),
-            name
+            name,
+            libraryType
         );
 
         if (!paths.IsNullOrEmpty())
@@ -33,12 +33,7 @@ public class LibraryManager : DomainService, ILibraryManager
         }
 
         await ValidateLibraryAsync(library);
-
-
         library = await _libraryRepository.InsertAsync(library);
-
-        await _backgroundJobManager.EnqueueAsync(new ScanLibraryFolderArgs(library.Id));
-
         return library;
     }
 
@@ -47,9 +42,6 @@ public class LibraryManager : DomainService, ILibraryManager
         await ValidateLibraryAsync(library);
 
         library = await _libraryRepository.UpdateAsync(library);
-
-        await _backgroundJobManager.EnqueueAsync(new ScanLibraryFolderArgs(library.Id),BackgroundJobPriority.High);
-
         return library;
     }
 

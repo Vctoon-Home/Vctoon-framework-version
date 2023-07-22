@@ -8,17 +8,17 @@ public class ComicChapter : Entity<Guid>
     {
     }
 
-    public ComicChapter(Guid id, string name, string path, bool isArchive, Guid comicId, Guid libraryPathId) :
+    public ComicChapter(Guid id, string title, string path, bool isArchive, Guid comicId, Guid libraryPathId) :
         base(id)
     {
-        Name = name;
+        Title = title;
         Path = path;
         IsArchive = isArchive;
         ComicId = comicId;
         LibraryPathId = libraryPathId;
     }
 
-    public string Name { get; protected set; }
+    public string Title { get; protected set; }
 
     /// <summary>
     /// if IsArchive is true, Path is archive file path, else Path is directory path.
@@ -40,7 +40,7 @@ public class ComicChapter : Entity<Guid>
     public void SetName(string name)
     {
         Check.NotNullOrEmpty(name, nameof(name));
-        Name = name;
+        Title = name;
     }
 
     public void SetPath(string path)

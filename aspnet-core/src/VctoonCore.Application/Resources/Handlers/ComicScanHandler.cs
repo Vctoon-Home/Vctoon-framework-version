@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using VctoonCore.Enums;
 using VctoonCore.Libraries;
 using Volo.Abp.Guids;
 
@@ -10,6 +11,9 @@ public class ComicScanHandler : IScanHandler
     private readonly IComicChapterRepository _comicChapterRepository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly IComicRepository _comicRepository;
+    
+    
+    public LibraryType SupportLibraryType { get; set; } = LibraryType.Comic;
 
     public ComicScanHandler(IComicChapterRepository comicChapterRepository, IGuidGenerator guidGenerator,
         IComicRepository comicRepository)

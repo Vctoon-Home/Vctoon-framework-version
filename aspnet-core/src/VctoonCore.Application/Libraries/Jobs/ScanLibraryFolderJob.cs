@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using VctoonCore.Consts;
 using VctoonCore.JobModels;
 using VctoonCore.Resources.Handlers;
@@ -14,15 +15,18 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
     private readonly ILibraryRepository _libraryRepository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly IEnumerable<IScanHandler> _resourceHandlers;
+    private readonly ILogger<ScanLibraryFolderJob> _logger;
 
     public ScanLibraryFolderJob(
         ILibraryRepository libraryRepository,
         IGuidGenerator guidGenerator,
-        IEnumerable<IScanHandler> resourceHandlers)
+        IEnumerable<IScanHandler> resourceHandlers,
+        ILogger<ScanLibraryFolderJob> logger)
     {
         _libraryRepository = libraryRepository;
         _guidGenerator = guidGenerator;
         _resourceHandlers = resourceHandlers;
+        _logger = logger;
     }
 
 
@@ -34,6 +38,13 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
         this.args = args;
         var query = await _libraryRepository.WithDetailsAsync();
         var library = query.FirstOrDefault(l => l.Id == args.LibraryId);
+
+        if (library == null)
+        {
+            _logger.LogError(@$" Library is not found, LibraryId: {args.LibraryId}");
+            return;
+        }
+
 
         #region Only Scan Library Path Structure
 
@@ -49,15 +60,19 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
         #region Scan Changed LibraryPath and LibraryFile
 
         Console.WriteLine("Scan Changed LibraryPath and LibraryFile");
+
+        var handlers = GetScanHandlerByLibrary(library);
+
         // scan library path and files
         foreach (var libraryPath in library.Paths)
         {
-            await ResolveDirectoryFiles(libraryPath);
+            await ResolveDirectoryFiles(libraryPath, handlers);
         }
 
         await _libraryRepository.UpdateAsync(library);
 
         #endregion
+
     }
 
     // TODO: signalR notification
@@ -69,7 +84,7 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
         DirectoryInfo dirInfo = new DirectoryInfo(libraryPath.Path);
 
         // if directory is changed
-        if (dirInfo.LastWriteTimeUtc != libraryPath.LastResolveTime) // check files in this directory
+        if (dirInfo.LastWriteTimeUtc != libraryPath.LastResolveTime)// check files in this directory
         {
             var fileExtensions = ResourceSupportFileExtensions.GetAllSupportFileExtensions();
 
@@ -116,20 +131,26 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
         libraryPath.SetLastModifyTime(dirInfo.LastWriteTimeUtc);
     }
 
-    async Task ResolveDirectoryFiles(LibraryPath libraryPath)
+    async Task ResolveDirectoryFiles(LibraryPath libraryPath, List<IScanHandler> handlers)
     {
         if (!libraryPath.ExistInRealFileSystem())
             return;
 
         foreach (var libraryPathChild in libraryPath.Children)
-            await ResolveDirectoryFiles(libraryPathChild);
+            await ResolveDirectoryFiles(libraryPathChild, handlers);
 
 
-        foreach (var resourceHandler in _resourceHandlers)
+        foreach (var resourceHandler in handlers)
         {
             await resourceHandler.Handler(libraryPath);
         }
 
         libraryPath.SetAllFilesLastResolveTime();
     }
+
+    List<IScanHandler> GetScanHandlerByLibrary(Library library)
+    {
+        return _resourceHandlers.Where(h => h.SupportLibraryType == library.LibraryType).ToList();
+    }
+
 }

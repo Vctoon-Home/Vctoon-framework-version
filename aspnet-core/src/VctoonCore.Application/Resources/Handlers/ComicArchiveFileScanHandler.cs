@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using VctoonCore.Consts;
+using VctoonCore.Enums;
 using VctoonCore.Helpers;
 using VctoonCore.Libraries;
 using VctoonCore.Resources.DataResolves;
@@ -15,7 +16,8 @@ public class ComicArchiveFileScanHandler : IScanHandler
     private readonly IComicRepository _comicRepository;
 
 
-    public ComicArchiveFileScanHandler(IGuidGenerator guidGenerator, IComicChapterRepository comicChapterRepository,
+    public ComicArchiveFileScanHandler(IGuidGenerator guidGenerator,
+        IComicChapterRepository comicChapterRepository,
         IComicRepository comicRepository)
 
     {
@@ -25,6 +27,7 @@ public class ComicArchiveFileScanHandler : IScanHandler
     }
 
 
+    public LibraryType SupportLibraryType { get; set; } = LibraryType.Comic;
     public async Task Handler(LibraryPath libraryPath)
     {
         foreach (var libraryFile in libraryPath.Files.Where(f => f.IsArchive()))
@@ -35,9 +38,8 @@ public class ComicArchiveFileScanHandler : IScanHandler
                 await _comicChapterRepository.DeleteManyAsync(deletes);
 
             if (!adds.IsNullOrEmpty())
-                await _comicRepository.InsertManyAsync(adds.Select(c =>
-                {
-                    var comic = new Comic(_guidGenerator.Create(), c.Name,
+                await _comicRepository.InsertManyAsync(adds.Select(c => {
+                    var comic = new Comic(_guidGenerator.Create(), c.Title,
                         libraryPath.LibraryId);
 
                     comic.AddChapter(c);
@@ -78,7 +80,7 @@ public class ComicArchiveFileScanHandler : IScanHandler
 
             if (await ComicChapterIsChanged(checkUpdateComicChapter, realComicChapterInFileSystem))
             {
-                checkUpdateComicChapter.SetName(realComicChapterInFileSystem.Name);
+                checkUpdateComicChapter.SetName(realComicChapterInFileSystem.Title);
                 checkUpdateComicChapter.Images.Clear();
                 checkUpdateComicChapter.AddImages(realComicChapterInFileSystem.Images);
                 updateComicChapters.Add(checkUpdateComicChapter);

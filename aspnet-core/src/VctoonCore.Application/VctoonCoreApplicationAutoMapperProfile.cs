@@ -22,6 +22,20 @@ public class VctoonCoreApplicationAutoMapperProfile : Profile
 
 
         CreateMap<Tag, TagDto>();
-        CreateMap<Tag, TagDto>();
+        CreateMap<TagDto, Tag>();
+
+        CreateMap<Comic, ComicDto>();
+        CreateMap<ComicUpdateDto, Comic>();
+
+        CreateMap<ComicChapter, ComicChapterDto>();
+        CreateMap<ComicChapterUpdateDto, ComicChapter>();
+
+        CreateMap<ComicImage, ComicImageDto>();
+        CreateMap<ComicImageUpdateDto, ComicImage>();
+
+        CreateMap<Video, VideoDto>();
+        CreateMap<VideoDto, Video>();
+
+
     }
 }

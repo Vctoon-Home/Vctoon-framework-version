@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace VctoonCore.Migrations
 {
     [DbContext(typeof(VctoonCoreDbContext))]
-    [Migration("20230720031447_Initial")]
+    [Migration("20230722150103_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -71,6 +71,10 @@ namespace VctoonCore.Migrations
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
+
+                    b.Property<string>("LibraryType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -210,10 +214,10 @@ namespace VctoonCore.Migrations
                     b.Property<Guid>("LibraryPathId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Path")
                         .HasColumnType("text");
 
-                    b.Property<string>("Path")
+                    b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -237,6 +241,9 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

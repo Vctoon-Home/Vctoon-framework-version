@@ -19,7 +19,7 @@ public class VctoonCoreTestDataSeedContributor : IDataSeedContributor, ITransien
     {
         /* Seed additional test data... */
 
-        var library = new Library(LibraryTestData.Id, LibraryTestData.Name);
+        var library = new Library(LibraryTestData.Id, LibraryTestData.Name, LibraryTestData.LibraryType);
         library.Paths.AddRange(LibraryTestData.Paths);
 
         await _libraryRepository.InsertAsync(library);
