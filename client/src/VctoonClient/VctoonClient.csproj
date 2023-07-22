@@ -1,29 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\..\..\client.props" />
-	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
-		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-	</PropertyGroup>
+    <Import Project="..\..\..\client.props" />
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
 
 
-	<ItemGroup>
-		<AvaloniaResource Include="Assets\**" />
-	</ItemGroup>
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="$(AvaloniaPackageVersion)" />
-		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaPackageVersion)" />
-		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaPackageVersion)" />
-<!--		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaPackageVersion)" />-->
-		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaPackageVersion)" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-		<PackageReference Include="Semi.Avalonia" Version="11.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Users\LoginView.axaml" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="$(AvaloniaPackageVersion)" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaPackageVersion)" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaPackageVersion)" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaPackageVersion)" />
+        <PackageReference Include="Semi.Avalonia" Version="11.0.0" />
+    </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\..\..\client.props"/>
+	<Import Project="..\..\..\client.props" />
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
