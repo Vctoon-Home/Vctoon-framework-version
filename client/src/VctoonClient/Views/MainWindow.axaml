@@ -8,5 +8,4 @@
         x:Class="VctoonClient.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="VctoonClient">
-        <views:MainView />
 </Window>

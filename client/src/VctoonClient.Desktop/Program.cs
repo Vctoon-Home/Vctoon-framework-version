@@ -2,7 +2,6 @@
 using System;
 
 namespace VctoonClient.Desktop;
-
 internal class Program
 {
     // Initialization code. Don't use any Avalonia, third-party APIs or any
