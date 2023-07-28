@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:VctoonClient.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:l="clr-namespace:VctoonClient.Localizations;assembly=VctoonClient"
+             xmlns:comp="clr-namespace:VctoonClient.Components;assembly=VctoonClient"
              x:Class="VctoonClient.Views.MainView"
              x:DataType="vm:MainViewModel">
     <Design.DataContext>
@@ -14,6 +15,7 @@
     </Design.DataContext>
 
     <StackPanel Spacing="15" VerticalAlignment="Center">
+        <comp:LanguageSelect></comp:LanguageSelect>
         <TextBlock Text="{l:Localize 'Save'}"></TextBlock>
         <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Button Click="Button_OnClick">test</Button>

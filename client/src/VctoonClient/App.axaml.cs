@@ -16,9 +16,9 @@ namespace VctoonClient;
 
 public partial class App : Application
 {
-    public static IServiceCollection ServiceCollection;
+    private static IServiceCollection ServiceCollection;
 
-    public static IServiceProvider ServiceProvider;
+    public static IServiceProvider Services;
 
     public App()
     {
@@ -43,7 +43,7 @@ public partial class App : Application
         });
         var factory = new AbpAutofacServiceProviderFactory(new Autofac.ContainerBuilder());
 
-        ServiceProvider = factory.CreateServiceProvider(factory.CreateBuilder(ServiceCollection));
+        Services = factory.CreateServiceProvider(factory.CreateBuilder(ServiceCollection));
     }
 
     private static void ConfigureConfiguration(IConfigurationBuilder builder)
@@ -55,8 +55,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        ServiceProvider.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
-            .Initialize(ServiceProvider);
+        Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
+            .Initialize(Services);
 
 
         // Line below is needed to remove Avalonia data validation.
@@ -65,11 +65,11 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            desktop.MainWindow = Services.GetRequiredService<MainWindow>();
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = ServiceProvider.GetRequiredService<MainView>();
+            singleViewPlatform.MainView = Services.GetRequiredService<MainView>();
         }
 
         base.OnFrameworkInitializationCompleted();

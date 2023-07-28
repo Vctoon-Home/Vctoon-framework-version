@@ -23,7 +23,7 @@ public class LocalizeExtension : MarkupExtension
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-        var manager = App.ServiceProvider.GetService<LocalizationManager>();
+        var manager = App.Services.GetService<LocalizationManager>();
 
         var binding = new Binding($"[{Text}]")
         {

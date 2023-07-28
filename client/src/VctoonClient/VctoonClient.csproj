@@ -37,8 +37,4 @@
         <None Remove="appsettings.json" />
         <EmbeddedResource Include="appsettings.json" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Components\" />
-    </ItemGroup>
 </Project>

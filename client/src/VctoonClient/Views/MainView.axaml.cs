@@ -25,7 +25,7 @@ public partial class MainView : UserControl, ISingletonDependency
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
         Console.WriteLine(123);
-        var manager = App.ServiceProvider.GetService<LocalizationManager>();
+        var manager = App.Services.GetService<LocalizationManager>();
 
         var currentCulture = manager.CurrentCulture;
 

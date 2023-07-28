@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="client/src/VctoonClient/App.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Components/LangaugeSelect.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Components/LanguageSelect.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/LoginView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/MainView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
