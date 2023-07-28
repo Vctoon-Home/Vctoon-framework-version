@@ -2,8 +2,8 @@
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
         <NoWarn>$(NoWarn);CS1591</NoWarn>
-        <AbpPackageVersion>7.3.0</AbpPackageVersion>
-        <AvaloniaPackageVersion>11.0.0</AvaloniaPackageVersion>
+        <AbpPackageVersion>7.3.1</AbpPackageVersion>
+        <AvaloniaPackageVersion>11.0.1</AvaloniaPackageVersion>
     </PropertyGroup>
 
     <Target Name="NoWarnOnRazorViewImportedTypeConflicts" BeforeTargets="RazorCoreCompile">
