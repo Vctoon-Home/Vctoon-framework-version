@@ -37,8 +37,7 @@ public partial class App : Application
         var configureConfiguration = new ConfigurationManager();
         ConfigureConfiguration(configureConfiguration);
 
-        ServiceCollection.AddApplication<VctoonClientModule>(options =>
-        {
+        ServiceCollection.AddApplication<VctoonClientModule>(options => {
             options.Services.ReplaceConfiguration(configureConfiguration);
         });
         var factory = new AbpAutofacServiceProviderFactory(new Autofac.ContainerBuilder());
@@ -58,7 +57,6 @@ public partial class App : Application
         Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
             .Initialize(Services);
 
-
         // Line below is needed to remove Avalonia data validation.
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
@@ -66,6 +64,7 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Services.GetRequiredService<MainWindow>();
+            desktop.MainWindow.Content = Services.GetRequiredService<MainView>();
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {

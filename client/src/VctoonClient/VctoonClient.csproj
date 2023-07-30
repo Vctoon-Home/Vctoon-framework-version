@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="$(AvaloniaPackageVersion)" />
+        <PackageReference Include="Avalonia.Labs.Controls" Version="11.0.0-rc2.2" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaPackageVersion)" />
         <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaPackageVersion)" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
@@ -36,5 +37,9 @@
     <ItemGroup>
         <None Remove="appsettings.json" />
         <EmbeddedResource Include="appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Storages\" />
     </ItemGroup>
 </Project>

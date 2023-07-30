@@ -1,11 +1,10 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Volo.Abp.DependencyInjection;
+using Avalonia.Platform.Storage;
 
 namespace VctoonClient.Views;
 
-public partial class LoginView : UserControl, ISingletonDependency
+public partial class LoginView : UserControl, ITransientDependency
 {
     public LoginView()
     {

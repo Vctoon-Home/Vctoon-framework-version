@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using VctoonClient.Localizations;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.Users;
 
 namespace VctoonClient.ViewModels;

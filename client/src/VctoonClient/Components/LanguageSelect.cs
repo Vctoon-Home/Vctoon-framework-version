@@ -1,40 +1,67 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Options;
+using VctoonClient.Localizations;
+using VctoonClient.Views;
 using Volo.Abp.Localization;
 
 namespace VctoonClient.Components;
 
 public class LanguageSelect : UserControl
 {
+    readonly LocalizationManager _localizationManager;
+    readonly NavigationManager _navigationManager;
     public LanguageSelect()
     {
-        var localizationOptions = App.Services.GetService<IOptions<AbpLocalizationOptions>>();
-        var menuItems = localizationOptions.Value.Languages.Select(x => x.DisplayName).Select(x => new MenuItem()
-        {
-            Header = x,
-        }).ToList();
+        _localizationManager = App.Services.GetService<LocalizationManager>();
+        _navigationManager = App.Services.GetService<NavigationManager>();
+        this.Content = GetMenu();
+    }
 
-        var menuItem = new MenuItem()
+
+    public Menu GetMenu()
+    {
+        var menuFirstItem = new MenuItem()
         {
-            Header = "语言",
-            ItemsSource = menuItems,
+            Header = _localizationManager.CurrentCulture.DisplayName,
+            ItemsSource = GetMenuItemsSource(),
         };
 
-        menuItem.SelectionChanged += (sender, args) =>
-        {
+        _localizationManager.PropertyChanged += (_, _) => {
+
+            menuFirstItem.Header = _localizationManager.CurrentCulture.NativeName;
+
             
             
+            _navigationManager.ToView<LoginView>();
         };
 
-
-        this.Content = new Menu()
+        var menu = new Menu()
         {
             ItemsSource = new List<MenuItem>()
             {
-                menuItem
+                menuFirstItem
             }
         };
+
+        return menu;
+
     }
+
+    public List<MenuItem> GetMenuItemsSource() =>
+        _localizationManager.GetSupportLanguages().Select(x => new MenuItem()
+        {
+            Header = x.DisplayName,
+            Command = new RelayCommand(() => {
+                _localizationManager.CurrentCulture = new CultureInfo(x.CultureName);
+            })
+        }).ToList();
+
 }

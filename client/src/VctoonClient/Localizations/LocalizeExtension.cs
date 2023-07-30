@@ -2,7 +2,6 @@
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
-using Volo.Abp.DependencyInjection;
 
 namespace VctoonClient.Localizations;
 
@@ -34,10 +33,10 @@ public class LocalizeExtension : MarkupExtension
 
         return binding;
     }
-
+    //
     // public override object ProvideValue(IServiceProvider serviceProvider)
     // {
-    //     var manager = App.ServiceProvider.GetService<LocalizationManager>();
+    //     var manager = App.Services.GetService<LocalizationManager>();
     //
     //     // 强制触发 MultiBinding 的更新，即使我们实际上并不需要这个属性的值
     //     var dummyBinding = new Binding("CurrentCulture")
@@ -54,6 +53,13 @@ public class LocalizeExtension : MarkupExtension
     //     };
     //
     //     return new MultiBinding
-    //         {Bindings = {dummyBinding, localizationBinding}, Converter = new LocalizationConverter()};
+    //     {
+    //         Bindings =
+    //         {
+    //             dummyBinding,
+    //             localizationBinding
+    //         },
+    //         Converter = new LocalizationConverter()
+    //     };
     // }
 }

@@ -1,6 +1,4 @@
 ﻿using Localization.Resources.AbpUi;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
