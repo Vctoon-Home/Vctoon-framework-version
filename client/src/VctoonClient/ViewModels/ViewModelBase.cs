@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using VctoonClient.Localizations;
+﻿using Abp.Localization.Avalonia;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Volo.Abp.Users;
 
 namespace VctoonClient.ViewModels;

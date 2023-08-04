@@ -1,4 +1,6 @@
-﻿using Localization.Resources.AbpUi;
+﻿using Abp.Localization.Avalonia;
+using Localization.Resources.AbpUi;
+using Microsoft.Extensions.Localization;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
@@ -15,7 +17,8 @@ namespace VctoonClient;
     typeof(AbpAutofacModule),
     typeof(AbpHttpClientIdentityModelModule),
     typeof(VctoonCoreHttpApiClientModule),
-    typeof(AbpUiModule)
+    typeof(AbpUiModule),
+    typeof(AbpLocalizationAvaloniaModule)
 )]
 public class VctoonClientModule : AbpModule
 {
@@ -28,6 +31,9 @@ public class VctoonClientModule : AbpModule
         var services = context.Services;
         var configuration = context.Services.GetConfiguration();
         ConfigureLocalization();
+
+        services.AddLocalizationManager(s => s.GetRequiredService<IStringLocalizerFactory>()
+            .Create(typeof(VctoonCoreResource)));
     }
 
 

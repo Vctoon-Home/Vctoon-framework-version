@@ -28,6 +28,7 @@
         <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="7.0.0" />
         <PackageReference Include="IdentityModel.OidcClient" Version="5.1.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
+        <PackageReference Include="Zyknow.Abp.Localization.Avalonia" Version="0.0.1-alpha7" />
     </ItemGroup>
 
     <ItemGroup>
