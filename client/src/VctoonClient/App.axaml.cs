@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
-using VctoonClient.ViewModels;
-using VctoonClient.Views;
 using Volo.Abp;
 using Volo.Abp.Autofac;
 
@@ -28,6 +26,7 @@ public partial class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        
     }
 
     void CreateServices()

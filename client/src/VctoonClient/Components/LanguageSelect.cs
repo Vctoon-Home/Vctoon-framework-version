@@ -1,15 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using Abp.Localization.Avalonia;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Threading;
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Options;
-using VctoonClient.Views;
+using ReactiveUI;
 using Volo.Abp.Localization;
 
 namespace VctoonClient.Components;
@@ -24,6 +18,7 @@ public class LanguageSelect : UserControl
         _localizationManager = App.Services.GetService<LocalizationManager>();
         _localizationOptions = App.Services.GetService<IOptions<AbpLocalizationOptions>>();
         this.Content = GetMenu();
+
     }
 
 
@@ -55,6 +50,6 @@ public class LanguageSelect : UserControl
         _localizationOptions.Value.Languages.Select(x => new MenuItem()
         {
             Header = x.DisplayName,
-            Command = new RelayCommand(() => { _localizationManager.ChangeLanguage(x.CultureName); })
+            Command = ReactiveCommand.Create(() => { _localizationManager.ChangeLanguage(x.CultureName); })
         }).ToList();
 }

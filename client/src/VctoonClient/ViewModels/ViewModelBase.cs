@@ -1,10 +1,10 @@
 ﻿using Abp.Localization.Avalonia;
-using CommunityToolkit.Mvvm.ComponentModel;
+using ReactiveUI;
 using Volo.Abp.Users;
 
 namespace VctoonClient.ViewModels;
 
-public class ViewModelBase : ObservableObject
+public class ViewModelBase : ReactiveObject
 {
     public IAbpLazyServiceProvider? LazyServiceProvider { get; set; }
     public ICurrentUser CurrentUser => LazyServiceProvider?.LazyGetRequiredService<ICurrentUser>()!;

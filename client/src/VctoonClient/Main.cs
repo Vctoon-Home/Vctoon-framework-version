@@ -7,11 +7,11 @@ namespace VctoonClient;
 
 public class MainWindow : Window, ISingletonDependency
 {
-
     public MainWindow()
     {
         Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://VctoonClient/Assets/avalonia-logo.ico")));
         Title = "VctoonClient";
+
     }
 }
 
