@@ -19,6 +19,8 @@
         <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaPackageVersion)"/>
         <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaPackageVersion)"/>
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaPackageVersion)"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="ReactiveUI.Fody" Version="19.4.1" />
         <PackageReference Include="Semi.Avalonia" Version="11.0.0"/>
 
         <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpPackageVersion)"/>
@@ -38,9 +40,5 @@
     <ItemGroup>
         <None Remove="appsettings.json"/>
         <EmbeddedResource Include="appsettings.json"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Storages\"/>
     </ItemGroup>
 </Project>

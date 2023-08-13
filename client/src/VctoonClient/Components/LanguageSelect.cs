@@ -3,7 +3,6 @@ using System.Linq;
 using Abp.Localization.Avalonia;
 using Avalonia.Controls;
 using Microsoft.Extensions.Options;
-using ReactiveUI;
 using Volo.Abp.Localization;
 
 namespace VctoonClient.Components;

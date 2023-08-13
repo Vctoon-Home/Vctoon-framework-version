@@ -4,14 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:t="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
              xmlns:com="clr-namespace:VctoonClient.Components;assembly=VctoonClient"
+             xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewModels:LoginViewModel"
              x:Class="VctoonClient.Views.LoginView">
     <StackPanel>
-
         <com:LanguageSelect></com:LanguageSelect>
+
+        <Button>Save</Button>
+        <Button>Load</Button>
 
         <TextBlock Text="{t:Localized 'Save'}"> </TextBlock>
         <TextBox></TextBox>
-
     </StackPanel>
 </UserControl>

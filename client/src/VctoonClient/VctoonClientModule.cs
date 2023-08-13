@@ -1,6 +1,7 @@
 ﻿using Abp.Localization.Avalonia;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.Localization;
+using VctoonClient.Storages;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
@@ -24,6 +25,13 @@ public class VctoonClientModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
+        // context.Services.OnRegistered(ctx =>
+        // {
+        //     if (ctx.ImplementationType.IsDefined(typeof(IStorage), true))
+        //     {
+        //         ctx.Interceptors.TryAdd<StorageBase>();
+        //     }
+        // });
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
