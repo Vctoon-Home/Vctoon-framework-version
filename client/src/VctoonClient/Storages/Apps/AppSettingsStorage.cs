@@ -1,21 +1,19 @@
 ﻿using System;
 using Abp.Localization.Avalonia;
 using Newtonsoft.Json;
+using VctoonClient.Storages.Base;
 
-namespace VctoonClient.Storages;
+namespace VctoonClient.Storages.Apps;
 
-public class AppSettingsStorage : StorageBase
+public class AppStorage : AppStorageBase
 {
-    public override string? StorageFolder { get; set; }
-    public override string StorageFileName { get; set; } = "appsettings.json";
-
     [JsonIgnore]
     private readonly LocalizationManager _localizationManager;
 
     [JsonProperty]
     private string CultureName { get; set; }
 
-    public AppSettingsStorage(LocalizationManager localizationManager)
+    public AppStorage(LocalizationManager localizationManager)
     {
         _localizationManager = localizationManager;
         Load();
