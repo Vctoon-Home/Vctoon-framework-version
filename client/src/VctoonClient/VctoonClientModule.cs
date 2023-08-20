@@ -1,6 +1,14 @@
-﻿using Abp.Localization.Avalonia;
+﻿using System;
+using System.Net.Http;
+using System.Reflection;
+using Abp.Localization.Avalonia;
+using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
+using VctoonClient.Consts;
 using VctoonClient.Storages;
 using VctoonCore;
 using VctoonCore.Localization;
@@ -23,17 +31,6 @@ namespace VctoonClient;
 )]
 public class VctoonClientModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        // context.Services.OnRegistered(ctx =>
-        // {
-        //     if (ctx.ImplementationType.IsDefined(typeof(IStorage), true))
-        //     {
-        //         ctx.Interceptors.TryAdd<StorageBase>();
-        //     }
-        // });
-    }
-
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var services = context.Services;
@@ -42,6 +39,26 @@ public class VctoonClientModule : AbpModule
 
         services.AddLocalizationManager(s => s.GetRequiredService<IStringLocalizerFactory>()
             .Create(typeof(VctoonCoreResource)));
+
+        ConfigureOidcClient(context, configuration);
+
+        // Assembly entryAssembly = Assembly.GetEntryAssembly();
+        // context.Services.add
+    }
+
+
+    private void ConfigureOidcClient(ServiceConfigurationContext context, IConfiguration configuration)
+    {
+        Configure<OidcClientOptions>(configuration.GetSection("Oidc:Options"));
+
+        context.Services.AddSingleton<OidcClient>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<OidcClientOptions>>().Value;
+
+            options.Browser = sp.GetService<IBrowser>();
+            var oidcClient = new OidcClient(options);
+            return oidcClient;
+        });
     }
 
 

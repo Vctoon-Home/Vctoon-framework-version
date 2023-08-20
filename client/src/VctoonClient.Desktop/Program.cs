@@ -3,6 +3,7 @@ using System;
 using Avalonia.ReactiveUI;
 
 namespace VctoonClient.Desktop;
+
 internal class Program
 {
     // Initialization code. Don't use any Avalonia, third-party APIs or any
@@ -14,9 +15,13 @@ internal class Program
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
+    {
+        var app =  AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
             .UseReactiveUI()
             .LogToTrace();
+        return app;
+        
+    }
 }

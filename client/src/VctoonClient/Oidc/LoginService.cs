@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using IdentityModel.OidcClient;
+using VctoonClient.Consts;
 using VctoonClient.Storages.Users;
 
 namespace VctoonClient.Oidc;
@@ -19,15 +24,37 @@ public class LoginService : ILoginService, ITransientDependency
 
     public async Task<LoginResult> LoginAsync()
     {
-        var loginResult = await _oidcClient.LoginAsync(new LoginRequest());
-
-        if (!loginResult.IsError)
+        if (Os.IsLinux || Os.IsWindows || Os.IsMacOS)
         {
-            _userStorage.SetToken(loginResult.AccessToken, loginResult.RefreshToken);
-            // WeakReferenceMessenger.Default.Send(new LoginMessage());
-        }
+            var state = await _oidcClient.PrepareLoginAsync();
+            var callbackManager = new CallbackManager(state.State);
 
-        return loginResult;
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = state.StartUrl,
+                UseShellExecute = true
+            });
+
+            var response = await callbackManager.RunServer();
+
+            var result = await _oidcClient.ProcessResponseAsync(response, state);
+
+            if (!result.IsError)
+            {
+                // focus on the  window
+                if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    desktop.MainWindow!.Focus();
+                }
+            }
+
+            return result;
+        }
+        else
+        {
+            var result = await _oidcClient.LoginAsync(new LoginRequest());
+            return result;
+        }
     }
 
     public async Task<LogoutResult> LogoutAsync()

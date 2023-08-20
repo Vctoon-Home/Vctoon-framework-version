@@ -2,8 +2,6 @@
     <Import Project="..\..\..\client.props"/>
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <LangVersion>latest</LangVersion>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
@@ -40,5 +38,9 @@
     <ItemGroup>
         <None Remove="appsettings.json"/>
         <EmbeddedResource Include="appsettings.json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Systems\" />
     </ItemGroup>
 </Project>

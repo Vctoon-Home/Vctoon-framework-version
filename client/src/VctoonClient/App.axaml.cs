@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using Autofac;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
@@ -22,19 +23,15 @@ public partial class App : Application
 
     public static IServiceProvider Services;
 
-
-    public App()
-    {
-        CreateServices();
-    }
-
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
     }
 
-    void CreateServices()
+    public override void RegisterServices()
     {
+        base.RegisterServices();
+
         ServiceCollection = new ServiceCollection();
 
         var configureConfiguration = new ConfigurationManager();
@@ -48,8 +45,11 @@ public partial class App : Application
 
         var builder = factory.CreateBuilder(ServiceCollection);
 
+        builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+
         Services = factory.CreateServiceProvider(builder);
     }
+
 
     private static void ConfigureConfiguration(IConfigurationBuilder builder)
     {
@@ -76,6 +76,7 @@ public partial class App : Application
         {
             singleViewPlatform.MainView = Services.GetRequiredService<MainView>();
         }
+
 
         base.OnFrameworkInitializationCompleted();
     }

@@ -2,6 +2,6 @@
 
 public interface IAppStorage : ISingletonDependency
 {
-    public void Save();
-    public void Load();
+    public void SaveStorage();
+    public void LoadStorage();
 }

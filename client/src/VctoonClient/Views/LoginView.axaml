@@ -11,8 +11,7 @@
     <StackPanel>
         <com:LanguageSelect></com:LanguageSelect>
 
-        <Button>Save</Button>
-        <Button>Load</Button>
+        <Button Command="{Binding Login}">Login</Button>
 
         <TextBlock Text="{t:Localized 'Save'}"> </TextBlock>
         <TextBox></TextBox>

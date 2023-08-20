@@ -7,16 +7,15 @@ namespace VctoonClient.Storages.Apps;
 
 public class AppStorage : AppStorageBase
 {
-    [JsonIgnore]
     private readonly LocalizationManager _localizationManager;
 
-    [JsonProperty]
+    [Storage]
     private string CultureName { get; set; }
 
     public AppStorage(LocalizationManager localizationManager)
     {
         _localizationManager = localizationManager;
-        Load();
+        LoadStorage();
 
         _localizationManager.PropertyChanged += (_, _) => { CultureName = _localizationManager.CurrentCulture.Name; };
 

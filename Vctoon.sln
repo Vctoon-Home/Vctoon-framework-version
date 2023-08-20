@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VctoonClient.Desktop", "cli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VctoonClient.iOS", "client\src\VctoonClient.iOS\VctoonClient.iOS.csproj", "{75C37594-7FAD-4DFC-95E8-C235B52BF608}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VctoonClient.Tests", "client\tests\VctoonClient.Tests\VctoonClient.Tests.csproj", "{D8EF3EF6-AD06-41B4-AA0E-14AC946147D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,10 @@ Global
 		{75C37594-7FAD-4DFC-95E8-C235B52BF608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75C37594-7FAD-4DFC-95E8-C235B52BF608}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75C37594-7FAD-4DFC-95E8-C235B52BF608}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D8EF3EF6-AD06-41B4-AA0E-14AC946147D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8EF3EF6-AD06-41B4-AA0E-14AC946147D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8EF3EF6-AD06-41B4-AA0E-14AC946147D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8EF3EF6-AD06-41B4-AA0E-14AC946147D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -175,6 +181,7 @@ Global
 		{04094285-4FBB-49B6-856E-4A1C82103ACE} = {C8C7B12C-BA61-4F20-94D7-D42386A0B1B6}
 		{A37F4FAC-EF66-43CA-96DD-8F1A194F26B8} = {C8C7B12C-BA61-4F20-94D7-D42386A0B1B6}
 		{75C37594-7FAD-4DFC-95E8-C235B52BF608} = {C8C7B12C-BA61-4F20-94D7-D42386A0B1B6}
+		{D8EF3EF6-AD06-41B4-AA0E-14AC946147D6} = {94FCC8D7-E5AF-4AC3-8900-25BBEE17E258}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EBC770D1-8624-4B3F-BB8C-3CEAAD1B459B}

@@ -10,26 +10,34 @@ namespace VctoonClient;
 
 public class MainWindow : Window, ISingletonDependency
 {
-    public MainWindow(IEnumerable<IAppStorage> storages)
+    public MainWindow()
     {
         Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://VctoonClient/Assets/avalonia-logo.ico")));
         Title = "VctoonClient";
-
-        // save settings on close
-        this.Closing += (sender, args) =>
-        {
-            foreach (var storage in storages)
-            {
-                storage.Save();
-            }
-        };
     }
 }
 
 public class MainView : UserControl, ISingletonDependency
 {
-    public MainView()
+    public MainView(IEnumerable<IAppStorage> storages)
     {
         Content = App.Services.GetService<LoginView>();
+
+        this.Unloaded += (sender, args) =>
+        {
+            foreach (var storage in storages)
+            {
+                storage.SaveStorage();
+            }
+        };
+        
+        // save settings on close
+        // this.exit += (sender, args) =>
+        // {
+        //     foreach (var storage in storages)
+        //     {
+        //         storage.SaveStorage();
+        //     }
+        // };
     }
 }
