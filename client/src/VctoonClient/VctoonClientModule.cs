@@ -10,6 +10,8 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using VctoonClient.Consts;
 using VctoonClient.Storages;
+using VctoonClient.Storages.Apps;
+using VctoonClient.Storages.Users;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
@@ -40,12 +42,10 @@ public class VctoonClientModule : AbpModule
         services.AddLocalizationManager(s => s.GetRequiredService<IStringLocalizerFactory>()
             .Create(typeof(VctoonCoreResource)));
 
+        services.AddAppStorages();
+
         ConfigureOidcClient(context, configuration);
-
-        // Assembly entryAssembly = Assembly.GetEntryAssembly();
-        // context.Services.add
     }
-
 
     private void ConfigureOidcClient(ServiceConfigurationContext context, IConfiguration configuration)
     {

@@ -15,19 +15,8 @@ public abstract class AppStorageBase : IAppStorage
 {
     private bool? ignore = null;
 
-    private const string RootFolderPath = "Settings";
+    private const string RootFolderPath = "Storages";
 
-
-    // public AppStorageBase()
-    // {
-    // }
-    //
-    // protected AppStorageBase(string savePath)
-    // {
-    //     _savePath = savePath;
-    // }
-
-    [StorageIgnore]
     private bool IgnoreStorage
     {
         get
@@ -41,7 +30,6 @@ public abstract class AppStorageBase : IAppStorage
 
     protected string _savePath;
 
-    [StorageIgnore]
     protected string SavePath
     {
         get

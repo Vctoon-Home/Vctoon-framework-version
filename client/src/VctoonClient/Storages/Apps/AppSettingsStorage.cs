@@ -5,14 +5,14 @@ using VctoonClient.Storages.Base;
 
 namespace VctoonClient.Storages.Apps;
 
-public class AppStorage : AppStorageBase
+public class AppSettingsStorage : AppStorageBase
 {
     private readonly LocalizationManager _localizationManager;
 
     [Storage]
     private string CultureName { get; set; }
 
-    public AppStorage(LocalizationManager localizationManager)
+    public AppSettingsStorage(LocalizationManager localizationManager)
     {
         _localizationManager = localizationManager;
         LoadStorage();

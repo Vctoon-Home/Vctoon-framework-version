@@ -1,6 +1,6 @@
 ﻿namespace VctoonClient.Storages.Base;
 
-public interface IAppStorage : ISingletonDependency
+public interface IAppStorage
 {
     public void SaveStorage();
     public void LoadStorage();
