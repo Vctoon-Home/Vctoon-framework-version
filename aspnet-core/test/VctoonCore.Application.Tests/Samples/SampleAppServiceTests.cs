@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Shouldly;
 using System.Threading.Tasks;
 using SharpCompress.Archives;
-using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.Zip;
-using SharpCompress.Common;
-using SharpCompress.Readers;
 using Volo.Abp.Identity;
 using Xunit;
 

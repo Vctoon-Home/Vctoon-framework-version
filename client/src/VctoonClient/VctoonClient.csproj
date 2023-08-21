@@ -29,6 +29,7 @@
         <PackageReference Include="IdentityModel.OidcClient" Version="5.1.0"/>
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0"/>
         <PackageReference Include="Zyknow.Abp.Localization.Avalonia" Version="1.2.2"/>
+        <PackageReference Include="Zyknow.NativeAppStore" Version="1.0.0-alpha.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,9 +39,5 @@
     <ItemGroup>
         <None Remove="appsettings.json"/>
         <EmbeddedResource Include="appsettings.json"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Systems\" />
     </ItemGroup>
 </Project>

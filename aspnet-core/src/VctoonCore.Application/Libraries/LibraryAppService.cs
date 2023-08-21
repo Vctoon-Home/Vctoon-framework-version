@@ -3,7 +3,6 @@ using VctoonCore.JobModels;
 using VctoonCore.Libraries.Dtos;
 using Volo.Abp;
 using Volo.Abp.BackgroundJobs;
-using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Guids;
 
 namespace VctoonCore.Libraries;

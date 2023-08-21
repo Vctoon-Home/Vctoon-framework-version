@@ -1,7 +1,6 @@
 ﻿using VctoonCore.Libraries;
 using Microsoft.Extensions.DependencyInjection;
 using VctoonCore.Resources;
-using Volo.Abp.Uow;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.PostgreSql;

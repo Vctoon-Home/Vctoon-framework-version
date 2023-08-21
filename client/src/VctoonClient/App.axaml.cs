@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using Autofac;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform.Storage;
-using Avalonia.ReactiveUI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
-using VctoonClient.Storages;
 using Volo.Abp;
 using Volo.Abp.Autofac;
 

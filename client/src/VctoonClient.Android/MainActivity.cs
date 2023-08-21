@@ -1,10 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.OS;
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.ReactiveUI;
-using VctoonClient.Storages;
+using NativeAppStore;
 
 namespace VctoonClient.Android;
 
@@ -25,7 +24,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 
     protected override void OnPause()
     {
-        AppStorageSavingHandler.SaveStorage();
+        StoreSaveExecutor.SaveAllStores();
         base.OnPause();
     }
 }

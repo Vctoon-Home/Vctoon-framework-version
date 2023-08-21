@@ -1,6 +1,4 @@
-﻿using Volo.Abp.Application.Dtos;
-
-namespace VctoonCore.Resources;
+﻿namespace VctoonCore.Resources;
 
 public interface IComicChapterAppService
 {

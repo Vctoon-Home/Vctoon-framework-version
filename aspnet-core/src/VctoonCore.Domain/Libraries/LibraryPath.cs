@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using VctoonCore.Resources;
 
 namespace VctoonCore.Libraries;
 

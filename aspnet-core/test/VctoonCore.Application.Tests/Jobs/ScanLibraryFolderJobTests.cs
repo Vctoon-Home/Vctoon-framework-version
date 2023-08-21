@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VctoonCore.JobModels;
@@ -8,7 +6,6 @@ using VctoonCore.Libraries;
 using VctoonCore.Libraries.Jobs;
 using VctoonCore.Resources;
 using VctoonCore.TestDatas;
-using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Uow;
 using Xunit;
 

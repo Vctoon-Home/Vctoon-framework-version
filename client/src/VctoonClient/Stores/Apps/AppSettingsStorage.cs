@@ -1,21 +1,21 @@
 ﻿using System;
 using Abp.Localization.Avalonia;
-using Newtonsoft.Json;
-using VctoonClient.Storages.Base;
+using NativeAppStore.Core;
+using VctoonClient.Stores;
 
 namespace VctoonClient.Storages.Apps;
 
-public class AppSettingsStorage : AppStorageBase
+public class AppSettingsStorage : VctoonStoreBase
 {
     private readonly LocalizationManager _localizationManager;
 
-    [Storage]
+    [Store]
     private string CultureName { get; set; }
 
     public AppSettingsStorage(LocalizationManager localizationManager)
     {
         _localizationManager = localizationManager;
-        LoadStorage();
+        LoadStore();
 
         _localizationManager.PropertyChanged += (_, _) => { CultureName = _localizationManager.CurrentCulture.Name; };
 

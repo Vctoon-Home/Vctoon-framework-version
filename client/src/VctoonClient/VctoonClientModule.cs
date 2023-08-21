@@ -1,17 +1,11 @@
-﻿using System;
-using System.Net.Http;
-using System.Reflection;
-using Abp.Localization.Avalonia;
+﻿using Abp.Localization.Avalonia;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using VctoonClient.Consts;
-using VctoonClient.Storages;
-using VctoonClient.Storages.Apps;
-using VctoonClient.Storages.Users;
+using NativeAppStore.Extensions;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
@@ -42,7 +36,7 @@ public class VctoonClientModule : AbpModule
         services.AddLocalizationManager(s => s.GetRequiredService<IStringLocalizerFactory>()
             .Create(typeof(VctoonCoreResource)));
 
-        services.AddAppStorages();
+        services.AddStores(GetType().Assembly, opt => { opt.EnabledCreatorStoreLoad = true; });
 
         ConfigureOidcClient(context, configuration);
     }

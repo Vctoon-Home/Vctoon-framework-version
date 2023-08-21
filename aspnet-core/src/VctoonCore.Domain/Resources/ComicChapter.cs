@@ -1,6 +1,4 @@
-﻿using VctoonCore.Libraries;
-
-namespace VctoonCore.Resources;
+﻿namespace VctoonCore.Resources;
 
 public class ComicChapter : Entity<Guid>
 {

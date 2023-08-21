@@ -1,8 +1,8 @@
-﻿using VctoonClient.Storages.Base;
+﻿using VctoonClient.Stores;
 
 namespace VctoonClient.Storages.Users;
 
-public class UserStorage : AppStorageBase
+public class UserStorage : VctoonStoreBase
 {
     public string RefreshToken { get; set; }
     public string AccessToken { get; set; }

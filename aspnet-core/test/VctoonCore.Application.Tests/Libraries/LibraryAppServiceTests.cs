@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using VctoonCore.Libraries.Dtos;
 using VctoonCore.TestDatas;

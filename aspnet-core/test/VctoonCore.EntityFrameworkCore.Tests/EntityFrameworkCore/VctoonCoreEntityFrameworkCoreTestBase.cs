@@ -1,6 +1,4 @@
-﻿using Volo.Abp;
-
-namespace VctoonCore.EntityFrameworkCore;
+﻿namespace VctoonCore.EntityFrameworkCore;
 
 public abstract class VctoonCoreEntityFrameworkCoreTestBase : VctoonCoreTestBase<VctoonCoreEntityFrameworkCoreTestModule>
 {

@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using IdentityModel.OidcClient;
 using VctoonClient.Consts;

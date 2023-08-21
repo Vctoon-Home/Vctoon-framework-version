@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace VctoonCore.Resources;
+﻿namespace VctoonCore.Resources;
 
 public class ComicManager : DomainService
 {

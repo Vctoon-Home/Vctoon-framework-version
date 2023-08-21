@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using VctoonCore.Enums;
-using VctoonCore.JobModels;
 using Volo.Abp.BackgroundJobs;
-using Volo.Abp.DependencyInjection;
 
 namespace VctoonCore.Libraries;
 

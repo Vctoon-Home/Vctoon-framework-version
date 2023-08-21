@@ -1,9 +1,7 @@
 ﻿using Avalonia;
 using System;
 using Avalonia.ReactiveUI;
-using Microsoft.Extensions.DependencyInjection;
-using VctoonClient.Storages;
-using VctoonClient.Storages.Base;
+using NativeAppStore;
 
 namespace VctoonClient.Desktop;
 
@@ -19,7 +17,7 @@ internal class Program
             .StartWithClassicDesktopLifetime(args);
 
 
-        AppStorageSavingHandler.SaveStorage();
+        StoreSaveExecutor.SaveAllStores();
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.

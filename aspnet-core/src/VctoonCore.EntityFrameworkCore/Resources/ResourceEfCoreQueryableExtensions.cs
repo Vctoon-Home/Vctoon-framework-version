@@ -1,5 +1,3 @@
-using VctoonCore.Libraries;
-
 namespace VctoonCore.Resources;
 
 /// <summary>
