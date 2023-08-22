@@ -1,9 +1,8 @@
 ﻿using System;
 using Abp.Localization.Avalonia;
 using NativeAppStore.Core;
-using VctoonClient.Stores;
 
-namespace VctoonClient.Storages.Apps;
+namespace VctoonClient.Stores.Apps;
 
 public class AppSettingsStorage : VctoonStoreBase
 {

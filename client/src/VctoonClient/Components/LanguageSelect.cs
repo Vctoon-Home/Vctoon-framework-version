@@ -14,10 +14,9 @@ public class LanguageSelect : UserControl
 
     public LanguageSelect()
     {
-        _localizationManager = App.Services.GetService<LocalizationManager>();
-        _localizationOptions = App.Services.GetService<IOptions<AbpLocalizationOptions>>();
+        _localizationManager = App.Services.GetService<LocalizationManager>()!;
+        _localizationOptions = App.Services.GetService<IOptions<AbpLocalizationOptions>>()!;
         this.Content = GetMenu();
-
     }
 
 

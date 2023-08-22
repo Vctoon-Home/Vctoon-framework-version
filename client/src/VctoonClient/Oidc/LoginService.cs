@@ -6,7 +6,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using IdentityModel.OidcClient;
 using VctoonClient.Consts;
-using VctoonClient.Storages.Users;
+using VctoonClient.Stores.Users;
 
 namespace VctoonClient.Oidc;
 

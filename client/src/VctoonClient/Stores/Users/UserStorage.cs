@@ -1,6 +1,4 @@
-﻿using VctoonClient.Stores;
-
-namespace VctoonClient.Storages.Users;
+﻿namespace VctoonClient.Stores.Users;
 
 public class UserStorage : VctoonStoreBase
 {

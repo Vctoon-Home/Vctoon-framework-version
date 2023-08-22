@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using VctoonClient.Oidc;
-using VctoonClient.Storages.Users;
+using VctoonClient.Stores.Users;
 
 namespace VctoonClient.ViewModels;
 
