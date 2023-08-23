@@ -2,6 +2,7 @@
 using System;
 using Avalonia.ReactiveUI;
 using NativeAppStore;
+using VctoonClient.Oidc;
 
 namespace VctoonClient.Desktop;
 
@@ -13,6 +14,8 @@ internal class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        new RegistryConfig("VctoonCore").Configure();
+        
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
 

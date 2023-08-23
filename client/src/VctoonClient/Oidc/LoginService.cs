@@ -22,41 +22,48 @@ public class LoginService : ILoginService, ITransientDependency
         _userStorage = userStorage;
     }
 
+    void WindowFocus()
+    {
+        // focus on the window
+        if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow!.Focus();
+        }
+    }
+
+
     public async Task<LoginResult> LoginAsync()
     {
         LoginResult? result = null;
-    
+
         if (Os.IsLinux || Os.IsWindows || Os.IsMacOS)
         {
             var state = await _oidcClient.PrepareLoginAsync();
             var callbackManager = new CallbackManager(state.State);
-    
+
             Process.Start(new ProcessStartInfo
             {
                 FileName = state.StartUrl,
                 UseShellExecute = true
             });
-    
+
             var response = await callbackManager.RunServer();
-    
+
+            WindowFocus();
             result = await _oidcClient.ProcessResponseAsync(response, state);
+            WindowFocus();
         }
         else
         {
             result = await _oidcClient.LoginAsync(new LoginRequest());
         }
-    
+
+        
         if (!result.IsError)
         {
-            // focus on the window
-            if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow!.Focus();
-            }
-    
             MessageBus.Current.SendMessage(new LoginMessage());
         }
-    
+
         return result;
     }
 
