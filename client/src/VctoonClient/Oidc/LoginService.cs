@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using IdentityModel.OidcClient;
 using VctoonClient.Consts;
+using VctoonClient.Messages;
 using VctoonClient.Stores.Users;
 
 namespace VctoonClient.Oidc;
@@ -23,37 +24,40 @@ public class LoginService : ILoginService, ITransientDependency
 
     public async Task<LoginResult> LoginAsync()
     {
+        LoginResult? result = null;
+    
         if (Os.IsLinux || Os.IsWindows || Os.IsMacOS)
         {
             var state = await _oidcClient.PrepareLoginAsync();
             var callbackManager = new CallbackManager(state.State);
-
+    
             Process.Start(new ProcessStartInfo
             {
                 FileName = state.StartUrl,
                 UseShellExecute = true
             });
-
+    
             var response = await callbackManager.RunServer();
-
-            var result = await _oidcClient.ProcessResponseAsync(response, state);
-
-            if (!result.IsError)
-            {
-                // focus on the  window
-                if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-                {
-                    desktop.MainWindow!.Focus();
-                }
-            }
-
-            return result;
+    
+            result = await _oidcClient.ProcessResponseAsync(response, state);
         }
         else
         {
-            var result = await _oidcClient.LoginAsync(new LoginRequest());
-            return result;
+            result = await _oidcClient.LoginAsync(new LoginRequest());
         }
+    
+        if (!result.IsError)
+        {
+            // focus on the window
+            if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow!.Focus();
+            }
+    
+            MessageBus.Current.SendMessage(new LoginMessage());
+        }
+    
+        return result;
     }
 
     public async Task<LogoutResult> LogoutAsync()
@@ -62,7 +66,7 @@ public class LoginService : ILoginService, ITransientDependency
         if (!logoutResult.IsError)
         {
             _userStorage.ClearToken();
-            // WeakReferenceMessenger.Default.Send(new LogoutMessage());
+            MessageBus.Current.SendMessage(new LogoutMessage());
         }
 
         return logoutResult;
@@ -87,7 +91,7 @@ public class LoginService : ILoginService, ITransientDependency
                 }
 
                 _userStorage.ClearToken();
-                // WeakReferenceMessenger.Default.Send(new LogoutMessage());
+                MessageBus.Current.SendMessage(new LogoutMessage());
             }
         }
 
