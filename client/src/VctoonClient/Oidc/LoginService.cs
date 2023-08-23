@@ -27,6 +27,7 @@ public class LoginService : ILoginService, ITransientDependency
         // focus on the window
         if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            desktop.MainWindow!.Activate();
             desktop.MainWindow!.Focus();
         }
     }
@@ -49,18 +50,17 @@ public class LoginService : ILoginService, ITransientDependency
 
             var response = await callbackManager.RunServer();
 
-            WindowFocus();
             result = await _oidcClient.ProcessResponseAsync(response, state);
-            WindowFocus();
         }
         else
         {
             result = await _oidcClient.LoginAsync(new LoginRequest());
         }
 
-        
+
         if (!result.IsError)
         {
+            WindowFocus();
             MessageBus.Current.SendMessage(new LoginMessage());
         }
 

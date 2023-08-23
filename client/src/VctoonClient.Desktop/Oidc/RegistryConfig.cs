@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Reflection;
 using Microsoft.Win32;
+using VctoonClient.Consts;
 
-namespace VctoonClient.Oidc;
+namespace VctoonClient.Desktop.Oidc;
 
 public class RegistryConfig
 {
     public RegistryConfig(string uriScheme)
     {
         CustomUriScheme = uriScheme;
+
+        if (CommandKeyValueValue.IsNullOrEmpty())
+        {
+            if (Os.IsWindows)
+                CommandKeyValueValue = String.Format(CommandKeyValueFormat, Assembly.GetExecutingAssembly().Location)
+                    .Replace("dll", "exe");
+        }
     }
 
     public void Configure()
@@ -32,7 +40,7 @@ public class RegistryConfig
 
     const string CommandKeyValueName = "";
     const string CommandKeyValueFormat = "\"{0}\" \"%1\"";
-    static string CommandKeyValueValue => String.Format(CommandKeyValueFormat, Assembly.GetExecutingAssembly().Location);
+    static string CommandKeyValueValue = null;
 
     const string UrlProtocolValueName = "URL Protocol";
     const string UrlProtocolValueValue = "";
