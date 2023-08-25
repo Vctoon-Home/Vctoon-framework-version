@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Avalonia.ReactiveUI;
 using IdentityModel.Client;
 using NativeAppStore;
 using VctoonClient.Desktop.Oidc;
@@ -54,7 +53,6 @@ internal class Program
         var app = AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
-            .UseReactiveUI()
             .LogToTrace();
 
         return app;

@@ -2,6 +2,7 @@
 using System.Linq;
 using Abp.Localization.Avalonia;
 using Avalonia.Controls;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Options;
 using Volo.Abp.Localization;
 
@@ -48,6 +49,6 @@ public class LanguageSelect : UserControl
         _localizationOptions.Value.Languages.Select(x => new MenuItem()
         {
             Header = x.DisplayName,
-            Command = ReactiveCommand.Create(() => { _localizationManager.ChangeLanguage(x.CultureName); })
+            Command = new RelayCommand(() => _localizationManager.ChangeLanguage(x.CultureName))
         }).ToList();
 }

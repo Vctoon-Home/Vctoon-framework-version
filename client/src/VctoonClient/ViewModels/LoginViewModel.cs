@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
+using VctoonClient.ViewModels.Bases;
+using VctoonClient.Views;
 
 namespace VctoonClient.ViewModels;
 
@@ -13,6 +15,14 @@ public class LoginViewModel : ViewModelBase, ITransientDependency
     {
         _loginService = loginService;
         _userStorage = userStorage;
+    }
+
+    static LoginViewModel()
+    {
+        ViewLocator.Register(typeof(LoginViewModel), () =>
+        {
+            return App.Services.GetService<LoginView>();
+        });
     }
 
     public async Task Login()

@@ -1,17 +1,15 @@
-﻿using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
+﻿using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using VctoonClient.ViewModels;
 
 namespace VctoonClient.Views;
 
-public partial class LoginView : ReactiveUserControl<LoginViewModel>, ITransientDependency
+public partial class LoginView : UserControl, ITransientDependency
 {
     public LoginView(LoginViewModel vm)
     {
         DataContext = vm;
         InitializeComponent();
-        
-        
     }
 
     private void InitializeComponent()

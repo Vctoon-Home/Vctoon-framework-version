@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using CommunityToolkit.Mvvm.Messaging;
 using IdentityModel.OidcClient;
 using VctoonClient.Consts;
 using VctoonClient.Messages;
@@ -61,7 +62,7 @@ public class LoginService : ILoginService, ITransientDependency
         if (!result.IsError)
         {
             WindowFocus();
-            MessageBus.Current.SendMessage(new LoginMessage());
+            WeakReferenceMessenger.Default.Send(new LoginMessage());
         }
 
         return result;
@@ -73,7 +74,7 @@ public class LoginService : ILoginService, ITransientDependency
         if (!logoutResult.IsError)
         {
             _userStorage.ClearToken();
-            MessageBus.Current.SendMessage(new LogoutMessage());
+            WeakReferenceMessenger.Default.Send(new LogoutMessage());
         }
 
         return logoutResult;
@@ -98,7 +99,7 @@ public class LoginService : ILoginService, ITransientDependency
                 }
 
                 _userStorage.ClearToken();
-                MessageBus.Current.SendMessage(new LogoutMessage());
+                WeakReferenceMessenger.Default.Send(new LogoutMessage());
             }
         }
 

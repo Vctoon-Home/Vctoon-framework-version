@@ -7,18 +7,12 @@ namespace VctoonClient;
 
 public class MainWindow : Window, ISingletonDependency
 {
-    public MainWindow()
+    public MainWindow(MainView mainView)
     {
         Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://VctoonClient/Assets/avalonia-logo.ico")));
         Title = "VctoonClient";
-    }
-}
 
-public class MainView : UserControl, ISingletonDependency
-{
-    public MainView()
-    {
-        Content = App.Services.GetService<LoginView>();
-        
+
+        Content = mainView;
     }
 }
