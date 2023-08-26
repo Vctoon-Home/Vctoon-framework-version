@@ -6,9 +6,9 @@ namespace VctoonClient.Views;
 
 public partial class LoginView : UserControl, ITransientDependency
 {
-    public LoginView(LoginViewModel vm)
+    public LoginView()
     {
-        DataContext = vm;
+        DataContext = App.Services.GetService<LoginViewModel>();
         InitializeComponent();
     }
 

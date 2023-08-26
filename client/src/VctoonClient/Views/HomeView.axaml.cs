@@ -9,11 +9,11 @@ public partial class HomeView : UserControl, ITransientDependency
 {
     private readonly HomeViewModel _vm;
 
-    public HomeView(HomeViewModel vm)
+    public HomeView()
     {
-        _vm = vm;
+        _vm = App.Services.GetService<HomeViewModel>();
         InitializeComponent();
 
-        DataContext = vm;
+        DataContext = _vm;
     }
 }

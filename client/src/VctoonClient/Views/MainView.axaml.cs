@@ -13,12 +13,12 @@ public partial class MainView : UserControl, ISingletonDependency
 
 
 
-    public MainView(MainViewModel vm)
+    public MainView()
     {
         InitializeComponent();
 
-        _vm = vm;
-        this.DataContext = vm;
+        _vm = App.Services.GetService<MainViewModel>();
+        this.DataContext = _vm;
     }
 
     private void ToggleButton_OnIsCheckedChanged(object sender, RoutedEventArgs e)
