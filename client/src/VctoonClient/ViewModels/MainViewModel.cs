@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Avalonia.Labs.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using VctoonClient.Navigations;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
@@ -30,26 +31,45 @@ public partial class MainViewModel : ViewModelBase, ITransientDependency
 
     public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
 
-    public MainViewModel(UserStore userStore,ILoginService loginService)
+    public MainViewModel(UserStore userStore, ILoginService loginService)
     {
         _userStore = userStore;
         _loginService = loginService;
         _navigationRouter = new StackNavigationRouter();
 
         // _navigationRouter.NavigateToAsync(new NavigationViewModel(_navigationRouter));
-        _navigationRouter.NavigateToAsync("//login");
+        _navigationRouter.NavigateToAsync("//home");
 
         MenuItems = new ObservableCollection<MenuItemViewModel>()
         {
-            new() {MenuHeader = "login", Key = "//login"},
+            new() {MenuHeader = "home", Key = "//home", MenuIconName = "mdi-home"},
+            new() {MenuHeader = "login", Key = "//login", MenuIconName = "mdi-home"},
         };
+
+        foreach (var menuItemViewModel in MenuItems)
+        {
+            SetActivateCommand(menuItemViewModel);
+        }
     }
 
-    public async void NavigateTo(object page)
+    // 递归设置所有menuItemViewModel.ActivateCommand
+    private void SetActivateCommand(MenuItemViewModel menuItemViewModel)
+    {
+        menuItemViewModel.ActivateCommand = new RelayCommand( () =>
+        {
+            NavigateTo(menuItemViewModel.Key);
+        });
+        foreach (var child in menuItemViewModel.Children)
+        {
+            SetActivateCommand(child);
+        }
+    }
+
+    public async void NavigateTo(object key)
     {
         if (NavigationRouter != null)
         {
-            await NavigationRouter.NavigateToAsync(page);
+            await NavigationRouter.NavigateToAsync(key);
         }
     }
 }

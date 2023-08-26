@@ -64,7 +64,7 @@
                     <TextBlock
                         VerticalAlignment="Center"
                         Classes="H5"
-                        Text="Semi Avalonia"
+                        Text="Vctoon"
                         Theme="{DynamicResource TitleTextBlock}" />
 
 
@@ -88,6 +88,7 @@
                     Name="Menu"
                     ItemsSource="{Binding MenuItems}"
                     IsClosed="{Binding Collapsed}"
+                    Padding="0"
                     ShowCollapseButton="False">
                     <!-- <u:NavigationMenu.Header> -->
                     <!--     <TextBlock -->
@@ -105,14 +106,22 @@
                         <navigations:MenuDataTemplateSelector>
                             <navigations:MenuDataTemplateSelector.MenuTemplate>
                                 <DataTemplate DataType="navigations:MenuItemViewModel">
-                                    <u:NavigationMenuItem Header="{Binding MenuHeader}"
+                                    <u:NavigationMenuItem Command="{Binding ActivateCommand}"
+                                                          Header="{Binding MenuHeader}"
                                                           ItemsSource="{Binding Children}">
-                                        <!-- <u:NavigationMenuItem.Icon> -->
-                                        <!--     <PathIcon -->
-                                        <!--         Width="16" -->
-                                        <!--         Height="16" -->
-                                        <!--         Data="{Binding MenuIconName, Converter={StaticResource IconNameConverter}}" /> -->
-                                        <!-- </u:NavigationMenuItem.Icon> -->
+                                        <u:NavigationMenuItem.Icon>
+                                            <i:Icon
+                                                Width="16"
+                                                Height="16"
+                                                Value="{Binding MenuIconName}" />
+
+
+                                            <!-- </i:Icon> -->
+                                            <!-- <PathIcon -->
+                                            <!--     Width="16" -->
+                                            <!--     Height="16" -->
+                                            <!--     Data="{Binding MenuIconName, Converter={StaticResource IconNameConverter}}" /> -->
+                                        </u:NavigationMenuItem.Icon>
                                     </u:NavigationMenuItem>
                                 </DataTemplate>
                             </navigations:MenuDataTemplateSelector.MenuTemplate>

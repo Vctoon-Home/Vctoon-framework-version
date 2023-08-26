@@ -16,6 +16,7 @@ public class ViewLocator : IDataTemplate
     static ViewLocator()
     {
         ViewModelRegistry.TryAdd(typeof(LoginViewModel), () => App.Services.GetService<LoginView>());
+        ViewModelRegistry.TryAdd(typeof(HomeViewModel), () => App.Services.GetService<HomeView>());
     }
 
     public static void Register(Type type, Func<Control> factory)
