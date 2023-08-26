@@ -8,48 +8,141 @@
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:bases="clr-namespace:VctoonClient.ViewModels.Bases"
              xmlns:labs="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:com="clr-namespace:VctoonClient.Components;assembly=VctoonClient"
+             xmlns:navigations="clr-namespace:VctoonClient.Navigations"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
              x:DataType="viewModels:MainViewModel"
              x:Class="VctoonClient.Views.MainView">
-    <UserControl.Resources>
-        <StreamGeometry x:Key="SwapThemeIcon">M 23.935547,4.0019531 C 23.275047,4.0354318 22.748047,4.5831669 22.748047,5.2519531 V 7.7519531 C 22.748047,8.4423031 23.307647,9.0019531 23.998047,9.0019531 24.688347,9.0019531 25.248047,8.4423031 25.248047,7.7519531 V 5.2519531 C 25.248047,4.5615931 24.688347,4.0019531 23.998047,4.0019531 23.976472,4.0019531 23.956853,4.0008732 23.935547,4.0019531 Z M 10.25,9 C 9.9300987,9 9.6093094,9.1231125 9.3652344,9.3671875 8.8770744,9.8553475 8.8770744,10.646666 9.3652344,11.134766 L 11.865234,13.634766 C 12.353334,14.122966 13.146666,14.122966 13.634766,13.634766 14.122966,13.146666 14.122966,12.355287 13.634766,11.867188 L 11.134766,9.3671875 C 10.890716,9.1231125 10.569901,9 10.25,9 Z M 37.75,9 C 37.430087,9 37.111288,9.1231125 36.867188,9.3671875 L 34.367188,11.867188 C 33.879088,12.355287 33.879087,13.146666 34.367188,13.634766 34.855388,14.122966 35.646666,14.122966 36.134766,13.634766 L 38.634766,11.134766 C 39.122966,10.646666 39.122966,9.8553475 38.634766,9.3671875 38.390716,9.1231125 38.069913,9 37.75,9 Z M 24,14 C 18.47715,14 14,18.47715 14,24 14,29.5228 18.47715,34 24,34 29.5228,34 34,29.5228 34,24 34,18.47715 29.5228,14 24,14 Z M 24,15.5 C 28.6944,15.5 32.5,19.30558 32.5,24 32.5,28.6944 28.6944,32.5 24,32.5 Z M 5.25,22.75 C 4.55965,22.75 4,23.3097 4,24 4,24.6904 4.55965,25.25 5.25,25.25 H 7.75 C 8.44035,25.25 9,24.6904 9,24 9,23.3097 8.44035,22.75 7.75,22.75 Z M 40.25,22.75 C 39.5596,22.75 39,23.3097 39,24 39,24.6904 39.5596,25.25 40.25,25.25 H 42.75 C 43.4403,25.25 44,24.6904 44,24 44,23.3097 43.4403,22.75 42.75,22.75 Z M 12.75,34 C 12.4301,34 12.109284,34.123087 11.865234,34.367188 L 9.3652344,36.867188 C 8.8770744,37.355287 8.8770744,38.146666 9.3652344,38.634766 9.8533844,39.122966 10.646666,39.122966 11.134766,38.634766 L 13.634766,36.134766 C 14.122966,35.646666 14.122966,34.855288 13.634766,34.367188 13.390716,34.123087 13.0699,34 12.75,34 Z M 35.25,34 C 34.930087,34 34.611288,34.123087 34.367188,34.367188 33.879088,34.855288 33.879087,35.646666 34.367188,36.134766 L 36.867188,38.634766 C 37.355388,39.122966 38.146666,39.122966 38.634766,38.634766 39.122966,38.146666 39.122966,37.355287 38.634766,36.867188 L 36.134766,34.367188 C 35.890716,34.123087 35.569913,34 35.25,34 Z M 23.998047,39 C 23.307647,39 22.748047,39.5597 22.748047,40.25 V 42.75 C 22.748047,43.4404 23.307647,44 23.998047,44 24.688347,44 25.248047,43.4404 25.248047,42.75 V 40.25 C 25.248047,39.5597 24.688347,39 23.998047,39 Z</StreamGeometry>
-    </UserControl.Resources>
-    <StackPanel>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Auto">
+
+    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, *">
+        <Border Padding="8,4,8,4" Theme="{DynamicResource CardBorder}" Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+            <DockPanel>
+
+                <StackPanel Spacing="8" Orientation="Horizontal" DockPanel.Dock="Right">
+                    <com:LanguageSelect></com:LanguageSelect>
+
+                    <Button IsVisible="{Binding !IsLogin}">登录</Button>
+
+                    <Menu>
+                        <MenuItem Header="登录成功" IsVisible="{Binding IsLogin}">
+                            <MenuItem Header="退出登录"></MenuItem>
+                        </MenuItem>
+                    </Menu>
+
+                    <ToggleSwitch
+                        Grid.Column="1"
+                        Padding="4"
+                        IsCheckedChanged="ToggleButton_OnIsCheckedChanged"
+                        Theme="{DynamicResource ButtonToggleSwitch}">
+                        <ToggleSwitch.OnContent>
+                            <PathIcon
+                                Width="16"
+                                Height="16"
+                                Data="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM17 15C17.476 15 17.9408 14.9525 18.3901 14.862C17.296 17.3011 14.8464 19 12 19C8.13401 19 5 15.866 5 12C5 8.60996 7.40983 5.78277 10.6099 5.13803C10.218 6.01173 10 6.98041 10 8C10 11.866 13.134 15 17 15Z"
+                                Foreground="{DynamicResource ButtonDefaultTertiaryForeground}" />
+                        </ToggleSwitch.OnContent>
+                        <ToggleSwitch.OffContent>
+                            <PathIcon
+                                Width="16"
+                                Height="16"
+                                Data="M3.55 19.09L4.96 20.5L6.76 18.71L5.34 17.29M12 6C8.69 6 6 8.69 6 12S8.69 18 12 18 18 15.31 18 12C18 8.68 15.31 6 12 6M20 13H23V11H20M17.24 18.71L19.04 20.5L20.45 19.09L18.66 17.29M20.45 5L19.04 3.6L17.24 5.39L18.66 6.81M13 1H11V4H13M6.76 5.39L4.96 3.6L3.55 5L5.34 6.81L6.76 5.39M1 13H4V11H1M13 20H11V23H13"
+                                Foreground="{DynamicResource ButtonDefaultTertiaryForeground}" />
+                        </ToggleSwitch.OffContent>
+                    </ToggleSwitch>
+                </StackPanel>
+
+
+                <StackPanel Spacing="8" Orientation="Horizontal">
+                    <ToggleButton i:Attached.Icon="mdi-menu" IsChecked="{Binding Collapsed}"></ToggleButton>
+
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Classes="H5"
+                        Text="Semi Avalonia"
+                        Theme="{DynamicResource TitleTextBlock}" />
+
+
+                </StackPanel>
+
+
+            </DockPanel>
+        </Border>
+        <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, *" Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2">
+            <Border Theme="{DynamicResource CardBorder} "
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.RowSpan="2">
+                <u:NavigationMenu
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Name="Menu"
+                    ItemsSource="{Binding MenuItems}"
+                    IsClosed="{Binding Collapsed}"
+                    ShowCollapseButton="False">
+                    <!-- <u:NavigationMenu.Header> -->
+                    <!--     <TextBlock -->
+                    <!--         Classes="H5" -->
+                    <!--         Text="Semi Avalonia" -->
+                    <!--         Theme="{DynamicResource TitleTextBlock}" /> -->
+                    <!-- </u:NavigationMenu.Header> -->
+                    <!-- <u:NavigationMenu.Icon> -->
+                    <!--     <PathIcon -->
+                    <!--         Width="32" -->
+                    <!--         Height="32" -->
+                    <!--         Data="M10.6201 17.5C6.06377 17.5 2.37012 13.8063 2.37012 9.25C2.37012 4.69365 6.06377 1 10.6201 1V17.5ZM13.3701 6.5C17.9265 6.5 21.6201 10.1936 21.6201 14.75C21.6201 19.3063 17.9265 23 13.3701 23V6.5Z" /> -->
+                    <!-- </u:NavigationMenu.Icon> -->
+                    <u:NavigationMenu.ItemTemplate>
+                        <navigations:MenuDataTemplateSelector>
+                            <navigations:MenuDataTemplateSelector.MenuTemplate>
+                                <DataTemplate DataType="navigations:MenuItemViewModel">
+                                    <u:NavigationMenuItem Header="{Binding MenuHeader}"
+                                                          ItemsSource="{Binding Children}">
+                                        <!-- <u:NavigationMenuItem.Icon> -->
+                                        <!--     <PathIcon -->
+                                        <!--         Width="16" -->
+                                        <!--         Height="16" -->
+                                        <!--         Data="{Binding MenuIconName, Converter={StaticResource IconNameConverter}}" /> -->
+                                        <!-- </u:NavigationMenuItem.Icon> -->
+                                    </u:NavigationMenuItem>
+                                </DataTemplate>
+                            </navigations:MenuDataTemplateSelector.MenuTemplate>
+                            <navigations:MenuDataTemplateSelector.SeparatorTemplate>
+                                <DataTemplate DataType="navigations:MenuItemViewModel">
+                                    <u:NavigationMenuSeparator Header="{Binding MenuHeader}" />
+                                </DataTemplate>
+                            </navigations:MenuDataTemplateSelector.SeparatorTemplate>
+                        </navigations:MenuDataTemplateSelector>
+                    </u:NavigationMenu.ItemTemplate>
+                </u:NavigationMenu>
+            </Border>
+
             <labs:NavigationControl
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.RowSpan="2"
                 x:Name="Nav"
                 VerticalAlignment="Stretch"
                 IsBackButtonVisible="{Binding ShowBackButton}"
-                IsNavBarVisible="{Binding ShowNavBar}"
+                IsNavBarVisible="False"
                 NavigationRouter="{Binding NavigationRouter}"
-                Header="{Binding NavigationRouter.CurrentPage}"
-                Margin="5"
-                Padding="10"
-                Grid.Row="1"
-                Grid.ColumnSpan="2">
-                <labs:NavigationControl.HeaderTemplate>
-                    <DataTemplate x:DataType="bases:ViewModelBase">
-                        <DockPanel>
-                            <Button
-                                    DockPanel.Dock="Right"
-                                    Background="Transparent">
-                                <PathIcon Data="{StaticResource SwapThemeIcon}"
-                                          Width="32"
-                                          Height="32" />
-                            </Button>
-                            <Label Content="{Binding Title}"
-                                   VerticalAlignment="Center"
-                                   VerticalContentAlignment="Center" />
-                        </DockPanel>
-                    </DataTemplate>
-                </labs:NavigationControl.HeaderTemplate>
+                Padding="8">
                 <labs:NavigationControl.DataTemplates>
                     <vctoonClient:ViewLocator />
                 </labs:NavigationControl.DataTemplates>
-            </labs:NavigationControl>
 
-        </ScrollViewer>
-    </StackPanel>
+            </labs:NavigationControl>
+        </Grid>
+    </Grid>
+
 
 </UserControl>

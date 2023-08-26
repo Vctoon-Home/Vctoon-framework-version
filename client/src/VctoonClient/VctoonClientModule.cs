@@ -1,4 +1,5 @@
-﻿using Abp.Localization.Avalonia;
+﻿using System.Reflection;
+using Abp.Localization.Avalonia;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;

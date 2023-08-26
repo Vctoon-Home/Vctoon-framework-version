@@ -17,7 +17,11 @@
         <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaPackageVersion)"/>
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaPackageVersion)"/>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+        <PackageReference Include="Irihi.Ursa" Version="0.1.0-beta20230702" />
+        <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="0.1.0-beta20230702" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="8.2.0" />
+        <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="8.2.0" />
         <PackageReference Include="Semi.Avalonia" Version="11.0.0"/>
 
         <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpPackageVersion)"/>

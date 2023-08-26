@@ -15,12 +15,12 @@ namespace VctoonClient.Oidc;
 public class LoginService : ILoginService, ITransientDependency
 {
     private readonly OidcClient _oidcClient;
-    private readonly UserStorage _userStorage;
+    private readonly UserStore _userStore;
 
-    public LoginService(OidcClient oidcClient, UserStorage userStorage)
+    public LoginService(OidcClient oidcClient, UserStore userStore)
     {
         _oidcClient = oidcClient;
-        _userStorage = userStorage;
+        _userStore = userStore;
     }
 
     void WindowFocus()
@@ -73,7 +73,7 @@ public class LoginService : ILoginService, ITransientDependency
         var logoutResult = await _oidcClient.LogoutAsync();
         if (!logoutResult.IsError)
         {
-            _userStorage.ClearToken();
+            _userStore.ClearToken();
             WeakReferenceMessenger.Default.Send(new LogoutMessage());
         }
 
@@ -82,23 +82,23 @@ public class LoginService : ILoginService, ITransientDependency
 
     public async Task<string> GetAccessTokenAsync()
     {
-        var token = _userStorage.AccessToken;
+        var token = _userStore.AccessToken;
 
         if (!token.IsNullOrEmpty())
         {
             var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
             if (jwtToken.ValidTo <= DateTime.UtcNow)
             {
-                var refreshToken = _userStorage.RefreshToken;
+                var refreshToken = _userStore.RefreshToken;
                 if (!refreshToken.IsNullOrEmpty())
                 {
                     var refreshResult = await _oidcClient.RefreshTokenAsync(refreshToken);
-                    _userStorage.SetToken(refreshResult.AccessToken, refreshResult.RefreshToken);
+                    _userStore.SetToken(refreshResult.AccessToken, refreshResult.RefreshToken);
 
                     return refreshResult.AccessToken;
                 }
 
-                _userStorage.ClearToken();
+                _userStore.ClearToken();
                 WeakReferenceMessenger.Default.Send(new LogoutMessage());
             }
         }

@@ -9,12 +9,12 @@ namespace VctoonClient.ViewModels;
 public class LoginViewModel : ViewModelBase, ITransientDependency
 {
     private readonly ILoginService _loginService;
-    private readonly UserStorage _userStorage;
+    private readonly UserStore _userStore;
 
-    public LoginViewModel(ILoginService loginService, UserStorage userStorage)
+    public LoginViewModel(ILoginService loginService, UserStore userStore)
     {
         _loginService = loginService;
-        _userStorage = userStorage;
+        _userStore = userStore;
     }
 
     static LoginViewModel()
@@ -28,7 +28,7 @@ public class LoginViewModel : ViewModelBase, ITransientDependency
     public async Task Login()
     {
         var res = await _loginService.LoginAsync();
-        _userStorage.AccessToken = res.AccessToken;
-        _userStorage.RefreshToken = res.RefreshToken;
+        _userStore.AccessToken = res.AccessToken;
+        _userStore.RefreshToken = res.RefreshToken;
     }
 }

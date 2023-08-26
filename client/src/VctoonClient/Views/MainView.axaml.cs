@@ -1,5 +1,8 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Styling;
+using VctoonClient.Stores.Users;
 using VctoonClient.ViewModels;
 
 namespace VctoonClient.Views;
@@ -8,14 +11,26 @@ public partial class MainView : UserControl, ISingletonDependency
 {
     private readonly MainViewModel _vm;
 
+
+
     public MainView(MainViewModel vm)
     {
         InitializeComponent();
-        
+
         _vm = vm;
         this.DataContext = vm;
     }
-    
+
+    private void ToggleButton_OnIsCheckedChanged(object sender, RoutedEventArgs e)
+    {
+        var app = Application.Current;
+        if (app is not null)
+        {
+            var theme = app.ActualThemeVariant;
+            app.RequestedThemeVariant = theme == ThemeVariant.Dark ? ThemeVariant.Light : ThemeVariant.Dark;
+        }
+    }
+
     protected override void OnLoaded(RoutedEventArgs e)
     {
         base.OnLoaded(e);

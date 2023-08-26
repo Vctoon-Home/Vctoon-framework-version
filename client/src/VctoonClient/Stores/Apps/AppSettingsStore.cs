@@ -4,14 +4,14 @@ using NativeAppStore.Core;
 
 namespace VctoonClient.Stores.Apps;
 
-public class AppSettingsStorage : VctoonStoreBase
+public class AppSettingsStore : VctoonStoreBase
 {
     private readonly LocalizationManager _localizationManager;
 
     [Store]
     private string CultureName { get; set; }
 
-    public AppSettingsStorage(LocalizationManager localizationManager)
+    public AppSettingsStore(LocalizationManager localizationManager)
     {
         _localizationManager = localizationManager;
         LoadStore();

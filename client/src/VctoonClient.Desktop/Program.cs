@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using NativeAppStore;
+using Projektanker.Icons.Avalonia;
+using Projektanker.Icons.Avalonia.FontAwesome;
+using Projektanker.Icons.Avalonia.MaterialDesign;
 using VctoonClient.Desktop.Oidc;
 using VctoonClient.Oidc;
 
@@ -50,6 +53,11 @@ internal class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
     {
+        
+        IconProvider.Current
+            .Register<FontAwesomeIconProvider>()
+            .Register<MaterialDesignIconProvider>();
+        
         var app = AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()

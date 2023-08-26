@@ -10,9 +10,7 @@
              x:Class="VctoonClient.Views.LoginView">
     <StackPanel>
         <com:LanguageSelect></com:LanguageSelect>
-
         <Button Command="{Binding Login}">Login</Button>
-
         <TextBlock Text="{t:Localized 'Save'}"> </TextBlock>
         <TextBox></TextBox>
     </StackPanel>
