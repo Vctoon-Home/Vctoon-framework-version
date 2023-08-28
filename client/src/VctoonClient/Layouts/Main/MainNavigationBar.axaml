@@ -4,17 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:u="https://irihi.tech/ursa"
              xmlns:navigations="clr-namespace:VctoonClient.Navigations"
-             xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Layouts.Main.MainNavigationBar"
              x:DataType="viewModels:MainViewModel">
-    <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, *">
-        <!-- Navigation Sider Bar -->
-        <Border Theme="{DynamicResource CardBorder} "
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.RowSpan="2">
+        <Border Theme="{DynamicResource CardBorder} ">
             <u:NavigationMenu
                 Name="Menu"
                 ItemsSource="{Binding MenuItems}"
@@ -22,18 +17,6 @@
                 ShowCollapseButton="False"
                 OpenedWidth="1000"
                 ClosedWidth="10">
-                <!-- <u:NavigationMenu.Header> -->
-                <!--     <TextBlock -->
-                <!--         Classes="H5" -->
-                <!--         Text="Semi Avalonia" -->
-                <!--         Theme="{DynamicResource TitleTextBlock}" /> -->
-                <!-- </u:NavigationMenu.Header> -->
-                <!-- <u:NavigationMenu.Icon> -->
-                <!--     <PathIcon -->
-                <!--         Width="32" -->
-                <!--         Height="32" -->
-                <!--         Data="M10.6201 17.5C6.06377 17.5 2.37012 13.8063 2.37012 9.25C2.37012 4.69365 6.06377 1 10.6201 1V17.5ZM13.3701 6.5C17.9265 6.5 21.6201 10.1936 21.6201 14.75C21.6201 19.3063 17.9265 23 13.3701 23V6.5Z" /> -->
-                <!-- </u:NavigationMenu.Icon> -->
                 <u:NavigationMenu.ItemTemplate>
                     <navigations:MenuDataTemplateSelector>
                         <navigations:MenuDataTemplateSelector.MenuTemplate>
@@ -42,10 +25,8 @@
                                                       Header="{Binding MenuHeader}"
                                                       ItemsSource="{Binding Children}">
                                     <u:NavigationMenuItem.Icon>
-                                        <avalonia:Icon
-                                            Width="16"
-                                            Height="16"
-                                            Value="{Binding MenuIconName}" />
+                                        <i:Icon FontSize="20"
+                                                Value="{Binding MenuIconName}" />
                                     </u:NavigationMenuItem.Icon>
                                 </u:NavigationMenuItem>
                             </DataTemplate>
@@ -61,6 +42,5 @@
         </Border>
 
 
-    </Grid>
 
 </UserControl>

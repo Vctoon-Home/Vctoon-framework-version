@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.Localization.Avalonia;
 using Avalonia.Labs.Controls;
 using CommunityToolkit.Mvvm.Input;
 using VctoonClient.Navigations;
@@ -23,16 +24,18 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     [ObservableProperty]
     private INavigationRouter _navigationRouter = NavigationProvider.Default.Router;
 
-    public ObservableCollection<MenuItemViewModel> MenuItems { get; set; } = new()
-    {
-        new() {MenuHeader = "home", Path = "//home", MenuIconName = "mdi-home", ViewType = typeof(HomeView)},
-        new() {MenuHeader = "login", Path = "//login", MenuIconName = "mdi-home", ViewType = typeof(LoginView)},
-    };
+    public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
 
 
     public MainViewModel(ILoginService loginService)
     {
         _loginService = loginService;
+
+        MenuItems = new()
+        {
+            new() {MenuHeader = L["Home"], Path = "//home", MenuIconName = "mdi-home", ViewType = typeof(HomeView)},
+        };
+
         foreach (var menuItemViewModel in MenuItems)
         {
             SetActivateCommand(menuItemViewModel);

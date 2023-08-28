@@ -19,8 +19,9 @@ public class ViewLocator : IDataTemplate
     public Control? Build(object? data)
     {
         if (data == null)
-            return null;
+            return new TextBlock {Text = "not find"};
 
+        Control? view = null;
 
         if (data is string viewPath)
         {
@@ -35,34 +36,48 @@ public class ViewLocator : IDataTemplate
             if (menuItem.ViewType == null)
                 return new TextBlock {Text = " not find ViewType"};
 
-            var view = (Control?) App.Services.GetService(menuItem.ViewType!)!;
+            view = (Control?) App.Services.GetService(menuItem.ViewType!)!;
 
             if (view == null)
                 return new TextBlock {Text = " not find ViewType"};
-
-            if (NavigationProvider.Default.Router is VctoonStackNavigationRouter router)
-            {
-                var vm = view.DataContext;
-
-                if (vm == null)
-                    return view;
-
-                // 判断vm是否继承INavigationQuery
-                if (vm is INavigationQuery navigationQuery)
-                {
-                    navigationQuery.OnNavigation(router.CurrentPageParameters);
-                }
-            }
-
-            return view;
         }
         else if (data is Type type)
         {
+        }
 
+        // set navigation parameters
+        if (NavigationProvider.Default.Router is VctoonStackNavigationRouter router)
+        {
+            var vm = view.DataContext;
+
+            if (vm == null)
+                return view;
+
+            // QueryPropertyAttribute
+            {
+                // TODO: cache
+                var queryProperties = vm.GetType().GetCustomAttributes(typeof(QueryPropertyAttribute), true)
+                    .Select(v => v as QueryPropertyAttribute).Where(v => v != null);
+
+                foreach (var queryProperty in queryProperties)
+                {
+                    if (router.CurrentPageParameters.TryGetValue(queryProperty.QueryId, out var value))
+                    {
+                        if (value != null)
+                        {
+                            vm.GetType().GetProperty(queryProperty.Name)?.SetValue(vm, value);
+                        }
+                    }
+                }
+            }
+
+            // IQueryAttributable
+            if (vm is IQueryAttributable navigationQuery)
+                navigationQuery.ApplyQueryAttributes(router.CurrentPageParameters);
         }
 
 
-        return new TextBlock {Text = "not find"};
+        return view;
     }
 
     public bool Match(object? data)
@@ -78,5 +93,4 @@ public class ViewLocator : IDataTemplate
 
         return false;
     }
-
 }
