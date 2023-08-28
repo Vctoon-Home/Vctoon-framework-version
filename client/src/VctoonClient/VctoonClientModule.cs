@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using NativeAppStore.Extensions;
+using VctoonClient.Oidc;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
@@ -15,6 +16,7 @@ using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.UI;
 
 namespace VctoonClient;
@@ -38,6 +40,8 @@ public class VctoonClientModule : AbpModule
             .Create(typeof(VctoonCoreResource)));
 
         services.AddStores(GetType().Assembly, opt => { opt.EnabledCreatorStoreLoad = true; });
+        
+        context.Services.AddTransient<ICurrentPrincipalAccessor, AvaloniaCurrentPrincipalAccessor>();
 
         ConfigureOidcClient(context, configuration);
     }

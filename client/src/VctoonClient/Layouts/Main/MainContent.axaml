@@ -11,18 +11,22 @@
              x:DataType="viewModels:MainViewModel">
 
     <!-- Content -->
-    <controls:NavigationControl
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch"
+    <ScrollViewer HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
+        <controls:NavigationControl
 
-        x:Name="Nav"
-        IsBackButtonVisible="False"
-        NavigationRouter="{Binding NavigationRouter}"
-        IsNavBarVisible="False"
-        Padding="8">
-        <controls:NavigationControl.DataTemplates>
-            <navigations:ViewLocator />
-        </controls:NavigationControl.DataTemplates>
 
-    </controls:NavigationControl>
+            x:Name="Nav"
+            IsBackButtonVisible="False"
+            NavigationRouter="{Binding NavigationRouter}"
+            IsNavBarVisible="False"
+            Padding="8">
+            <controls:NavigationControl.DataTemplates>
+                <navigations:ViewLocator />
+            </controls:NavigationControl.DataTemplates>
+
+        </controls:NavigationControl>
+
+    </ScrollViewer>
+
 </UserControl>

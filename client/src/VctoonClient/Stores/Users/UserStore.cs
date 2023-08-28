@@ -12,8 +12,7 @@ namespace VctoonClient.Stores.Users;
 [INotifyPropertyChanged]
 public partial class UserStore : VctoonStoreBase
 {
-    [ObservableProperty]
-    private TokenInfo? _tokenInfo;
+    public TokenInfo TokenInfo { get; set; }
 
     public void ClearToken()
     {

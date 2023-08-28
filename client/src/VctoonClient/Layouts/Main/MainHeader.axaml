@@ -5,6 +5,7 @@
              xmlns:components="clr-namespace:VctoonClient.Components"
              xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
+             xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Layouts.Main.MainHeader"
              x:DataType="viewModels:MainViewModel">
@@ -15,10 +16,10 @@
             <StackPanel Spacing="8" Orientation="Horizontal" DockPanel.Dock="Right">
                 <components:LanguageSelect></components:LanguageSelect>
 
-                <Button IsVisible="{Binding !IsLogin}" Command="{Binding Login}">登录</Button>
+                <Button IsVisible="{Binding !IsLogin}" Command="{Binding Login}" Content="{L:Localized Login}"></Button>
 
                 <Menu>
-                    <MenuItem Header="登录成功" IsVisible="{Binding IsLogin}">
+                    <MenuItem IsVisible="{Binding IsLogin}" Header="{Binding UserName}">
                         <MenuItem Header="退出登录"></MenuItem>
                     </MenuItem>
                 </Menu>

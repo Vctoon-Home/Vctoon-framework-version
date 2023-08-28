@@ -4,5 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Views.HomeView">
-    Welcome to Avalonia!
+    <StackPanel Spacing="50">
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+
+    </StackPanel>
 </UserControl>
