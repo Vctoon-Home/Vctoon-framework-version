@@ -24,6 +24,8 @@ public class AvaloniaCurrentPrincipalAccessor : CurrentPrincipalAccessorBase, IT
         }
 
         var token = new JwtSecurityTokenHandler().ReadJwtToken(tokenString);
-        return new ClaimsPrincipal(new ClaimsIdentity(token.Claims));
+        var principal = new ClaimsPrincipal(new ClaimsIdentity(token.Claims));
+
+        return principal;
     }
 }

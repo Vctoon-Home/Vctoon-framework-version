@@ -60,7 +60,6 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
         _navigationRouter.NavigateToAsync(MenuItems.First().Path);
 
         MessengerRegister(localizationManager);
-
     }
 
     void MessengerRegister(LocalizationManager localizationManager)
@@ -76,6 +75,11 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     public async void Login()
     {
         await _loginService.LoginAsync();
+    }
+
+    public async void Logout()
+    {
+        await _loginService.LogoutAsync();
     }
 
     // 递归设置所有menuItemViewModel.ActivateCommand
@@ -104,5 +108,8 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
         var user = CurrentUser;
         var user1 = App.Services.GetService<ICurrentUser>();
+
+        var nuame = UserName;
+        var name = user.Name;
     }
 }

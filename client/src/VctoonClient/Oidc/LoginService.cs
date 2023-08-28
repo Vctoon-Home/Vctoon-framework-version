@@ -62,17 +62,15 @@ public class LoginService : ILoginService, ITransientDependency
         if (!result.IsError)
         {
             WindowFocus();
-            WeakReferenceMessenger.Default.Send(new LoginMessage());
-
-            _userStore.TokenInfo = new TokenInfo()
+            _userStore.SetToken(new TokenInfo()
             {
                 AccessToken = result.AccessToken,
                 RefreshToken = result.RefreshToken
-            };
+            });
+            WeakReferenceMessenger.Default.Send(new LoginMessage());
         }
 
         // Get User Info
-
         return result;
     }
 

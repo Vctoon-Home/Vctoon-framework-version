@@ -20,7 +20,7 @@
 
                 <Menu>
                     <MenuItem IsVisible="{Binding IsLogin}" Header="{Binding UserName}">
-                        <MenuItem Header="退出登录"></MenuItem>
+                        <MenuItem Header="{L:Localized LoggedOutTitle}" Command="{Binding Logout}"></MenuItem>
                     </MenuItem>
                 </Menu>
 
