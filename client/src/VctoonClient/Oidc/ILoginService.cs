@@ -9,5 +9,5 @@ public interface ILoginService
 
     Task<LogoutResult> LogoutAsync();
 
-    Task<string> GetAccessTokenAsync();
+    Task<string?> GetAccessTokenAsync();
 }

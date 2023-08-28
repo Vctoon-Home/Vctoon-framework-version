@@ -1,0 +1,28 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
+             xmlns:vctoonClient="clr-namespace:VctoonClient"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:nav="clr-namespace:VctoonClient.Navigations"
+             xmlns:main="clr-namespace:VctoonClient.Layouts.Main"
+             x:Class="VctoonClient.Layouts.Main.MainContent"
+             x:DataType="main:MainContentViewModel">
+
+    <!-- Content -->
+    <controls:NavigationControl
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+
+        x:Name="Nav"
+        IsBackButtonVisible="False"
+        NavigationRouter="{Binding NavigationRouter}"
+        IsNavBarVisible="False"
+        Padding="8">
+        <controls:NavigationControl.DataTemplates>
+            <vctoonClient:ViewLocator />
+        </controls:NavigationControl.DataTemplates>
+
+    </controls:NavigationControl>
+</UserControl>

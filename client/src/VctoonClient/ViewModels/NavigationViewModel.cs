@@ -1,6 +1,5 @@
 ﻿using System;
 using Avalonia.Labs.Controls;
-using VctoonClient.ViewModels.Bases;
 using VctoonClient.Views;
 
 namespace VctoonClient.ViewModels;

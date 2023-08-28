@@ -1,6 +1,10 @@
-﻿using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Messaging;
+using IdentityModel.Client;
 using NativeAppStore.Core;
+using VctoonClient.Messages;
 using VctoonClient.Oidc;
 
 namespace VctoonClient.Stores.Users;
@@ -8,26 +12,16 @@ namespace VctoonClient.Stores.Users;
 [INotifyPropertyChanged]
 public partial class UserStore : VctoonStoreBase
 {
-    // public string RefreshToken { get; set; }
-    // public string AccessToken { get; set; }
-
     [ObservableProperty]
-    private string _refreshToken;
-
-
-    [ObservableProperty]
-    private string _accessToken;
-
+    private TokenInfo? _tokenInfo;
 
     public void ClearToken()
     {
-        RefreshToken = null;
-        AccessToken = null;
+        TokenInfo = null;
     }
 
-    public void SetToken(string refreshToken, string accessToken)
+    public void SetToken(TokenInfo tokenInfo)
     {
-        RefreshToken = refreshToken;
-        AccessToken = accessToken;
+        TokenInfo = tokenInfo;
     }
 }

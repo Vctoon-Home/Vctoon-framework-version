@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
-using VctoonClient.ViewModels.Bases;
 using VctoonClient.Views;
 
 namespace VctoonClient.ViewModels;
@@ -28,7 +27,5 @@ public class LoginViewModel : ViewModelBase, ITransientDependency
     public async Task Login()
     {
         var res = await _loginService.LoginAsync();
-        _userStore.AccessToken = res.AccessToken;
-        _userStore.RefreshToken = res.RefreshToken;
     }
 }

@@ -45,6 +45,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Layouts\" />
+      <Compile Update="Layouts\Main\MainNavigationBar.axaml.cs">
+        <DependentUpon>NavigationBar.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>

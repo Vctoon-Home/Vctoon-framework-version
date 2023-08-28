@@ -80,29 +80,34 @@ public class LoginService : ILoginService, ITransientDependency
         return logoutResult;
     }
 
-    public async Task<string> GetAccessTokenAsync()
+    public async Task<string?> GetAccessTokenAsync()
     {
-        var token = _userStore.AccessToken;
+        var token = _userStore.TokenInfo?.AccessToken;
 
-        if (!token.IsNullOrEmpty())
+        if (token.IsNullOrEmpty())
+            return null;
+
+        var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
+
+        if (jwtToken.ValidTo > DateTime.UtcNow)
+            return token!;
+
+        var refreshToken = _userStore.TokenInfo?.RefreshToken;
+
+        if (refreshToken.IsNullOrEmpty())
         {
-            var jwtToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
-            if (jwtToken.ValidTo <= DateTime.UtcNow)
-            {
-                var refreshToken = _userStore.RefreshToken;
-                if (!refreshToken.IsNullOrEmpty())
-                {
-                    var refreshResult = await _oidcClient.RefreshTokenAsync(refreshToken);
-                    _userStore.SetToken(refreshResult.AccessToken, refreshResult.RefreshToken);
-
-                    return refreshResult.AccessToken;
-                }
-
-                _userStore.ClearToken();
-                WeakReferenceMessenger.Default.Send(new LogoutMessage());
-            }
+            _userStore.ClearToken();
+            WeakReferenceMessenger.Default.Send(new LogoutMessage());
+            return null;
         }
 
-        return token;
+        var refreshResult = await _oidcClient.RefreshTokenAsync(refreshToken);
+
+        _userStore.SetToken(new TokenInfo()
+        {
+            AccessToken = refreshResult.AccessToken,
+            RefreshToken = refreshResult.RefreshToken
+        });
+        return refreshResult.AccessToken;
     }
 }

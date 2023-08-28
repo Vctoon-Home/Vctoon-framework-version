@@ -6,6 +6,11 @@
         <entry key="client/src/VctoonClient/App.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Components/LangaugeSelect.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Components/LanguageSelect.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Layouts/Main/MainContent.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Layouts/Main/MainHeader.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Layouts/Main/MainNavigationBar.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Layouts/Main/NavigationBar.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Navigations/NavigationBar.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/HomeView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/LoginView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/MainView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
