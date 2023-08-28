@@ -5,18 +5,19 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Apps;
+using VctoonClient.ViewModels;
 
 namespace VctoonClient.Layouts.Main;
 
 public partial class MainHeader : UserControl
 {
-    private MainHeaderViewModel _vm;
+    private MainViewModel _vm;
 
     public MainHeader()
     {
         InitializeComponent();
 
-        _vm = App.Services.GetService<MainHeaderViewModel>()!;
+        _vm = App.Services.GetService<MainViewModel>()!;
         this.DataContext = _vm;
     }
 

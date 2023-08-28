@@ -16,14 +16,6 @@ public class LoginViewModel : ViewModelBase, ITransientDependency
         _userStore = userStore;
     }
 
-    static LoginViewModel()
-    {
-        ViewLocator.Register(typeof(LoginViewModel), () =>
-        {
-            return App.Services.GetService<LoginView>();
-        });
-    }
-
     public async Task Login()
     {
         var res = await _loginService.LoginAsync();

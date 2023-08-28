@@ -9,12 +9,12 @@ namespace VctoonClient.Layouts.Main;
 
 public partial class MainContent : UserControl
 {
-    private MainContentViewModel _vm;
+    private MainViewModel _vm;
 
     public MainContent()
     {
         InitializeComponent();
-        _vm = App.Services.GetService<MainContentViewModel>()!;
+        _vm = App.Services.GetService<MainViewModel>()!;
         this.DataContext = _vm;
     }
 
@@ -36,11 +36,11 @@ public partial class MainContent : UserControl
 
         if (viewModel != null)
         {
-            if (NavigationManager.Default.Router.CanGoBack)
+            if (NavigationProvider.Default.Router.CanGoBack)
             {
                 e.Handled = true;
 
-                await NavigationManager.Default.Router.BackAsync();
+                await NavigationProvider.Default.Router.BackAsync();
             }
         }
     }

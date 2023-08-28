@@ -5,10 +5,10 @@
              xmlns:u="https://irihi.tech/ursa"
              xmlns:navigations="clr-namespace:VctoonClient.Navigations"
              xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
-             xmlns:main="clr-namespace:VctoonClient.Layouts.Main"
+             xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Layouts.Main.MainNavigationBar"
-             x:DataType="main:MainNavigationBarViewModel">
+             x:DataType="viewModels:MainViewModel">
     <Grid ColumnDefinitions="Auto, *" RowDefinitions="*, *">
         <!-- Navigation Sider Bar -->
         <Border Theme="{DynamicResource CardBorder} "

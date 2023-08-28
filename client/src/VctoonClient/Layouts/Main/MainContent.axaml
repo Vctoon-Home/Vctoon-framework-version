@@ -5,10 +5,10 @@
              xmlns:controls="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
              xmlns:vctoonClient="clr-namespace:VctoonClient"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:nav="clr-namespace:VctoonClient.Navigations"
-             xmlns:main="clr-namespace:VctoonClient.Layouts.Main"
+             xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
+             xmlns:navigations="clr-namespace:VctoonClient.Navigations"
              x:Class="VctoonClient.Layouts.Main.MainContent"
-             x:DataType="main:MainContentViewModel">
+             x:DataType="viewModels:MainViewModel">
 
     <!-- Content -->
     <controls:NavigationControl
@@ -21,7 +21,7 @@
         IsNavBarVisible="False"
         Padding="8">
         <controls:NavigationControl.DataTemplates>
-            <vctoonClient:ViewLocator />
+            <navigations:ViewLocator />
         </controls:NavigationControl.DataTemplates>
 
     </controls:NavigationControl>

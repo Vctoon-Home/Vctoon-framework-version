@@ -2,11 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vctoonClient="clr-namespace:VctoonClient"
              xmlns:labs="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
+             xmlns:navigations="clr-namespace:VctoonClient.Navigations"
              x:Class="VctoonClient.App"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
              <Application.DataTemplates>
-                 <vctoonClient:ViewLocator/>
+                 <navigations:ViewLocator/>
              </Application.DataTemplates>
     <Application.Styles>
         <FluentTheme />
