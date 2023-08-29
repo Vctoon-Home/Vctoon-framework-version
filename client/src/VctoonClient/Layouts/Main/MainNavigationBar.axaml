@@ -6,7 +6,7 @@
              xmlns:navigations="clr-namespace:VctoonClient.Navigations"
              xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d"  
              x:Class="VctoonClient.Layouts.Main.MainNavigationBar"
              x:DataType="viewModels:MainViewModel">
     <Border  Margin="4,0,4,4" x:Name="Border" Theme="{StaticResource CardBorder}">

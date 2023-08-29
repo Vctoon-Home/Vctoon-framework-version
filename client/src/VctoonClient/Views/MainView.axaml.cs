@@ -17,7 +17,7 @@ public partial class MainView : UserControl, ISingletonDependency
     {
         InitializeComponent();
 
-        _vm = App.Services.GetService<MainViewModel>();
+        _vm = App.Services.GetService<MainViewModel>()!;
         this.DataContext = _vm;
     }
 

@@ -4,7 +4,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using CommunityToolkit.Mvvm.Messaging;
 using IdentityModel.OidcClient;
 using VctoonClient.Consts;
 using VctoonClient.Messages;

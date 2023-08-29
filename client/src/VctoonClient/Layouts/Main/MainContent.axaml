@@ -14,11 +14,9 @@
     <ScrollViewer HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch">
         <controls:NavigationControl
-
-
             x:Name="Nav"
             IsBackButtonVisible="False"
-            NavigationRouter="{Binding NavigationRouter}"
+            NavigationRouter="{Binding Router}"
             IsNavBarVisible="False"
             Padding="8">
             <controls:NavigationControl.DataTemplates>

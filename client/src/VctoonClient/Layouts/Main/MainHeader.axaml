@@ -3,10 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:components="clr-namespace:VctoonClient.Components"
-             xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="500"
              x:Class="VctoonClient.Layouts.Main.MainHeader"
              x:DataType="viewModels:MainViewModel">
     <!-- Header -->
@@ -27,7 +27,7 @@
                 <ToggleSwitch
                     Grid.Column="1"
                     Padding="4"
-                    IsCheckedChanged="ToggleButton_OnIsCheckedChanged"
+                    IsCheckedChanged="ToggleButton_ThemeVariantChanged"
                     Theme="{DynamicResource ButtonToggleSwitch}">
                     <ToggleSwitch.OnContent>
                         <PathIcon
@@ -48,15 +48,20 @@
 
 
             <StackPanel Spacing="8" Orientation="Horizontal">
-                <ToggleButton avalonia:Attached.Icon="mdi-menu" IsChecked="{Binding Collapsed}"></ToggleButton>
-
+                <StackPanel Orientation="Horizontal">
+                    <ToggleButton Theme="{DynamicResource BorderlessButton}" i:Attached.Icon="mdi-menu"
+                                  IsChecked="{Binding Collapsed}">
+                    </ToggleButton>
+                    <Button Theme="{DynamicResource BorderlessButton}" Command="{Binding NavigationGoBack}"
+                            IsEnabled="{Binding RouterCanGoBack}"
+                            i:Attached.Icon="mdi-keyboard-backspace" FontSize="20">
+                    </Button>
+                </StackPanel>
                 <TextBlock
                     VerticalAlignment="Center"
                     Classes="H5"
                     Text="Vctoon"
                     Theme="{DynamicResource TitleTextBlock}" />
-
-
             </StackPanel>
 
 

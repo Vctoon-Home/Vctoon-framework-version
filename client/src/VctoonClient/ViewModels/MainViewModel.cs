@@ -6,7 +6,6 @@ using Abp.Localization.Avalonia;
 using Avalonia.Labs.Controls;
 using Avalonia.Utilities;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using VctoonClient.Messages;
 using VctoonClient.Navigations;
 using VctoonClient.Oidc;
@@ -28,7 +27,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     // private bool _isLogin;
 
     [ObservableProperty]
-    private INavigationRouter _navigationRouter = NavigationProvider.Default.Router;
+    private INavigationRouter _router = NavigationManager.MainRouter;
 
     public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
 
@@ -36,6 +35,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
 
     public string UserName => CurrentUser.UserName;
+    public bool RouterCanGoBack => Router.CanGoBack;
 
 
     public MainViewModel(ILoginService loginService, LocalizationManager localizationManager, UserStore userStore)
@@ -50,6 +50,11 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
                 MenuHeader = localizationManager["Home"], Path = "//home", MenuIconName = "mdi-home",
                 ViewType = typeof(HomeView)
             },
+            new()
+            {
+                MenuHeader = "Home1", Path = "//home1", MenuIconName = "mdi-test",
+                ViewType = typeof(HomeView1)
+            },
         };
 
         foreach (var menuItemViewModel in MenuItems)
@@ -57,7 +62,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
             SetActivateCommand(menuItemViewModel);
         }
 
-        _navigationRouter.NavigateToAsync(MenuItems.First().Path);
+        _router.NavigateToAsync(MenuItems.First().Path);
 
         MessengerRegister(localizationManager);
     }
@@ -65,9 +70,8 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     void MessengerRegister(LocalizationManager localizationManager)
     {
         WeakReferenceMessenger.Default.Register<LoginMessage>(this, (r, m) => { UpdateProperties(); });
-
         WeakReferenceMessenger.Default.Register<LogoutMessage>(this, (r, m) => { UpdateProperties(); });
-
+        WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (r, m) => { UpdateProperties(); });
         localizationManager.PropertyChanged += (_, _) => { UpdateProperties(); };
     }
 
@@ -94,7 +98,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
     private async void NavigateTo(string path)
     {
-        var navigationRouter = NavigationProvider.Default.Router;
+        var navigationRouter = NavigationManager.MainRouter;
 
         var paras = MenuItems.First(m => m.Path == path).ClickNavigationParameters;
 
@@ -105,5 +109,9 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     {
         OnPropertyChanged(nameof(IsLogin));
         OnPropertyChanged(nameof(UserName));
+        OnPropertyChanged(nameof(RouterCanGoBack));
     }
+
+
+    public Task NavigationGoBack() => Router.BackAsync();
 }

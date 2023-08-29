@@ -3,20 +3,14 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using VctoonClient.Navigations;
-using VctoonClient.ViewModels;
 
 namespace VctoonClient.Views;
 
-public partial class HomeView : UserControl, ITransientDependency
+public partial class HomeView2 : UserControl
 {
-    private readonly HomeViewModel _vm;
-
-    public HomeView()
+    public HomeView2()
     {
-        _vm = App.Services.GetService<HomeViewModel>();
         InitializeComponent();
-
-        DataContext = _vm;
     }
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)

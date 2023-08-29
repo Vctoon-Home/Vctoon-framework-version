@@ -21,7 +21,7 @@ public partial class MainHeader : UserControl
         this.DataContext = _vm;
     }
 
-    private void ToggleButton_OnIsCheckedChanged(object sender, RoutedEventArgs e)
+    private void ToggleButton_ThemeVariantChanged(object sender, RoutedEventArgs e)
     {
         var app = Application.Current;
         if (app is not null)

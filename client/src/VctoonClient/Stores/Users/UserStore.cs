@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Messaging;
 using IdentityModel.Client;
 using NativeAppStore.Core;
 using VctoonClient.Messages;
