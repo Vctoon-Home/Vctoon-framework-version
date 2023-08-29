@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Labs.Controls;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 using VctoonClient.Messages;
 using VctoonClient.Navigations;
@@ -26,15 +28,28 @@ public partial class MainNavigationBar : UserControl
             }
         };
 
-        WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (r, m) =>
-        {
-            if (m.Path != null)
-            {
-                Menu.SelectedItem =
-                    Menu.Items.FirstOrDefault(i => i is MenuItemViewModel vm && vm.Path == m.Path);
-            }
-        });
+        var navigationRouter = App.Services.GetService<IVctoonNavigationRouter>()!;
+
+        SetSelect(navigationRouter.CurrentPage);
+
+        WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (r, m) => { SetSelect(m.Path); });
     }
+
+    public void SetSelect(object pathOrView)
+    {
+        if (pathOrView == null)
+            return;
+
+        if (pathOrView is string path)
+            Menu.SelectedItem =
+                Menu.Items.FirstOrDefault(i => i is MenuItemViewModel vm && vm.Path == path);
+        else if (pathOrView is UserControl view)
+        {
+            Menu.SelectedItem =
+                Menu.Items.FirstOrDefault(i => i is MenuItemViewModel vm && vm.ViewType == view.GetType());
+        }
+    }
+
 
     public void SetBorderPadding(bool set)
     {

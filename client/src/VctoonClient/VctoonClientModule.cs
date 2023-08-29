@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using NativeAppStore.Extensions;
+using VctoonClient.Navigations;
 using VctoonClient.Oidc;
 using VctoonCore;
 using VctoonCore.Localization;
@@ -42,6 +43,7 @@ public class VctoonClientModule : AbpModule
         services.AddStores(GetType().Assembly, opt => { opt.EnabledCreatorStoreLoad = true; });
         
         context.Services.AddTransient<ICurrentPrincipalAccessor, AvaloniaCurrentPrincipalAccessor>();
+        context.Services.AddSingleton<IVctoonNavigationRouter, VctoonStackNavigationRouter>();
 
         ConfigureOidcClient(context, configuration);
     }

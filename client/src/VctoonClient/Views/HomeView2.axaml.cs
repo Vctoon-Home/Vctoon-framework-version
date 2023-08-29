@@ -15,6 +15,6 @@ public partial class HomeView2 : UserControl
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        NavigationManager.MainRouter.NavigateToAsync(new HomeView2());
+        App.Services.GetService<IVctoonNavigationRouter>()!.NavigateToAsync(new HomeView2());
     }
 }

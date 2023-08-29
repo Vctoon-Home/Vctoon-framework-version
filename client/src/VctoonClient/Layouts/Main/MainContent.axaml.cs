@@ -36,11 +36,11 @@ public partial class MainContent : UserControl
 
         if (viewModel != null)
         {
-            if (NavigationManager.MainRouter.CanGoBack)
+            if (_vm.Router.CanGoBack)
             {
                 e.Handled = true;
 
-                await NavigationManager.MainRouter.BackAsync();
+                await _vm.Router.BackAsync();
             }
         }
     }

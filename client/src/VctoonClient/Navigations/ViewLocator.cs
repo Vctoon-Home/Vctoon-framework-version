@@ -10,13 +10,6 @@ namespace VctoonClient.Navigations;
 
 public class ViewLocator : IDataTemplate
 {
-    private readonly MainViewModel _mainViewModel;
-
-    public ViewLocator()
-    {
-        _mainViewModel = App.Services.GetService<MainViewModel>()!;
-    }
-
     public Control? Build(object? data)
     {
         return (Control?) data;

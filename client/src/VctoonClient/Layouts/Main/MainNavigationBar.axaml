@@ -12,7 +12,7 @@
     <Border  Margin="4,0,4,4" x:Name="Border" Theme="{StaticResource CardBorder}">
         <u:NavigationMenu
             Name="Menu"
-            ItemsSource="{Binding MenuItems}"
+            ItemsSource="{Binding NavigationMenuItemProvider.MenuItems}"
             IsClosed="{Binding Collapsed}"
             ShowCollapseButton="False"
             OpenedWidth="1000"

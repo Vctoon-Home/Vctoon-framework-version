@@ -15,5 +15,12 @@ public class QueryPropertyAttribute : Attribute
     public QueryPropertyAttribute(string name, string queryId)
     {
         Name = name;
+        QueryId = queryId;
+    }
+    
+    public QueryPropertyAttribute(string name)
+    {
+        Name = name;
+        QueryId = name;
     }
 }

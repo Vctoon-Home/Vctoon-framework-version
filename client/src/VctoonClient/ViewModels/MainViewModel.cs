@@ -21,48 +21,37 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     private readonly UserStore _userStore;
 
     [ObservableProperty]
+    private  INavigationMenuItemProvider _navigationMenuItemProvider;
+
+    [ObservableProperty]
     public bool _collapsed;
 
     // [ObservableProperty]
     // private bool _isLogin;
 
     [ObservableProperty]
-    private INavigationRouter _router = NavigationManager.MainRouter;
-
-    public ObservableCollection<MenuItemViewModel> MenuItems { get; set; }
+    private IVctoonNavigationRouter _router;
 
     public bool IsLogin => CurrentUser.IsAuthenticated;
-
 
     public string UserName => CurrentUser.UserName;
     public bool RouterCanGoBack => Router.CanGoBack;
 
 
-    public MainViewModel(ILoginService loginService, LocalizationManager localizationManager, UserStore userStore)
+    public MainViewModel(ILoginService loginService, LocalizationManager localizationManager, UserStore userStore,
+        IVctoonNavigationRouter router, INavigationMenuItemProvider navigationMenuItemProvider)
     {
         _loginService = loginService;
         _userStore = userStore;
+        _navigationMenuItemProvider = navigationMenuItemProvider;
+        Router = router;
 
-        MenuItems = new()
-        {
-            new()
-            {
-                MenuHeader = localizationManager["Home"], Path = "//home", MenuIconName = "mdi-home",
-                ViewType = typeof(HomeView)
-            },
-            new()
-            {
-                MenuHeader = "Home1", Path = "//home1", MenuIconName = "mdi-test",
-                ViewType = typeof(HomeView1)
-            },
-        };
-
-        foreach (var menuItemViewModel in MenuItems)
+        foreach (var menuItemViewModel in NavigationMenuItemProvider.MenuItems)
         {
             SetActivateCommand(menuItemViewModel);
         }
 
-        _router.NavigateToAsync(MenuItems.First().Path);
+        _router.NavigateToAsync(NavigationMenuItemProvider.MenuItems.First().Path);
 
         MessengerRegister(localizationManager);
     }
@@ -98,11 +87,9 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
     private async void NavigateTo(string path)
     {
-        var navigationRouter = NavigationManager.MainRouter;
+        var paras = NavigationMenuItemProvider.MenuItems.First(m => m.Path == path).ClickNavigationParameters;
 
-        var paras = MenuItems.First(m => m.Path == path).ClickNavigationParameters;
-
-        await navigationRouter.NavigateToAsync(path, paras);
+        await Router.NavigateToAsync(path, paras);
     }
 
     private void UpdateProperties()

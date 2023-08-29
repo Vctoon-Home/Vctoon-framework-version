@@ -12,8 +12,7 @@ namespace VctoonClient.Navigations;
 
 public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRouter
 {
-    private MainViewModel _mainViewModel;
-
+    private readonly INavigationMenuItemProvider _navigationMenuItemProvider;
     private readonly Stack<object?> _backStack;
     private object? _currentPage;
 
@@ -44,8 +43,9 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
 
     public bool CanGoForward => false;
 
-    public VctoonStackNavigationRouter()
+    public VctoonStackNavigationRouter(INavigationMenuItemProvider navigationMenuItemProvider)
     {
+        _navigationMenuItemProvider = navigationMenuItemProvider;
         _backStack = new Stack<object?>();
     }
 
@@ -56,7 +56,9 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
     {
         if (CanGoBack || AllowEmpty)
         {
-            CurrentPage = _backStack?.Pop();
+            CurrentPage = _backStack!.Pop();
+            WeakReferenceMessenger.Default.Send(
+                new NavigationMessage(CurrentPage as UserControl, CurrentPageParameters));
         }
     }
 
@@ -104,14 +106,11 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
         string viewPath = null;
         Dictionary<string, object> paras = null;
 
-        if (_mainViewModel == null)
-            _mainViewModel = App.Services.GetService<MainViewModel>()!;
-
 
         if (data is string)
         {
             viewPath = data.ToString()!;
-            var menuItems = _mainViewModel.MenuItems;
+            var menuItems = _navigationMenuItemProvider.MenuItems;
 
 
             var menuItem = menuItems.FirstOrDefault(m => m.Path == viewPath);
@@ -133,14 +132,12 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
         }
 
         // set navigation parameters
-        if (NavigationManager.MainRouter is VctoonStackNavigationRouter router)
+
+        paras = CurrentPageParameters;
+        var vm = view.DataContext;
+
+        if (vm != null)
         {
-            paras = router.CurrentPageParameters;
-            var vm = view.DataContext;
-
-            if (vm == null)
-                return view;
-
             // QueryPropertyAttribute
             {
                 // TODO: cache
