@@ -9,38 +9,37 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Layouts.Main.MainNavigationBar"
              x:DataType="viewModels:MainViewModel">
-        <Border Theme="{DynamicResource CardBorder} ">
-            <u:NavigationMenu
-                Name="Menu"
-                ItemsSource="{Binding MenuItems}"
-                IsClosed="{Binding Collapsed}"
-                ShowCollapseButton="False"
-                OpenedWidth="1000"
-                ClosedWidth="10">
-                <u:NavigationMenu.ItemTemplate>
-                    <navigations:MenuDataTemplateSelector>
-                        <navigations:MenuDataTemplateSelector.MenuTemplate>
-                            <DataTemplate DataType="navigations:MenuItemViewModel">
-                                <u:NavigationMenuItem Command="{Binding ActivateCommand}"
-                                                      Header="{Binding MenuHeader}"
-                                                      ItemsSource="{Binding Children}">
-                                    <u:NavigationMenuItem.Icon>
-                                        <i:Icon FontSize="20"
-                                                Value="{Binding MenuIconName}" />
-                                    </u:NavigationMenuItem.Icon>
-                                </u:NavigationMenuItem>
-                            </DataTemplate>
-                        </navigations:MenuDataTemplateSelector.MenuTemplate>
-                        <navigations:MenuDataTemplateSelector.SeparatorTemplate>
-                            <!-- <DataTemplate DataType="navigations:MenuItemViewModel"> -->
-                            <!--     <u:NavigationMenuSeparator Header="{Binding MenuHeader}" /> -->
-                            <!-- </DataTemplate> -->
-                        </navigations:MenuDataTemplateSelector.SeparatorTemplate>
-                    </navigations:MenuDataTemplateSelector>
-                </u:NavigationMenu.ItemTemplate>
-            </u:NavigationMenu>
-        </Border>
-
+    <Border  Margin="4,0,4,4" x:Name="Border" Theme="{StaticResource CardBorder}">
+        <u:NavigationMenu
+            Name="Menu"
+            ItemsSource="{Binding MenuItems}"
+            IsClosed="{Binding Collapsed}"
+            ShowCollapseButton="False"
+            OpenedWidth="1000"
+            ClosedWidth="10">
+            <u:NavigationMenu.ItemTemplate>
+                <navigations:MenuDataTemplateSelector>
+                    <navigations:MenuDataTemplateSelector.MenuTemplate>
+                        <DataTemplate DataType="navigations:MenuItemViewModel">
+                            <u:NavigationMenuItem Command="{Binding ActivateCommand}"
+                                                  Header="{Binding MenuHeader}"
+                                                  ItemsSource="{Binding Children}">
+                                <u:NavigationMenuItem.Icon>
+                                    <i:Icon FontSize="20"
+                                            Value="{Binding MenuIconName}" />
+                                </u:NavigationMenuItem.Icon>
+                            </u:NavigationMenuItem>
+                        </DataTemplate>
+                    </navigations:MenuDataTemplateSelector.MenuTemplate>
+                    <navigations:MenuDataTemplateSelector.SeparatorTemplate>
+                        <!-- <DataTemplate DataType="navigations:MenuItemViewModel"> -->
+                        <!--     <u:NavigationMenuSeparator Header="{Binding MenuHeader}" /> -->
+                        <!-- </DataTemplate> -->
+                    </navigations:MenuDataTemplateSelector.SeparatorTemplate>
+                </navigations:MenuDataTemplateSelector>
+            </u:NavigationMenu.ItemTemplate>
+        </u:NavigationMenu>
+    </Border>
 
 
 </UserControl>

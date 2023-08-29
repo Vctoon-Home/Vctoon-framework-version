@@ -50,7 +50,7 @@ public class VctoonClientModule : AbpModule
     {
         Configure<OidcClientOptions>(configuration.GetSection("Oidc:Options"));
 
-        context.Services.AddSingleton<OidcClient>(sp =>
+        context.Services.AddTransient<OidcClient>(sp =>
         {
             var options = sp.GetRequiredService<IOptions<OidcClientOptions>>().Value;
 

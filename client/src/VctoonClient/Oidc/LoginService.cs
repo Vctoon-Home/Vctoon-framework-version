@@ -76,14 +76,16 @@ public class LoginService : ILoginService, ITransientDependency
 
     public async Task<LogoutResult> LogoutAsync()
     {
-        var logoutResult = await _oidcClient.LogoutAsync();
-        if (!logoutResult.IsError)
-        {
-            _userStore.ClearToken();
-            WeakReferenceMessenger.Default.Send(new LogoutMessage());
-        }
+        // var logoutResult = await _oidcClient.LogoutAsync();
+        // if (!logoutResult.IsError)
+        // {
+        //     _userStore.ClearToken();
+        //     WeakReferenceMessenger.Default.Send(new LogoutMessage());
+        // }
+        _userStore.SetToken(null);
+        WeakReferenceMessenger.Default.Send(new LogoutMessage());
 
-        return logoutResult;
+        return null;
     }
 
     public async Task<string?> GetAccessTokenAsync()

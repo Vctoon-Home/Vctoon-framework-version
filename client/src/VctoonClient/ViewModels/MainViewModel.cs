@@ -105,11 +105,5 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     {
         OnPropertyChanged(nameof(IsLogin));
         OnPropertyChanged(nameof(UserName));
-
-        var user = CurrentUser;
-        var user1 = App.Services.GetService<ICurrentUser>();
-
-        var nuame = UserName;
-        var name = user.Name;
     }
 }
