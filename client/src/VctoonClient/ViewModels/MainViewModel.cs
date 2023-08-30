@@ -41,7 +41,6 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     public string UserName => CurrentUser.UserName;
     public bool RouterCanGoBack => Router.CanGoBack;
 
-
     public MainViewModel(ILoginService loginService, LocalizationManager localizationManager, UserStore userStore,
         IVctoonNavigationRouter router, NavigationMenuItemProvider navigationMenuItemProvider,
         ILibraryAppService libraryAppService)
@@ -89,9 +88,11 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
             UpdateProperties();
         });
-        localizationManager.PropertyChanged += (_, _) => { UpdateProperties(); };
+        localizationManager.PropertyChanged += (_, _) =>
+        {
+            UpdateProperties();
+        };
         Router.Navigated += (_, _) => { UpdateProperties(); };
-        
     }
 
 

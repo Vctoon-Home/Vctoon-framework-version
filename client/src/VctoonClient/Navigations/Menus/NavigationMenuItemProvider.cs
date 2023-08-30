@@ -18,6 +18,12 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
     {
         _localizationManager = localizationManager;
         MenuItems = GetMenuItems();
+
+        localizationManager.PropertyChanged += (sender, args) =>
+        {
+            MenuItems = GetMenuItems();
+            NotifyMenuItemsChanged();
+        };
     }
 
     private ObservableCollection<MenuItemViewModel> GetMenuItems()
@@ -44,16 +50,21 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
     public void SetLibraryResources(ObservableCollection<MenuItemViewModel>? resources)
     {
         RootResourceItem.Children = resources ?? new ObservableCollection<MenuItemViewModel>();
-
-        var oldRes = MenuItems;
-        MenuItems = null;
-        MenuItems = oldRes;
+        NotifyMenuItemsChanged();
     }
 
     public MenuItemViewModel? GetMenuItemByPath(string path)
     {
         return GetMenuItem(path, MenuItems);
     }
+
+    public void NotifyMenuItemsChanged()
+    {
+        var oldRes = MenuItems;
+        MenuItems = null;
+        MenuItems = oldRes;
+    }
+
 
     private MenuItemViewModel? GetMenuItem(string path, ObservableCollection<MenuItemViewModel> items)
     {
