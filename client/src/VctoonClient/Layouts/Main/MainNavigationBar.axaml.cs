@@ -12,48 +12,43 @@ namespace VctoonClient.Layouts.Main;
 
 public partial class MainNavigationBar : UserControl
 {
+    private MainViewModel _vm;
+
     public MainNavigationBar()
     {
         InitializeComponent();
 
-        var vm = App.Services.GetService<MainViewModel>();
-        this.DataContext = vm;
+        _vm = App.Services.GetRequiredService<MainViewModel>();
+        this.DataContext = _vm;
 
-        SetBorderPadding(!Menu.IsClosed);
+
+        SetRootBorderHasPadding(!Menu.IsClosed);
         Menu.PropertyChanged += (sender, args) =>
         {
             if (args.Property.Name == nameof(Menu.IsClosed))
             {
-                SetBorderPadding(args.NewValue is false);
+                SetRootBorderHasPadding(args.NewValue is false);
             }
         };
 
-        var navigationRouter = App.Services.GetService<IVctoonNavigationRouter>()!;
+        // var navigationRouter = App.Services.GetService<IVctoonNavigationRouter>()!;
 
-        SetSelect(navigationRouter.CurrentPage);
-
-        WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (r, m) => { SetSelect(m.Path); });
+        UpdateSelectItem(_vm.Router?.CurrentPage);
+        // WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (r, m) => { UpdateSelectItem(m.Path); });
+        _vm.Router.Navigated += (_, e) => { UpdateSelectItem(e?.To); };
     }
 
-    public void SetSelect(object pathOrView)
+    public void UpdateSelectItem(object navigationRouterPageModel)
     {
-        if (pathOrView == null)
-            return;
-
-        if (pathOrView is string path)
-            Menu.SelectedItem =
-                Menu.Items.FirstOrDefault(i => i is MenuItemViewModel vm && vm.Path == path);
-        else if (pathOrView is UserControl view)
-        {
-            Menu.SelectedItem =
-                Menu.Items.FirstOrDefault(i => i is MenuItemViewModel vm && vm.ViewType == view.GetType());
-        }
+        var model = navigationRouterPageModel as NavigationRouterPageModel;
+        if (model?.Path is { } path)
+            Menu.SelectedItem = _vm.NavigationMenuItemProvider.GetMenuItemByPath(path);
     }
 
 
-    public void SetBorderPadding(bool set)
+    public void SetRootBorderHasPadding(bool hasPadding)
     {
-        if (set)
+        if (hasPadding)
         {
             this.Border.Padding = new Thickness(8, 0, 8, 0);
         }

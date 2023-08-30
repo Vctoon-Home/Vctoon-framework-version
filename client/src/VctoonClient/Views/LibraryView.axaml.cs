@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace VctoonClient.Views;
 
-public partial class HomeView1 : UserControl, ITransientDependency
+public partial class LibraryView : UserControl, ITransientDependency
 {
-    public HomeView1()
+    public LibraryView()
     {
         InitializeComponent();
     }

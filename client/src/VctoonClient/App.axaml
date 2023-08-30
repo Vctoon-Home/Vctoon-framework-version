@@ -11,7 +11,6 @@
              </Application.DataTemplates>
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <labs:ControlThemes/>
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <StyleInclude Source="avares://Ursa.Themes.Semi/Index.axaml" />

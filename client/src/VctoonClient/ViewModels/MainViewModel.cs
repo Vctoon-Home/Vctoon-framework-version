@@ -1,17 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Linq.Dynamic.Core.Tokenizer;
 using System.Threading.Tasks;
 using Abp.Localization.Avalonia;
-using Avalonia.Labs.Controls;
-using Avalonia.Utilities;
 using CommunityToolkit.Mvvm.Input;
 using VctoonClient.Messages;
 using VctoonClient.Navigations;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
 using VctoonClient.Views;
-using Volo.Abp.Users;
+using VctoonCore.Enums;
+using VctoonCore.Libraries;
 
 namespace VctoonClient.ViewModels;
 
@@ -21,7 +20,9 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     private readonly UserStore _userStore;
 
     [ObservableProperty]
-    private  INavigationMenuItemProvider _navigationMenuItemProvider;
+    private NavigationMenuItemProvider _navigationMenuItemProvider;
+
+    private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
     public bool _collapsed;
@@ -39,29 +40,55 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
 
     public MainViewModel(ILoginService loginService, LocalizationManager localizationManager, UserStore userStore,
-        IVctoonNavigationRouter router, INavigationMenuItemProvider navigationMenuItemProvider)
+        IVctoonNavigationRouter router, NavigationMenuItemProvider navigationMenuItemProvider,
+        ILibraryAppService libraryAppService)
     {
         _loginService = loginService;
         _userStore = userStore;
         _navigationMenuItemProvider = navigationMenuItemProvider;
+        _libraryAppService = libraryAppService;
         Router = router;
 
-        foreach (var menuItemViewModel in NavigationMenuItemProvider.MenuItems)
-        {
-            SetActivateCommand(menuItemViewModel);
-        }
-
-        _router.NavigateToAsync(NavigationMenuItemProvider.MenuItems.First().Path);
 
         MessengerRegister(localizationManager);
+
+        Initialize();
     }
+
+    public async void Initialize()
+    {
+        foreach (var menuItemViewModel in NavigationMenuItemProvider.MenuItems)
+            SetActivateCommand(menuItemViewModel);
+
+        await Router.NavigateToAsync(NavigationMenuItemProvider.MenuItems.First().Path);
+    }
+
+
+    public async Task InitializeWhenViewIsLoaded()
+    {
+        if (IsLogin)
+        {
+            NavigationMenuItemProvider.SetLibraryResources(await GetLibraryResources());
+        }
+    }
+
 
     void MessengerRegister(LocalizationManager localizationManager)
     {
-        WeakReferenceMessenger.Default.Register<LoginMessage>(this, (r, m) => { UpdateProperties(); });
-        WeakReferenceMessenger.Default.Register<LogoutMessage>(this, (r, m) => { UpdateProperties(); });
-        WeakReferenceMessenger.Default.Register<NavigationMessage>(this, (r, m) => { UpdateProperties(); });
+        WeakReferenceMessenger.Default.Register<LoginMessage>(this, async (r, m) =>
+        {
+            NavigationMenuItemProvider.SetLibraryResources(await GetLibraryResources());
+            UpdateProperties();
+        });
+        WeakReferenceMessenger.Default.Register<LogoutMessage>(this, (r, m) =>
+        {
+            NavigationMenuItemProvider.SetLibraryResources(null);
+
+            UpdateProperties();
+        });
         localizationManager.PropertyChanged += (_, _) => { UpdateProperties(); };
+        Router.Navigated += (_, _) => { UpdateProperties(); };
+        
     }
 
 
@@ -76,21 +103,44 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     }
 
     // 递归设置所有menuItemViewModel.ActivateCommand
-    private void SetActivateCommand(MenuItemViewModel menuItemViewModel)
+    private void SetActivateCommand(MenuItemViewModel item)
     {
-        menuItemViewModel.ActivateCommand = new RelayCommand(() => { NavigateTo(menuItemViewModel.Path); });
-        foreach (var child in menuItemViewModel.Children)
+        item.ActivateCommand = new AsyncRelayCommand(async () =>
+        {
+            await Router.NavigateToAsync(item.Path, item.ClickNavigationParameters);
+        });
+        foreach (var child in item.Children)
         {
             SetActivateCommand(child);
         }
     }
 
-    private async void NavigateTo(string path)
-    {
-        var paras = NavigationMenuItemProvider.MenuItems.First(m => m.Path == path).ClickNavigationParameters;
 
-        await Router.NavigateToAsync(path, paras);
+    public async Task<ObservableCollection<MenuItemViewModel>> GetLibraryResources()
+    {
+        var libraries = await _libraryAppService.GetLibraryMenuAsync();
+
+        var menus = libraries.Select(l => new MenuItemViewModel()
+        {
+            IsResource = true,
+            Header = l.Name,
+            Icon = l.LibraryType == LibraryType.Comic ? "mdi-bookshelf" : "mdi-movie-filter",
+            Path = $"//library/{l.Id}",
+            ClickNavigationParameters = new Dictionary<string, object>()
+            {
+                {"LibraryId", l.Id},
+            },
+            ViewType = typeof(LibraryView)
+        }).ToList();
+
+        foreach (var menuItemViewModel in menus)
+        {
+            SetActivateCommand(menuItemViewModel);
+        }
+
+        return new ObservableCollection<MenuItemViewModel>(menus);
     }
+
 
     private void UpdateProperties()
     {

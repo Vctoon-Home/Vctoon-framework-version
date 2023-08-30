@@ -13,7 +13,7 @@ public partial class HomeView : UserControl, ITransientDependency
 
     public HomeView()
     {
-        _vm = App.Services.GetService<HomeViewModel>();
+        _vm = App.Services.GetRequiredService<HomeViewModel>();
         InitializeComponent();
 
         DataContext = _vm;
@@ -21,6 +21,5 @@ public partial class HomeView : UserControl, ITransientDependency
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        App.Services.GetService<IVctoonNavigationRouter>()!.NavigateToAsync(new HomeView2());
     }
 }

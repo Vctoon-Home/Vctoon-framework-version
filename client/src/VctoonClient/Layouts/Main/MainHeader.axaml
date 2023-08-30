@@ -6,7 +6,7 @@
              xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="500"
+             mc:Ignorable="d" d:DesignWidth="1200"
              x:Class="VctoonClient.Layouts.Main.MainHeader"
              x:DataType="viewModels:MainViewModel">
     <!-- Header -->
@@ -47,21 +47,29 @@
             </StackPanel>
 
 
-            <StackPanel Spacing="8" Orientation="Horizontal">
-                <StackPanel Orientation="Horizontal">
-                    <ToggleButton Theme="{DynamicResource BorderlessButton}" i:Attached.Icon="mdi-menu"
-                                  IsChecked="{Binding Collapsed}">
-                    </ToggleButton>
-                    <Button Theme="{DynamicResource BorderlessButton}" Command="{Binding NavigationGoBack}"
-                            IsEnabled="{Binding RouterCanGoBack}"
-                            i:Attached.Icon="mdi-keyboard-backspace" FontSize="20">
-                    </Button>
-                </StackPanel>
+            <StackPanel Spacing="16" Orientation="Horizontal">
+                <ToggleButton Theme="{DynamicResource BorderlessButton}" i:Attached.Icon="mdi-menu"
+                              IsChecked="{Binding Collapsed}">
+                </ToggleButton>
+
                 <TextBlock
                     VerticalAlignment="Center"
                     Classes="H5"
                     Text="Vctoon"
                     Theme="{DynamicResource TitleTextBlock}" />
+
+                <Button Theme="{DynamicResource BorderlessButton}" Command="{Binding NavigationGoBack}"
+                        IsEnabled="{Binding RouterCanGoBack}"
+                        i:Attached.Icon="mdi-keyboard-backspace" FontSize="20">
+
+                </Button>
+
+                <TextBox Width="350" MinWidth="50" FontSize="20">
+                    <TextBox.InnerLeftContent>
+                        <i:Icon  Value="mdi-magnify"></i:Icon>
+                    </TextBox.InnerLeftContent>
+                </TextBox>
+
             </StackPanel>
 
 

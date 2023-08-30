@@ -60,6 +60,13 @@ public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, Libra
             ;
     }
 
+
+    public async Task<List<LibraryDto>> GetLibraryMenuAsync()
+    {
+        return (await Repository.GetListAsync()).Select(MapToGetOutputDto).ToList();
+    }
+
+
     public override async Task<LibraryDto> CreateAsync(CreateUpdateLibraryDto input)
     {
         await CheckGetPolicyAsync();

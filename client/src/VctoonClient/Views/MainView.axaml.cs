@@ -12,7 +12,6 @@ public partial class MainView : UserControl, ISingletonDependency
     private readonly MainViewModel _vm;
 
 
-
     public MainView()
     {
         InitializeComponent();
@@ -22,6 +21,10 @@ public partial class MainView : UserControl, ISingletonDependency
     }
 
 
+    protected override async void OnInitialized()
+    {
+        base.OnInitialized();
 
-
+        await _vm.InitializeWhenViewIsLoaded();
+    }
 }

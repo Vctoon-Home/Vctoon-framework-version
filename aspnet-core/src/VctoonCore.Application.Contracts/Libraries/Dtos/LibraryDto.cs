@@ -1,3 +1,5 @@
+using VctoonCore.Enums;
+
 namespace VctoonCore.Libraries.Dtos;
 
 [Serializable]
@@ -12,4 +14,7 @@ public class LibraryDto : EntityDto<Guid>
     /// 
     /// </summary>
     public string[] Paths { get; set; }
+    
+    public LibraryType LibraryType { get; set; }
+    
 }

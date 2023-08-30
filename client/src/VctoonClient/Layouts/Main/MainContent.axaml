@@ -13,18 +13,33 @@
     <!-- Content -->
     <ScrollViewer HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch">
-        <controls:NavigationControl
-            x:Name="Nav"
-            IsBackButtonVisible="False"
-            NavigationRouter="{Binding Router}"
-            IsNavBarVisible="False"
-            Padding="8">
-            <controls:NavigationControl.DataTemplates>
+
+        <!-- <ContentControl> -->
+        <!--     <ContentControl.ContentTemplate> -->
+        <!--         <navigations:ViewLocator /> -->
+        <!--     </ContentControl.ContentTemplate> -->
+        <!-- </ContentControl> -->
+
+        <ContentControl
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="12"
+            Content="{Binding Router.CurrentPage}">
+            <ContentControl.ContentTemplate>
                 <navigations:ViewLocator />
-            </controls:NavigationControl.DataTemplates>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
 
-        </controls:NavigationControl>
-
+        <!-- <controls:NavigationControl -->
+        <!--     x:Name="Nav" -->
+        <!--     IsBackButtonVisible="False" -->
+        <!--     NavigationRouter="{Binding Router}" -->
+        <!--     IsNavBarVisible="False" -->
+        <!--     Padding="8"> -->
+        <!--     <controls:NavigationControl.DataTemplates> -->
+        <!--         <navigations:ViewLocator /> -->
+        <!--     </controls:NavigationControl.DataTemplates> -->
+        <!-- </controls:NavigationControl> -->
     </ScrollViewer>
 
 </UserControl>

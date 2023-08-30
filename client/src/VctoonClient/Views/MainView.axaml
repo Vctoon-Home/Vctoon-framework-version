@@ -14,7 +14,7 @@
              xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:main="clr-namespace:VctoonClient.Layouts.Main"
              mc:Ignorable="d"
-             d:DesignWidth="800"
+             d:DesignWidth="1000"
              d:DesignHeight="450"
              x:DataType="viewModels:MainViewModel"
              x:Class="VctoonClient.Views.MainView">

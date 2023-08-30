@@ -10,21 +10,37 @@ using VctoonClient.ViewModels;
 
 namespace VctoonClient.Navigations;
 
+public class NavigationRouterPageModel
+{
+    public NavigationRouterPageModel(Control view, string? path = null)
+    {
+        View = view;
+        Path = path;
+    }
+
+    public Control View { get; set; }
+    public string? Path { get; set; }
+}
+
 public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRouter
 {
-    private readonly INavigationMenuItemProvider _navigationMenuItemProvider;
-    private readonly Stack<object?> _backStack;
-    private object? _currentPage;
+    private readonly NavigationMenuItemProvider _navigationMenuItemProvider;
+    private readonly Stack<NavigationRouterPageModel?> _backStack;
+    private NavigationRouterPageModel? _currentPage;
 
     public event EventHandler<NavigatedEventArgs>? Navigated;
 
     public bool CanGoBack => _backStack?.Count() > 0;
 
-    public static readonly DirectProperty<VctoonStackNavigationRouter, object?> CurrentPageProperty =
-        AvaloniaProperty.RegisterDirect<VctoonStackNavigationRouter, object?>(nameof(CurrentPage), o => o.CurrentPage,
+    [Obsolete("Use CurrentPage instead")]
+    object? INavigationRouter.CurrentPage { get; }
+
+    public static readonly DirectProperty<VctoonStackNavigationRouter, NavigationRouterPageModel?> CurrentPageProperty =
+        AvaloniaProperty.RegisterDirect<VctoonStackNavigationRouter, NavigationRouterPageModel?>(nameof(CurrentPage),
+            o => o.CurrentPage,
             (o, v) => o.CurrentPage = v);
 
-    public object? CurrentPage
+    public NavigationRouterPageModel? CurrentPage
     {
         get => _currentPage;
         private set
@@ -43,10 +59,10 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
 
     public bool CanGoForward => false;
 
-    public VctoonStackNavigationRouter(INavigationMenuItemProvider navigationMenuItemProvider)
+    public VctoonStackNavigationRouter(NavigationMenuItemProvider navigationMenuItemProvider)
     {
         _navigationMenuItemProvider = navigationMenuItemProvider;
-        _backStack = new Stack<object?>();
+        _backStack = new Stack<NavigationRouterPageModel?>();
     }
 
     public Task NavigateToAsync(object? destination, NavigationMode mode = NavigationMode.Normal) =>
@@ -57,8 +73,8 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
         if (CanGoBack || AllowEmpty)
         {
             CurrentPage = _backStack!.Pop();
-            WeakReferenceMessenger.Default.Send(
-                new NavigationMessage(CurrentPage as UserControl, CurrentPageParameters));
+            // WeakReferenceMessenger.Default.Send(
+            //     new NavigationMessage(CurrentPage as UserControl, CurrentPageParameters));
         }
     }
 
@@ -94,36 +110,44 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
         }
 
         CurrentPageParameters = paras;
-        CurrentPage = BuildView(pathOrView);
+
+
+        var path = pathOrView as string;
+
+        CurrentPage = new NavigationRouterPageModel((BuildView(pathOrView) as Control)!, path);
     }
 
-    private Control BuildView(object? data)
+    private object? BuildView(object? data)
     {
         if (data == null)
             return new TextBlock {Text = "not find"};
 
-        UserControl? view = null;
-        string viewPath = null;
+        Control? view = null;
         Dictionary<string, object> paras = null;
 
 
-        if (data is string)
+        if (data is string path)
         {
-            viewPath = data.ToString()!;
-            var menuItems = _navigationMenuItemProvider.MenuItems;
+            // check has cache
+            var stackCache = _backStack.ToList();
+            var cache = stackCache.FirstOrDefault(v => v?.Path == path);
 
+            view = cache?.View;
 
-            var menuItem = menuItems.FirstOrDefault(m => m.Path == viewPath);
+            if (view is null)
+            {
+                var menuItem = _navigationMenuItemProvider.GetMenuItemByPath(path);
 
-            if (menuItem == null)
-                return new TextBlock {Text = "not find menuItem"};
+                if (menuItem == null)
+                    return new TextBlock {Text = "not find menuItem"};
 
-            if (menuItem.ViewType == null)
-                return new TextBlock {Text = " not find ViewType"};
+                if (menuItem.ViewType == null)
+                    return new TextBlock {Text = " not find ViewType"};
 
-            view = (UserControl?) App.Services.GetService(menuItem.ViewType!)!;
+                view = (UserControl?) App.Services.GetService(menuItem.ViewType!);
+            }
 
-            if (view == null)
+            if (view is null)
                 return new TextBlock {Text = " not find ViewType"};
         }
         else if (data is UserControl userControl)
@@ -161,10 +185,10 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
                 navigationQuery.ApplyQueryAttributes(paras);
         }
 
-        if (data is string)
-            WeakReferenceMessenger.Default.Send(new NavigationMessage(viewPath, paras));
-        else if (data is UserControl)
-            WeakReferenceMessenger.Default.Send(new NavigationMessage(view, paras));
+        // if (data is string)
+        //     WeakReferenceMessenger.Default.Send(new NavigationMessage(viewPath, paras));
+        // else if (data is UserControl)
+        //     WeakReferenceMessenger.Default.Send(new NavigationMessage(view, paras));
 
         return view;
     }

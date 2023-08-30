@@ -9,9 +9,9 @@ namespace VctoonClient.Navigations;
 public interface IVctoonNavigationRouter : INavigationRouter
 {
     /// <summary>
-    /// this is the current page 
+    /// CurrentPage can be string or UserControl
     /// </summary>
-    new object? CurrentPage { get; }
+    new NavigationRouterPageModel? CurrentPage { get; }
 
     Task NavigateToAsync(string path, Dictionary<string, object>? paras = null,
         NavigationMode navigationMode = NavigationMode.Normal);

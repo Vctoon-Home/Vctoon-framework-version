@@ -5,12 +5,10 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Views.HomeView">
     <StackPanel Spacing="50">
+        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
         
-        <Button Click="Button_OnClick">导航</Button>
-        
-        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
-        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
-        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+        <TextBox></TextBox>
+        <CheckBox></CheckBox>
         <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
         <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
         <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>

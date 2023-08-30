@@ -15,5 +15,5 @@ public interface ILibraryAppService :
         CreateUpdateLibraryDto,
         CreateUpdateLibraryDto>
 {
-
+    Task<List<LibraryDto>> GetLibraryMenuAsync();
 }
