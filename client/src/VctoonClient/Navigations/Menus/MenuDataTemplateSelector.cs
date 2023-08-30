@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 
-namespace VctoonClient.Navigations;
+namespace VctoonClient.Navigations.Menus;
 
 public class MenuDataTemplateSelector : IDataTemplate
 {

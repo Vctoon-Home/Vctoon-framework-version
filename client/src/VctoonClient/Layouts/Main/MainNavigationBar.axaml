@@ -8,6 +8,7 @@
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              mc:Ignorable="d"
              xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
+             xmlns:menus="clr-namespace:VctoonClient.Navigations.Menus"
              x:Class="VctoonClient.Layouts.Main.MainNavigationBar"
              x:CompileBindings="True"
              x:DataType="viewModels:MainViewModel">
@@ -22,9 +23,9 @@
             OpenedWidth="1000"
             ClosedWidth="10">
             <u:NavigationMenu.ItemTemplate>
-                <navigations:MenuDataTemplateSelector>
-                    <navigations:MenuDataTemplateSelector.MenuTemplate>
-                        <DataTemplate DataType="navigations:MenuItemViewModel">
+                <menus:MenuDataTemplateSelector>
+                    <menus:MenuDataTemplateSelector.MenuTemplate>
+                        <DataTemplate DataType="menus:MenuItemViewModel">
                             <u:NavigationMenuItem Command="{Binding ActivateCommand}"
                                                   Header="{Binding Header}"
                                                   ItemsSource="{Binding Children}">
@@ -46,7 +47,7 @@
 
                                             <Button Theme="{StaticResource BorderlessButton}" DockPanel.Dock="Right"
                                                     i:Attached.Icon="mdi-plus-thick"
-                                                    IsVisible="{Binding $parent[u:NavigationMenuItem].((navigations:MenuItemViewModel)DataContext).IsRootResource}">
+                                                    IsVisible="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).IsRootResource}">
                                                 <Button.Styles>
                                                     <Style Selector="Button:pointerover">
                                                         <Setter Property="Background"
@@ -72,13 +73,13 @@
                                 </u:NavigationMenuItem.Icon>
                             </u:NavigationMenuItem>
                         </DataTemplate>
-                    </navigations:MenuDataTemplateSelector.MenuTemplate>
-                    <navigations:MenuDataTemplateSelector.SeparatorTemplate>
+                    </menus:MenuDataTemplateSelector.MenuTemplate>
+                    <menus:MenuDataTemplateSelector.SeparatorTemplate>
                         <!-- <DataTemplate DataType="navigations:MenuItemViewModel"> -->
                         <!--     <u:NavigationMenuSeparator Header="{Binding MenuHeader}" /> -->
                         <!-- </DataTemplate> -->
-                    </navigations:MenuDataTemplateSelector.SeparatorTemplate>
-                </navigations:MenuDataTemplateSelector>
+                    </menus:MenuDataTemplateSelector.SeparatorTemplate>
+                </menus:MenuDataTemplateSelector>
             </u:NavigationMenu.ItemTemplate>
         </u:NavigationMenu>
     </Border>

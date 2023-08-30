@@ -5,26 +5,13 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Labs.Controls;
-using VctoonClient.Messages;
-using VctoonClient.ViewModels;
+using VctoonClient.Navigations.Query;
 
-namespace VctoonClient.Navigations;
-
-public class NavigationRouterPageModel
-{
-    public NavigationRouterPageModel(Control view, string? path = null)
-    {
-        View = view;
-        Path = path;
-    }
-
-    public Control View { get; set; }
-    public string? Path { get; set; }
-}
+namespace VctoonClient.Navigations.Router;
 
 public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRouter
 {
-    private readonly NavigationMenuItemProvider _navigationMenuItemProvider;
+    private readonly Menus.NavigationMenuItemProvider _navigationMenuItemProvider;
     private readonly Stack<NavigationRouterPageModel?> _backStack;
     private NavigationRouterPageModel? _currentPage;
 
@@ -59,7 +46,7 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
 
     public bool CanGoForward => false;
 
-    public VctoonStackNavigationRouter(NavigationMenuItemProvider navigationMenuItemProvider)
+    public VctoonStackNavigationRouter(Menus.NavigationMenuItemProvider navigationMenuItemProvider)
     {
         _navigationMenuItemProvider = navigationMenuItemProvider;
         _backStack = new Stack<NavigationRouterPageModel?>();

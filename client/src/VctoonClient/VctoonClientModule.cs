@@ -8,6 +8,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using NativeAppStore.Extensions;
 using VctoonClient.Navigations;
+using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonCore;
 using VctoonCore.Localization;

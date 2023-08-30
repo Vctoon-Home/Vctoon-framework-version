@@ -1,15 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
 using Abp.Localization.Avalonia;
-using Avalonia.Threading;
-using Ursa.Controls;
 using VctoonClient.Views;
-using VctoonCore.Libraries;
 
-namespace VctoonClient.Navigations;
+namespace VctoonClient.Navigations.Menus;
 
 public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDependency
 {

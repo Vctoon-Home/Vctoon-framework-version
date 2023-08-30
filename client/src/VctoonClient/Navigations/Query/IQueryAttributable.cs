@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VctoonClient.Navigations;
+namespace VctoonClient.Navigations.Query;
 
 public interface IQueryAttributable
 {

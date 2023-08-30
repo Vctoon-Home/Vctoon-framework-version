@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace VctoonClient.Navigations;
+namespace VctoonClient.Navigations.Menus;
 
 public class MenuItemViewModel : ViewModelBase
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VctoonClient.Navigations;
+namespace VctoonClient.Navigations.Query;
 
 /// <summary>To be added.</summary>
 /// <remarks>To be added.</remarks>

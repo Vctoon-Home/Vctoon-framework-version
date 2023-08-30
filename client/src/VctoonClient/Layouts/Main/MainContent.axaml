@@ -7,39 +7,23 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:navigations="clr-namespace:VctoonClient.Navigations"
+             xmlns:router="clr-namespace:VctoonClient.Navigations.Router"
              x:Class="VctoonClient.Layouts.Main.MainContent"
              x:DataType="viewModels:MainViewModel">
 
     <!-- Content -->
     <ScrollViewer HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch">
-
-        <!-- <ContentControl> -->
-        <!--     <ContentControl.ContentTemplate> -->
-        <!--         <navigations:ViewLocator /> -->
-        <!--     </ContentControl.ContentTemplate> -->
-        <!-- </ContentControl> -->
-
         <ContentControl
             Grid.Row="1"
             Grid.Column="1"
             Margin="12"
             Content="{Binding Router.CurrentPage}">
             <ContentControl.ContentTemplate>
-                <navigations:ViewLocator />
+                <router:ViewLocator />
             </ContentControl.ContentTemplate>
         </ContentControl>
 
-        <!-- <controls:NavigationControl -->
-        <!--     x:Name="Nav" -->
-        <!--     IsBackButtonVisible="False" -->
-        <!--     NavigationRouter="{Binding Router}" -->
-        <!--     IsNavBarVisible="False" -->
-        <!--     Padding="8"> -->
-        <!--     <controls:NavigationControl.DataTemplates> -->
-        <!--         <navigations:ViewLocator /> -->
-        <!--     </controls:NavigationControl.DataTemplates> -->
-        <!-- </controls:NavigationControl> -->
     </ScrollViewer>
 
 </UserControl>

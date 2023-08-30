@@ -3,11 +3,12 @@
              xmlns:vctoonClient="clr-namespace:VctoonClient"
              xmlns:labs="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
              xmlns:navigations="clr-namespace:VctoonClient.Navigations"
+             xmlns:router="clr-namespace:VctoonClient.Navigations.Router"
              x:Class="VctoonClient.App"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
              <Application.DataTemplates>
-                 <navigations:ViewLocator/>
+                 <router:ViewLocator/>
              </Application.DataTemplates>
     <Application.Styles>
         <FluentTheme />

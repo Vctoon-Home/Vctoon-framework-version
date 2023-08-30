@@ -6,11 +6,14 @@ using Abp.Localization.Avalonia;
 using CommunityToolkit.Mvvm.Input;
 using VctoonClient.Messages;
 using VctoonClient.Navigations;
+using VctoonClient.Navigations.Menus;
+using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
 using VctoonClient.Views;
 using VctoonCore.Enums;
 using VctoonCore.Libraries;
+using NavigationMenuItemProvider = VctoonClient.Navigations.Menus.NavigationMenuItemProvider;
 
 namespace VctoonClient.ViewModels;
 
