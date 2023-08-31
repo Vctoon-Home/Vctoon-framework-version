@@ -1,10 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
-using VctoonClient.Oidc;
-using VctoonClient.Stores.Apps;
 using VctoonClient.ViewModels;
 
 namespace VctoonClient.Layouts.Main;

@@ -1,12 +1,4 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Threading.Tasks;
-using IdentityModel.Client;
-using NativeAppStore.Core;
-using VctoonClient.Messages;
-using VctoonClient.Oidc;
-
-namespace VctoonClient.Stores.Users;
+﻿namespace VctoonClient.Stores.Users;
 
 [INotifyPropertyChanged]
 public partial class UserStore : VctoonStoreBase

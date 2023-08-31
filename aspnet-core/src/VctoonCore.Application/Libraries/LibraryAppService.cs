@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using VctoonCore.JobModels;
 using VctoonCore.Libraries.Dtos;
 using Volo.Abp;
@@ -10,8 +11,8 @@ namespace VctoonCore.Libraries;
 /// <summary>
 /// 
 /// </summary>
-public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, LibraryGetListInput, CreateUpdateLibraryDto,
-        CreateUpdateLibraryDto>,
+public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, LibraryGetListInput, LibraryCreateUpdateDto,
+        LibraryCreateUpdateDto>,
     ILibraryAppService
 {
     protected override string GetPolicyName { get; set; } = VctoonCorePermissions.Library.Default;
@@ -61,20 +62,21 @@ public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, Libra
     }
 
 
+    [Authorize(VctoonCorePermissions.Library.Default)]
     public async Task<List<LibraryDto>> GetLibraryMenuAsync()
     {
         return (await Repository.GetListAsync()).Select(MapToGetOutputDto).ToList();
     }
 
 
-    public override async Task<LibraryDto> CreateAsync(CreateUpdateLibraryDto input)
+    public override async Task<LibraryDto> CreateAsync(LibraryCreateUpdateDto input)
     {
         await CheckGetPolicyAsync();
         var library = await _libraryManager.CreateAsync(input.Name, input.Paths, input.LibraryType);
         return await MapToGetOutputDtoAsync(library);
     }
 
-    public override async Task<LibraryDto> UpdateAsync(Guid id, CreateUpdateLibraryDto input)
+    public override async Task<LibraryDto> UpdateAsync(Guid id, LibraryCreateUpdateDto input)
     {
         await CheckUpdatePolicyAsync();
         var library = await GetEntityByIdAsync(id);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Users;
 

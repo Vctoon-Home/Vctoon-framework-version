@@ -1,0 +1,8 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "DuplicateLibraryName": "已存在名称为 {0} 的库.",
+    "AddLibrary": "添加库",
+    "ScanLibrary": "扫描库"
+  }
+}

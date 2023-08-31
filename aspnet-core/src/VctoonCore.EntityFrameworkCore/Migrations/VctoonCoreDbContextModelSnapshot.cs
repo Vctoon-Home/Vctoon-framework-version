@@ -61,11 +61,13 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -74,6 +76,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -90,12 +93,15 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("FileExtension")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FileName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FilePath")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("LastModifyTime")
@@ -135,6 +141,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -155,21 +162,26 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Author")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("CoverPath")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -186,6 +198,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -212,9 +225,11 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -232,15 +247,18 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("ArchivePath")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("ComicChapterId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -257,15 +275,18 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -279,6 +300,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -295,30 +317,36 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Author")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<long>("Bitrate")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Codec")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
 
                     b.Property<string>("CoverPath")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("interval");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -332,12 +360,14 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<double>("Rate")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Ratio")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("ReadCount")
@@ -347,6 +377,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Width")
@@ -399,6 +430,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -419,6 +451,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -631,6 +664,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -640,6 +674,7 @@ namespace VctoonCore.Migrations
                         .HasColumnName("CreationTime");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -809,6 +844,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -818,6 +854,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -880,6 +917,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -888,6 +926,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -979,6 +1018,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -991,6 +1031,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -1039,6 +1080,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -1075,6 +1117,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -1357,6 +1400,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -1387,6 +1431,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -1465,6 +1510,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -1496,6 +1542,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -1553,6 +1600,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -1577,6 +1625,7 @@ namespace VctoonCore.Migrations
                         .HasColumnName("DeletionTime");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -1627,6 +1676,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -1660,6 +1710,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -1708,6 +1759,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -1735,6 +1787,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 
@@ -1934,6 +1987,55 @@ namespace VctoonCore.Migrations
                     b.ToTable("AbpSettings", (string)null);
                 });
 
+            modelBuilder.Entity("Volo.Abp.SettingManagement.SettingDefinitionRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("DefaultValue")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsEncrypted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsInherited")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsVisibleToClients")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("Providers")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("AbpSettingDefinitions", (string)null);
+                });
+
             modelBuilder.Entity("Volo.Abp.TenantManagement.Tenant", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1941,6 +2043,7 @@ namespace VctoonCore.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)")
                         .HasColumnName("ConcurrencyStamp");
@@ -1965,6 +2068,7 @@ namespace VctoonCore.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ExtraProperties")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ExtraProperties");
 

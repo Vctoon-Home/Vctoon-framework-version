@@ -1,19 +1,21 @@
-﻿using System.Reflection;
+﻿using System.Net.Http;
 using Abp.Localization.Avalonia;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NativeAppStore.Extensions;
-using VctoonClient.Navigations;
+using VctoonClient.Dialogs;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
 using Volo.Abp.Autofac;
+using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity.Localization;
 using Volo.Abp.Localization;
@@ -42,7 +44,8 @@ public class VctoonClientModule : AbpModule
             .Create(typeof(VctoonCoreResource)));
 
         services.AddStores(GetType().Assembly, opt => { opt.EnabledCreatorStoreLoad = true; });
-        
+
+
         context.Services.AddTransient<ICurrentPrincipalAccessor, AvaloniaCurrentPrincipalAccessor>();
         context.Services.AddSingleton<IVctoonNavigationRouter, VctoonStackNavigationRouter>();
 
@@ -59,6 +62,7 @@ public class VctoonClientModule : AbpModule
 
             options.Browser = sp.GetService<IBrowser>();
             var oidcClient = new OidcClient(options);
+
             return oidcClient;
         });
     }
@@ -96,4 +100,5 @@ public class VctoonClientModule : AbpModule
             options.Languages.Add(new LanguageInfo("es", "es", "Español"));
         });
     }
+
 }

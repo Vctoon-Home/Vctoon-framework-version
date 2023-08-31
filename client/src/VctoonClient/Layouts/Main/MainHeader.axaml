@@ -58,7 +58,7 @@
                     Text="Vctoon"
                     Theme="{DynamicResource TitleTextBlock}" />
 
-                <Button Theme="{DynamicResource BorderlessButton}" Command="{Binding NavigationGoBack}"
+                <Button Theme="{DynamicResource BorderlessButton}" Command="{Binding Router.BackAsync}"
                         IsEnabled="{Binding RouterCanGoBack}"
                         i:Attached.Icon="mdi-keyboard-backspace" FontSize="20">
 

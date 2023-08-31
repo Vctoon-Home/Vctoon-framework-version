@@ -2,11 +2,14 @@
 using System.Reflection;
 using Autofac;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Notifications;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
+using VctoonClient.Navigations.Router;
 using VctoonClient.Views;
 using Volo.Abp;
 using Volo.Abp.Autofac;
@@ -18,6 +21,11 @@ public partial class App : Application
     private static IServiceCollection ServiceCollection;
 
     public static IServiceProvider Services;
+
+    public static IVctoonNavigationRouter Router => Services.GetRequiredService<IVctoonNavigationRouter>();
+
+
+    public static WindowNotificationManager NotificationManager { get; private set; }
 
     public override void Initialize()
     {
@@ -59,6 +67,7 @@ public partial class App : Application
         Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
             .Initialize(Services);
 
+
         // Line below is needed to remove Avalonia data validation.
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
@@ -66,13 +75,27 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Services.GetRequiredService<MainWindow>();
+
+            SetWindowNotificationManager((UserControl) desktop.MainWindow!.Content!);
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             singleViewPlatform.MainView = Services.GetRequiredService<MainView>();
+            SetWindowNotificationManager((UserControl) singleViewPlatform.MainView);
         }
 
-
         base.OnFrameworkInitializationCompleted();
+    }
+
+    void SetWindowNotificationManager(UserControl topView)
+    {
+        topView.AttachedToVisualTree += (_, _) =>
+        {
+            var topLevel = TopLevel.GetTopLevel(topView);
+            NotificationManager = new WindowNotificationManager(topLevel)
+            {
+                MaxItems = 5
+            };
+        };
     }
 }

@@ -67,6 +67,7 @@ public class LoginService : ILoginService, ITransientDependency
                 RefreshToken = result.RefreshToken
             });
             WeakReferenceMessenger.Default.Send(new LoginMessage());
+            WindowFocus();
         }
 
         // Get User Info

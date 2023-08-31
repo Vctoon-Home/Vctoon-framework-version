@@ -22,7 +22,7 @@
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="8.2.0" />
         <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="8.2.0" />
-        <PackageReference Include="Semi.Avalonia" Version="11.0.0"/>
+        <PackageReference Include="Semi.Avalonia" Version="11.0.1"/>
 
         <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpPackageVersion)"/>
         <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="$(AbpPackageVersion)"/>
@@ -31,7 +31,7 @@
         <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="7.0.0"/>
         <PackageReference Include="IdentityModel.OidcClient" Version="5.1.0"/>
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0"/>
-        <PackageReference Include="Zyknow.Abp.Localization.Avalonia" Version="1.2.2"/>
+        <PackageReference Include="Zyknow.Abp.Localization.Avalonia" Version="1.5.0"/>
         <PackageReference Include="Zyknow.NativeAppStore" Version="1.0.0-alpha.1" />
     </ItemGroup>
 
@@ -47,6 +47,18 @@
     <ItemGroup>
       <Compile Update="Layouts\Main\MainNavigationBar.axaml.cs">
         <DependentUpon>NavigationBar.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Libraries\LibraryCreateView.axaml.cs">
+        <DependentUpon>LibraryCreateView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Libraries\LibraryEditView.axaml.cs">
+        <DependentUpon>LibraryEditView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Libraries\LibraryView.axaml.cs">
+        <DependentUpon>LibraryView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

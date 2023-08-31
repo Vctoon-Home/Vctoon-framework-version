@@ -23,8 +23,8 @@ namespace VctoonCore;
     typeof(AbpOpenIddictDomainSharedModule),
     typeof(AbpPermissionManagementDomainSharedModule),
     typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)    
-    )]
+    typeof(AbpTenantManagementDomainSharedModule)
+)]
 public class VctoonCoreDomainSharedModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -46,6 +46,8 @@ public class VctoonCoreDomainSharedModule : AbpModule
                 .Add<VctoonCoreResource>("en")
                 .AddBaseTypes(typeof(AbpValidationResource))
                 .AddVirtualJson("/Localization/VctoonCore");
+
+            options.Resources.Add<LibraryResource>("en");
 
             options.DefaultResourceType = typeof(VctoonCoreResource);
         });

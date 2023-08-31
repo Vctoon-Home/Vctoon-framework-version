@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.JavaScript;
-using Avalonia.Controls;
-
-namespace VctoonClient.Messages;
+﻿namespace VctoonClient.Messages;
 
 // public class NavigationMessage
 // {

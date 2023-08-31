@@ -1,13 +1,10 @@
-﻿using System.Linq;
+﻿using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Labs.Controls;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualBasic;
-using VctoonClient.Messages;
-using VctoonClient.Navigations;
+using Avalonia.Interactivity;
 using VctoonClient.Navigations.Router;
 using VctoonClient.ViewModels;
+using VctoonClient.Views.Libraries;
 
 namespace VctoonClient.Layouts.Main;
 
@@ -44,6 +41,7 @@ public partial class MainNavigationBar : UserControl
         var model = navigationRouterPageModel as NavigationRouterPageModel;
         if (model?.Path is { } path)
             Menu.SelectedItem = _vm.NavigationMenuItemProvider.GetMenuItemByPath(path);
+        else Menu.SelectedItem = null;
     }
 
 
@@ -57,5 +55,11 @@ public partial class MainNavigationBar : UserControl
         {
             this.Border.Padding = new Thickness();
         }
+    }
+
+    private async void NavigationToCreateLibraryView_ClickAsync(object? sender, RoutedEventArgs e)
+    {
+        await App.Router.NavigateToAsync(App.Services.GetRequiredService<LibraryCreateView>());
+
     }
 }

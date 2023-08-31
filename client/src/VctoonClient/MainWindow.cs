@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using VctoonClient.Views;
@@ -14,5 +15,9 @@ public class MainWindow : Window, ISingletonDependency
 
 
         Content = mainView;
+
+        #if DEBUG
+                this.AttachDevTools();
+        #endif
     }
 }

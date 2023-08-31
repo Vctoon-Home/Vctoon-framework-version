@@ -1,17 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Abp.Localization.Avalonia;
-using CommunityToolkit.Mvvm.Input;
 using VctoonClient.Messages;
-using VctoonClient.Navigations;
-using VctoonClient.Navigations.Menus;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
-using VctoonClient.Views;
-using VctoonCore.Enums;
+using VctoonClient.Views.Libraries;
 using VctoonCore.Libraries;
 using NavigationMenuItemProvider = VctoonClient.Navigations.Menus.NavigationMenuItemProvider;
 
@@ -29,9 +23,6 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
     [ObservableProperty]
     public bool _collapsed;
-
-    // [ObservableProperty]
-    // private bool _isLogin;
 
     [ObservableProperty]
     private IVctoonNavigationRouter _router;
@@ -59,39 +50,20 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 
     public async void Initialize()
     {
-        foreach (var menuItemViewModel in NavigationMenuItemProvider.MenuItems)
-            SetActivateCommand(menuItemViewModel);
-
         await Router.NavigateToAsync(NavigationMenuItemProvider.MenuItems.First().Path);
-    }
-
-
-    public async Task InitializeWhenViewIsLoaded()
-    {
-        if (IsLogin)
-        {
-            NavigationMenuItemProvider.SetLibraryResources(await GetLibraryResources());
-        }
     }
 
 
     void MessengerRegister(LocalizationManager localizationManager)
     {
-        WeakReferenceMessenger.Default.Register<LoginMessage>(this, async (r, m) =>
-        {
-            NavigationMenuItemProvider.SetLibraryResources(await GetLibraryResources());
-            UpdateProperties();
-        });
+        WeakReferenceMessenger.Default.Register<LoginMessage>(this, async (r, m) => { UpdateProperties(); });
         WeakReferenceMessenger.Default.Register<LogoutMessage>(this, (r, m) =>
         {
             NavigationMenuItemProvider.SetLibraryResources(null);
 
             UpdateProperties();
         });
-        localizationManager.PropertyChanged += (_, _) =>
-        {
-            UpdateProperties();
-        };
+        localizationManager.PropertyChanged += (_, _) => { UpdateProperties(); };
         Router.Navigated += (_, _) => { UpdateProperties(); };
     }
 
@@ -106,45 +78,6 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
         await _loginService.LogoutAsync();
     }
 
-    // 递归设置所有menuItemViewModel.ActivateCommand
-    private void SetActivateCommand(MenuItemViewModel item)
-    {
-        item.ActivateCommand = new AsyncRelayCommand(async () =>
-        {
-            await Router.NavigateToAsync(item.Path, item.ClickNavigationParameters);
-        });
-        foreach (var child in item.Children)
-        {
-            SetActivateCommand(child);
-        }
-    }
-
-
-    public async Task<ObservableCollection<MenuItemViewModel>> GetLibraryResources()
-    {
-        var libraries = await _libraryAppService.GetLibraryMenuAsync();
-
-        var menus = libraries.Select(l => new MenuItemViewModel()
-        {
-            IsResource = true,
-            Header = l.Name,
-            Icon = l.LibraryType == LibraryType.Comic ? "mdi-bookshelf" : "mdi-movie-filter",
-            Path = $"//library/{l.Id}",
-            ClickNavigationParameters = new Dictionary<string, object>()
-            {
-                {"LibraryId", l.Id},
-            },
-            ViewType = typeof(LibraryView)
-        }).ToList();
-
-        foreach (var menuItemViewModel in menus)
-        {
-            SetActivateCommand(menuItemViewModel);
-        }
-
-        return new ObservableCollection<MenuItemViewModel>(menus);
-    }
-
 
     private void UpdateProperties()
     {
@@ -152,7 +85,4 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
         OnPropertyChanged(nameof(UserName));
         OnPropertyChanged(nameof(RouterCanGoBack));
     }
-
-
-    public Task NavigationGoBack() => Router.BackAsync();
 }

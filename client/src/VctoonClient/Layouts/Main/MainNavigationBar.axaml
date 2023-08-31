@@ -47,6 +47,7 @@
 
                                             <Button Theme="{StaticResource BorderlessButton}" DockPanel.Dock="Right"
                                                     i:Attached.Icon="mdi-plus-thick"
+                                                    Click="NavigationToCreateLibraryView_ClickAsync"
                                                     IsVisible="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).IsRootResource}">
                                                 <Button.Styles>
                                                     <Style Selector="Button:pointerover">

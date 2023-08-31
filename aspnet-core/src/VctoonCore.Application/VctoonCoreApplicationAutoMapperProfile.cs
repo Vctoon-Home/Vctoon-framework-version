@@ -17,7 +17,7 @@ public class VctoonCoreApplicationAutoMapperProfile : Profile
         CreateMap<Library, LibraryDto>()
             .ForMember(b => b.Paths, opt => opt.MapFrom(b => b.Paths.Select(b => b.Path).ToArray()));
 
-        CreateMap<CreateUpdateLibraryDto, Library>(MemberList.Source)
+        CreateMap<LibraryCreateUpdateDto, Library>(MemberList.Source)
             .Ignore(b => b.Paths);
 
 

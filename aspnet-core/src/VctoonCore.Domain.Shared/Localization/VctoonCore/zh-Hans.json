@@ -6,8 +6,6 @@
     "Menu:Playlist": "播放列表",
     "Welcome": "欢迎",
     "LongWelcomeMessage": "欢迎来到该应用程序. 这是一个基于ABP框架的启动项目. 有关更多信息, 请访问 abp.io.",
-    "DuplicateLibraryName": "已存在名称为 {0} 的库.",
-    "AddLibrary": "添加库",
-    "ScanLibrary": "扫描库"
+    
   }
 }
