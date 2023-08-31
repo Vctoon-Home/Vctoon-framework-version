@@ -11,8 +11,8 @@ namespace VctoonCore.Libraries;
 /// <summary>
 /// 
 /// </summary>
-public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, LibraryGetListInput, LibraryCreateUpdateDto,
-        LibraryCreateUpdateDto>,
+public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, LibraryGetListInput, LibraryCreateUpdateInput,
+        LibraryCreateUpdateInput>,
     ILibraryAppService
 {
     protected override string GetPolicyName { get; set; } = VctoonCorePermissions.Library.Default;
@@ -69,14 +69,14 @@ public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, Libra
     }
 
 
-    public override async Task<LibraryDto> CreateAsync(LibraryCreateUpdateDto input)
+    public override async Task<LibraryDto> CreateAsync(LibraryCreateUpdateInput input)
     {
         await CheckGetPolicyAsync();
         var library = await _libraryManager.CreateAsync(input.Name, input.Paths, input.LibraryType);
         return await MapToGetOutputDtoAsync(library);
     }
 
-    public override async Task<LibraryDto> UpdateAsync(Guid id, LibraryCreateUpdateDto input)
+    public override async Task<LibraryDto> UpdateAsync(Guid id, LibraryCreateUpdateInput input)
     {
         await CheckUpdatePolicyAsync();
         var library = await GetEntityByIdAsync(id);

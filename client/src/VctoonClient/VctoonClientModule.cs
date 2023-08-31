@@ -15,7 +15,6 @@ using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
 using Volo.Abp.Autofac;
-using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity.Localization;
 using Volo.Abp.Localization;
@@ -100,5 +99,4 @@ public class VctoonClientModule : AbpModule
             options.Languages.Add(new LanguageInfo("es", "es", "Español"));
         });
     }
-
 }

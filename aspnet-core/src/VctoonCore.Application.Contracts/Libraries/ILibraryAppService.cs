@@ -12,8 +12,8 @@ public interface ILibraryAppService :
         LibraryDto, 
         Guid, 
         LibraryGetListInput,
-        LibraryCreateUpdateDto,
-        LibraryCreateUpdateDto>
+        LibraryCreateUpdateInput,
+        LibraryCreateUpdateInput>
 {
     Task<List<LibraryDto>> GetLibraryMenuAsync();
 }

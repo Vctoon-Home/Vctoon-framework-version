@@ -4,7 +4,7 @@ using VctoonCore.Enums;
 namespace VctoonCore.Libraries.Dtos;
 
 [Serializable]
-public class LibraryCreateUpdateDto
+public class LibraryCreateUpdateInput
 {
     /// <summary>
     /// 

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Abp.Localization.Avalonia;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Notifications;
-using VctoonClient.Views;
+using Mapster;
 using VctoonCore.Libraries;
 using VctoonCore.Libraries.Dtos;
 using Volo.Abp.Validation;
@@ -17,7 +12,7 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
-    private LibraryCreateUpdateDto _library = new ();
+    private LibraryCreateUpdateInputViewModel _library = new();
 
     public LibraryCreateViewModel(ILibraryAppService libraryAppService)
     {
@@ -28,7 +23,7 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     {
         try
         {
-            await _libraryAppService.CreateAsync(Library);
+            await _libraryAppService.CreateAsync(Library.Adapt<LibraryCreateUpdateInput>());
         }
         catch (AbpValidationException ve)
         {
