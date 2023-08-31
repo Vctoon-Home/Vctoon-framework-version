@@ -2,7 +2,7 @@
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
         <NoWarn>$(NoWarn);CS1591</NoWarn>
-        <AbpPackageVersion>7.3.2</AbpPackageVersion>
+        <AbpPackageVersion>7.4.0-rc.2</AbpPackageVersion>
         <AvaloniaPackageVersion>11.0.4</AvaloniaPackageVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
