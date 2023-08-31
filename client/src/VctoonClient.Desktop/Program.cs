@@ -20,44 +20,21 @@ internal class Program
     [STAThread]
     public static async Task Main(string[] args)
     {
-        if (args.Any())
-        {
-            await ProcessCallback(args[0]);
-        }
-        else
-        {
-            new RegistryConfig("VctoonCore").Configure();
+        new RegistryConfig("VctoonCore").Configure();
 
-            BuildAvaloniaApp()
-                .StartWithClassicDesktopLifetime(args);
+        BuildAvaloniaApp()
+            .StartWithClassicDesktopLifetime(args);
 
-            StoreSaveExecutor.SaveAllStores();
-        }
-    }
-
-    private static async Task ProcessCallback(string args)
-    {
-        var response = new AuthorizeResponse(args);
-        if (!String.IsNullOrWhiteSpace(response.State))
-        {
-            Console.WriteLine($"Found state: {response.State}");
-            var callbackManager = new CallbackManager(response.State);
-            await callbackManager.RunClient(args);
-        }
-        else
-        {
-            Console.WriteLine("Error: no state on response");
-        }
+        StoreSaveExecutor.SaveAllStores();
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
     {
-        
         IconProvider.Current
             .Register<FontAwesomeIconProvider>()
             .Register<MaterialDesignIconProvider>();
-        
+
         var app = AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()

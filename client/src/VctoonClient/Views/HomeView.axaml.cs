@@ -24,7 +24,7 @@ public partial class HomeView : UserControl, ITransientDependency
         base.OnAttachedToVisualTree(e);
 
         var topLevel = TopLevel.GetTopLevel(this);
-        _manager = new WindowNotificationManager(topLevel) {MaxItems = 3};
+        _manager = new WindowNotificationManager(topLevel) {MaxItems = 5};
     }
 
     private void Notification_Click(object? sender, RoutedEventArgs e)

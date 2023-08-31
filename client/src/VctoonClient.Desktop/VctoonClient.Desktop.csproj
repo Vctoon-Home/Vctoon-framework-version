@@ -15,6 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\VctoonClient.Desktop.Oidc\VctoonClient.Desktop.Oidc.csproj" />
 		<ProjectReference Include="..\VctoonClient\VctoonClient.csproj" />
 	</ItemGroup>
 </Project>

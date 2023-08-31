@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Microsoft.Win32;
 using VctoonClient.Consts;
@@ -13,9 +14,16 @@ public class RegistryConfig
 
         if (CommandKeyValueValue.IsNullOrEmpty())
         {
+            var currentPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+
+
             if (Os.IsWindows)
-                CommandKeyValueValue = String.Format(CommandKeyValueFormat, Assembly.GetExecutingAssembly().Location)
-                    .Replace("dll", "exe");
+            {
+                var oidcServerExePath = Path.Combine(currentPath,
+                    "VctoonClient.Desktop.Oidc.exe");
+
+                CommandKeyValueValue = String.Format(CommandKeyValueFormat, oidcServerExePath);
+            }
         }
     }
 
