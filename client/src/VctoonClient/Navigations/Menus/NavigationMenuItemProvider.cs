@@ -9,6 +9,7 @@ using VctoonClient.Messages;
 using VctoonClient.Views;
 using VctoonCore.Enums;
 using VctoonCore.Libraries;
+using HomeView = VctoonClient.Views.Homes.HomeView;
 using LibraryView = VctoonClient.Views.Libraries.LibraryView;
 
 namespace VctoonClient.Navigations.Menus;

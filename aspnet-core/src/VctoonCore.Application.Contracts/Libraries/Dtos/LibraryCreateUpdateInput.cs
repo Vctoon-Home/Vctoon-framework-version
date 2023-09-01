@@ -10,7 +10,6 @@ public class LibraryCreateUpdateInput
     /// 
     /// </summary>
     [Required]
-    [MinLength(50)]
     public string Name { get; set; }
 
     /// <summary>

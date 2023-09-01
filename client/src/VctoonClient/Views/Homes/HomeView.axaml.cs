@@ -2,9 +2,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
-using VctoonClient.ViewModels;
+using VctoonClient.ViewModels.Homes;
 
-namespace VctoonClient.Views;
+namespace VctoonClient.Views.Homes;
 
 public partial class HomeView : UserControl, ITransientDependency
 {

@@ -1,8 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-
-namespace VctoonClient.ViewModels;
+﻿namespace VctoonClient.ViewModels.Homes;
 
 public class HomeViewModel : ViewModelBase, ITransientDependency
 {

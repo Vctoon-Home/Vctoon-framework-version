@@ -1,5 +1,4 @@
-﻿using System;
-using Abp.Localization.Avalonia;
+﻿using Abp.Localization.Avalonia;
 using Volo.Abp.Users;
 
 namespace VctoonClient.ViewModels.Bases;

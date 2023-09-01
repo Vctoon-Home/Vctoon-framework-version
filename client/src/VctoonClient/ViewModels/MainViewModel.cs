@@ -1,11 +1,9 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Abp.Localization.Avalonia;
 using VctoonClient.Messages;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
-using VctoonClient.Views.Libraries;
 using VctoonCore.Libraries;
 using NavigationMenuItemProvider = VctoonClient.Navigations.Menus.NavigationMenuItemProvider;
 

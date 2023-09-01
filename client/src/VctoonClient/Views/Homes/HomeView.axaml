@@ -3,9 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
+             xmlns:homes="clr-namespace:VctoonClient.ViewModels.Homes"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="VctoonClient.Views.HomeView"
-             x:DataType="viewModels:HomeViewModel">
+             x:Class="VctoonClient.Views.Homes.HomeView"
+             x:DataType="homes:HomeViewModel">
     <StackPanel Spacing="50">
         <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
         <Button Command="{Binding ShowDialog}">Dialog</Button>

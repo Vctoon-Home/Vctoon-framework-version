@@ -2,26 +2,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:libraries="clr-namespace:VctoonClient.ViewModels.Libraries"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="370"
              Padding="20"
              xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:vctoonClient="clr-namespace:VctoonClient"
              x:Class="VctoonClient.Views.Libraries.LibraryCreateView"
              x:DataType="libraries:LibraryCreateViewModel">
-
 
     <StackPanel Spacing="24">
 
         <Label Classes="H6" FontSize="40" Theme="{StaticResource TitleLabel}" Content="{L:Localized AddLibrary}"></Label>
+
+        <TextBlock Text="{Binding IdentityLocalizer Name}"></TextBlock>
         
         <StackPanel>
-            <TextBlock>Name</TextBlock>
-            <TextBox Text="{Binding Library.Name, Mode=TwoWay}" Watermark="Name" Margin="10">
+            <TextBox InnerLeftContent="Name" Text="{Binding Library.Name, Mode=TwoWay}" Margin="10">
                 <DataValidationErrors.Error>
                     <system:Exception />
                 </DataValidationErrors.Error>
+                
             </TextBox>
         </StackPanel>
 

@@ -3,18 +3,23 @@ using VctoonCore.Enums;
 
 namespace VctoonClient.ViewModels.Libraries;
 
-public partial class LibraryCreateUpdateInputViewModel : ObservableObject
+public partial class LibraryCreateUpdateInputViewModel : ObservableValidator
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Required]
-    [MinLength(50)]
     [ObservableProperty]
-    private string _name;
+    string _name;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [Required]
     [MinLength(1)]
     [ObservableProperty]
-    private string[] _paths;
+    string[] _paths;
 
     [ObservableProperty]
-    private LibraryType _libraryType;
+    LibraryType _libraryType;
 }

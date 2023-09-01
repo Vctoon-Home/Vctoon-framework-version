@@ -1,20 +1,20 @@
-﻿using System.Net.Http;
-using Abp.Localization.Avalonia;
+﻿using Abp.Localization.Avalonia;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NativeAppStore.Extensions;
-using VctoonClient.Dialogs;
+using VctoonClient.Handlers;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
 using Volo.Abp.Autofac;
+using Volo.Abp.AutoMapper;
+using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity.Localization;
 using Volo.Abp.Localization;
@@ -25,6 +25,7 @@ using Volo.Abp.UI;
 namespace VctoonClient;
 
 [DependsOn(
+    typeof(AbpAutoMapperModule),
     typeof(AbpAutofacModule),
     typeof(AbpHttpClientIdentityModelModule),
     typeof(VctoonCoreHttpApiClientModule),
@@ -33,6 +34,17 @@ namespace VctoonClient;
 )]
 public class VctoonClientModule : AbpModule
 {
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        // PreConfigure<AbpHttpClientBuilderOptions>(options =>
+        // {
+        //     options.ProxyClientBuildActions.Add((_, clientBuilder) =>
+        //     {
+        //         clientBuilder.ConfigurePrimaryHttpMessageHandler(s=> s.GetRequiredService<VctoonHttpClientHandler>());
+        //     });
+        // });
+    }
+
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var services = context.Services;
@@ -49,6 +61,14 @@ public class VctoonClientModule : AbpModule
         context.Services.AddSingleton<IVctoonNavigationRouter, VctoonStackNavigationRouter>();
 
         ConfigureOidcClient(context, configuration);
+
+
+        Configure<AbpAutoMapperOptions>(options => { options.AddMaps<VctoonClientModule>(); });
+
+        // services.
+        //
+        // services.AddHttpClient("Client")
+        //     .AddHttpMessageHandler<VctoonHttpClientHandler>();
     }
 
     private void ConfigureOidcClient(ServiceConfigurationContext context, IConfiguration configuration)
