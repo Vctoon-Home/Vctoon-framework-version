@@ -10,12 +10,12 @@ namespace VctoonClient.Components;
 
 public class LanguageSelect : UserControl
 {
-    readonly LocalizationManager _localizationManager;
+    readonly ILocalizationManager _localizationManager;
     private readonly IOptions<AbpLocalizationOptions> _localizationOptions;
 
     public LanguageSelect()
     {
-        _localizationManager = App.Services.GetService<LocalizationManager>()!;
+        _localizationManager = App.Services.GetService<ILocalizationManager>()!;
         _localizationOptions = App.Services.GetService<IOptions<AbpLocalizationOptions>>()!;
         this.Content = GetMenu();
     }
@@ -29,7 +29,7 @@ public class LanguageSelect : UserControl
             ItemsSource = GetMenuItemsSource(),
         };
 
-        _localizationManager.PropertyChanged += (_, _) =>
+        _localizationManager.CurrentCultureChanged += (_, _) =>
         {
             menuFirstItem.Header = _localizationManager.CurrentCulture.NativeName;
         };

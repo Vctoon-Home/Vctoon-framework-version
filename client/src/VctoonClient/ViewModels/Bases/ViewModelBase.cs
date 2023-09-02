@@ -7,5 +7,5 @@ public abstract class ViewModelBase : ObservableObject
 {
     public IAbpLazyServiceProvider? LazyServiceProvider { get; set; }
     public ICurrentUser CurrentUser => LazyServiceProvider?.LazyGetRequiredService<ICurrentUser>()!;
-    public LocalizationManager L => LazyServiceProvider?.LazyGetRequiredService<LocalizationManager>()!;
+    public ILocalizationManager L => LazyServiceProvider?.LazyGetRequiredService<ILocalizationManager>()!;
 }

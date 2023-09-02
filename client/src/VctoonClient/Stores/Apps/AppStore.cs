@@ -7,7 +7,7 @@ namespace VctoonClient.Stores.Apps;
 [INotifyPropertyChanged]
 public partial class AppStore : VctoonStoreBase
 {
-    private readonly LocalizationManager _localizationManager;
+    private readonly ILocalizationManager _localizationManager;
 
     [Store]
     private string CultureName { get; set; }
@@ -15,12 +15,12 @@ public partial class AppStore : VctoonStoreBase
     [ObservableProperty]
     bool _collapsed;
 
-    public AppStore(LocalizationManager localizationManager)
+    public AppStore(ILocalizationManager localizationManager)
     {
         _localizationManager = localizationManager;
         LoadStore();
 
-        _localizationManager.PropertyChanged += (_, _) => { CultureName = _localizationManager.CurrentCulture.Name; };
+        _localizationManager.CurrentCultureChanged += (_, _) => { CultureName = _localizationManager.CurrentCulture.Name; };
 
         if (!CultureName.IsNullOrEmpty())
         {

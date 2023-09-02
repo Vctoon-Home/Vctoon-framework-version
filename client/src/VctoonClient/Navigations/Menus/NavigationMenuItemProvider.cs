@@ -16,7 +16,7 @@ namespace VctoonClient.Navigations.Menus;
 
 public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDependency
 {
-    private readonly LocalizationManager _localizationManager;
+    private readonly ILocalizationManager _localizationManager;
     private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
@@ -24,13 +24,13 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
 
     private MenuItemViewModel RootResourceItem;
 
-    public NavigationMenuItemProvider(LocalizationManager localizationManager, ILibraryAppService libraryAppService)
+    public NavigationMenuItemProvider(ILocalizationManager localizationManager, ILibraryAppService libraryAppService)
     {
         _localizationManager = localizationManager;
         _libraryAppService = libraryAppService;
         MenuItems = GetMenuItems();
 
-        localizationManager.PropertyChanged += (sender, args) =>
+        localizationManager.CurrentCultureChanged += (sender, args) =>
         {
             MenuItems = GetMenuItems();
             NotifyMenuItemsChanged();

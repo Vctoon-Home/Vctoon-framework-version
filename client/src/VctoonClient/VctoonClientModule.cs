@@ -51,8 +51,7 @@ public class VctoonClientModule : AbpModule
         var configuration = context.Services.GetConfiguration();
         ConfigureLocalization();
 
-        services.AddLocalizationManager(s => s.GetRequiredService<IStringLocalizerFactory>()
-            .Create(typeof(VctoonCoreResource)));
+        services.AddLocalizationManager();
 
         services.AddStores(GetType().Assembly, opt => { opt.EnabledCreatorStoreLoad = true; });
 

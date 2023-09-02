@@ -21,11 +21,11 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     public IStringLocalizer IdentityLocalizer { get; set; }
 
 
-    public LibraryCreateViewModel(ILibraryAppService libraryAppService, LocalizationManager localizationManager)
+    public LibraryCreateViewModel(ILibraryAppService libraryAppService, ILocalizationManager localizationManager)
     {
         _libraryAppService = libraryAppService;
 
-        IdentityLocalizer = localizationManager.GetResourceLocalizer<IdentityResource>();
+        IdentityLocalizer = localizationManager.GetResource<IdentityResource>();
 
     }
 

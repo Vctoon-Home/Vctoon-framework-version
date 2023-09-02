@@ -8,9 +8,9 @@ namespace VctoonClient.Handlers;
 
 public class VctoonHttpClientHandler : DelegatingHandler, ITransientDependency
 {
-    private readonly LocalizationManager _localizationManager;
+    private readonly ILocalizationManager _localizationManager;
 
-    public VctoonHttpClientHandler(LocalizationManager localizationManager)
+    public VctoonHttpClientHandler(ILocalizationManager localizationManager)
     {
         _localizationManager = localizationManager;
     }
