@@ -4,6 +4,7 @@
         <NoWarn>$(NoWarn);CS1591</NoWarn>
         <AbpPackageVersion>7.4.0-rc.2</AbpPackageVersion>
         <AvaloniaPackageVersion>11.0.4</AvaloniaPackageVersion>
+        <MicrosoftPackageVersion>7.0.0</MicrosoftPackageVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
