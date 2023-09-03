@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Avalonia.Controls.Notifications;
+using VctoonClient.Helpers;
 using VctoonCore.Libraries;
 using VctoonCore.Libraries.Dtos;
 using Volo.Abp.Validation;
@@ -24,30 +25,17 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
 
     public async void Create()
     {
-        // if (CanCreate() == false)
-        // {
-        //     return;
-        // }
-
+        if (!ValidHelper.IsValid(Library))
+            return;
         try
         {
             await _libraryAppService.CreateAsync(Library);
         }
-        catch (AbpValidationException ve)
-        {
-            var msg = ve.ValidationErrors.FirstOrDefault()?.ErrorMessage;
-        }
         catch (Exception e)
         {
-            App.NotificationManager.Show(new Notification("异常", e.Message, NotificationType.Error));
+            App.NotificationManager.Show(new Notification("", e.Message, NotificationType.Error));
         }
     }
-
-    public bool CanCreate()
-    {
-        return Validator.TryValidateObject(Library, new ValidationContext(Library), null, true);
-    }
-
 
     public async void Cancel()
     {

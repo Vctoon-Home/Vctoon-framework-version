@@ -95,9 +95,8 @@ public class VctoonClientModule : AbpModule
         {
             options.Resources
                 .Get<VctoonCoreResource>()
-                .AddBaseTypes(typeof(IdentityResource))
+                .AddBaseTypes(typeof(LibraryResource))
                 .AddBaseTypes(typeof(AbpValidationResource))
-                .AddBaseTypes(typeof(AccountResource))
                 .AddBaseTypes(typeof(AbpUiResource));
 
             options.DefaultResourceType = typeof(VctoonCoreResource);

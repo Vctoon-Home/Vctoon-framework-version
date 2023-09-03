@@ -47,7 +47,9 @@ public class VctoonCoreDomainSharedModule : AbpModule
                 .AddBaseTypes(typeof(AbpValidationResource))
                 .AddVirtualJson("/Localization/VctoonCore");
 
-            options.Resources.Add<LibraryResource>("en");
+            options.Resources
+                .Add<LibraryResource>("en")
+                .AddVirtualJson("/Localization/Library");
 
             options.DefaultResourceType = typeof(VctoonCoreResource);
         });
@@ -55,6 +57,7 @@ public class VctoonCoreDomainSharedModule : AbpModule
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
             options.MapCodeNamespace("VctoonCore", typeof(VctoonCoreResource));
+            options.MapCodeNamespace("Library", typeof(LibraryResource));
         });
     }
 }

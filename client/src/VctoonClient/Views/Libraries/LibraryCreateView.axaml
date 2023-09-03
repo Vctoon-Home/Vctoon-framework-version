@@ -15,18 +15,15 @@
 
         <Label Classes="H6" FontSize="40" Theme="{StaticResource TitleLabel}" Content="{L:Localized AddLibrary}"></Label>
 
-        <StackPanel>
-            <TextBox InnerLeftContent="Name" Text="{Binding Library.Name, Mode=TwoWay}" Margin="10">
-            </TextBox>
-        </StackPanel>
+        <TextBox InnerLeftContent="Name" Text="{Binding Library.Name, Mode=TwoWay}" Margin="10">
+        </TextBox>
+        
+        
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="{L:Localized Cancel}" Command="{Binding Cancel}" Margin="10" />
-            <Button Content="{L:Localized Created,AbpUi}" Command="{Binding Create}" Margin="10" />
-
+            <Button FontSize="18" Content="{L:Localized Cancel}" Command="{Binding Cancel}" Margin="10" />
+            <Button FontSize="18" Content="{L:Localized Submit,AbpUi}" Command="{Binding Create}" Margin="10" />
         </StackPanel>
-
-
     </StackPanel>
 
 
