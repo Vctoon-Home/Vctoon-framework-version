@@ -8,7 +8,6 @@ public class VctoonClientAutoMapperProfile : Profile
 {
     public VctoonClientAutoMapperProfile()
     {
-        CreateMap<LibraryCreateUpdateInput, LibraryCreateUpdateInputViewModel>();
-        CreateMap<LibraryCreateUpdateInputViewModel, LibraryCreateUpdateInput>();
+
     }
 }

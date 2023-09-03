@@ -64,10 +64,9 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        //
-        // BindingPlugins.DataValidators.RemoveAt(0);
-        //
-        // BindingPlugins.DataValidators.Add(new VctoonClientDataAnnotationsValidationPlugin());
+        
+        BindingPlugins.DataValidators.RemoveAt(0);
+        BindingPlugins.DataValidators.Add(new VctoonClientDataAnnotationsValidationPlugin());
         
         Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
             .Initialize(Services);

@@ -4,11 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:homes="clr-namespace:VctoonClient.ViewModels.Homes"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Views.Homes.HomeView"
              x:DataType="homes:HomeViewModel">
     <StackPanel Spacing="50">
-        <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
+
+
+        <TextBlock FontSize="60">
+            Welcome to Avalonia!
+        </TextBlock>
+
+        <!-- <AutoCompleteBox Width="300"> -->
+        <!--     <DataValidationErrors.Error> -->
+        <!--         <system:Exception> -->
+        <!--             <x:Arguments> -->
+        <!--                 <x:String> Error 123</x:String> -->
+        <!--             </x:Arguments> -->
+        <!--         </system:Exception> -->
+        <!--     </DataValidationErrors.Error> -->
+        <!-- </AutoCompleteBox> -->
+
+
+        <TextBox Text="{Binding Library.Name}">
+        </TextBox>
+        
+        <Button Command="{Binding Validation}">Valid</Button>
+        
+
         <Button Command="{Binding ShowDialog}">Dialog</Button>
         <Button Click="Notification_Click">Notification</Button>
         <TextBox></TextBox>

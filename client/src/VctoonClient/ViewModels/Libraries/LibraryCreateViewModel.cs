@@ -18,15 +18,10 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     [ObservableProperty]
     private LibraryCreateUpdateInput _library = new();
 
-    public IStringLocalizer IdentityLocalizer { get; set; }
 
-
-    public LibraryCreateViewModel(ILibraryAppService libraryAppService, ILocalizationManager localizationManager)
+    public LibraryCreateViewModel(ILibraryAppService libraryAppService)
     {
         _libraryAppService = libraryAppService;
-
-        IdentityLocalizer = localizationManager.GetResource<IdentityResource>();
-
     }
 
 

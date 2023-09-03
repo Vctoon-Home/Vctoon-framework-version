@@ -1,4 +1,5 @@
-﻿using Abp.Localization.Avalonia;
+﻿using System.Threading.Tasks;
+using Abp.Localization.Avalonia;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;
@@ -21,6 +22,8 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.UI;
+using Volo.Abp.Validation;
+using Volo.Abp.Validation.Localization;
 
 namespace VctoonClient;
 
@@ -34,15 +37,8 @@ namespace VctoonClient;
 )]
 public class VctoonClientModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
+    public async override Task PreConfigureServicesAsync(ServiceConfigurationContext context)
     {
-        // PreConfigure<AbpHttpClientBuilderOptions>(options =>
-        // {
-        //     options.ProxyClientBuildActions.Add((_, clientBuilder) =>
-        //     {
-        //         clientBuilder.ConfigurePrimaryHttpMessageHandler(s=> s.GetRequiredService<VctoonHttpClientHandler>());
-        //     });
-        // });
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -54,7 +50,6 @@ public class VctoonClientModule : AbpModule
         services.AddLocalizationManager();
 
         services.AddStores(GetType().Assembly, opt => { opt.EnabledCreatorStoreLoad = true; });
-
 
         context.Services.AddTransient<ICurrentPrincipalAccessor, AvaloniaCurrentPrincipalAccessor>();
         context.Services.AddSingleton<IVctoonNavigationRouter, VctoonStackNavigationRouter>();
@@ -90,15 +85,17 @@ public class VctoonClientModule : AbpModule
     {
         Configure<AbpLocalizationOptions>(options =>
         {
+            
             options.Resources
                 .Get<VctoonCoreResource>()
                 .AddBaseTypes(typeof(IdentityResource))
+                .AddBaseTypes(typeof(AbpValidationResource))
                 .AddBaseTypes(typeof(AccountResource))
                 .AddBaseTypes(typeof(AbpUiResource));
-        });
-
-        Configure<AbpLocalizationOptions>(options =>
-        {
+            
+            options.DefaultResourceType = typeof(VctoonCoreResource);
+            
+            
             options.Languages.Add(new LanguageInfo("ar", "ar", "العربية", "ae"));
             options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
             options.Languages.Add(new LanguageInfo("en", "en", "English"));
@@ -116,6 +113,7 @@ public class VctoonClientModule : AbpModule
             options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
             options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
             options.Languages.Add(new LanguageInfo("es", "es", "Español"));
+            
         });
     }
 }

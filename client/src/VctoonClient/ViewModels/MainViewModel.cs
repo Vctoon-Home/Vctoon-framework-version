@@ -30,7 +30,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     public string UserName => CurrentUser.UserName;
     public bool RouterCanGoBack => Router.CanGoBack;
 
-    public MainViewModel(ILoginService loginService, ILocalizationManager localizationManager, UserStore userStore,
+    public MainViewModel(ILoginService loginService, LocalizationManager localizationManager, UserStore userStore,
         IVctoonNavigationRouter router, NavigationMenuItemProvider navigationMenuItemProvider,
         ILibraryAppService libraryAppService)
     {
@@ -52,7 +52,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     }
 
 
-    void MessengerRegister(ILocalizationManager localizationManager)
+    void MessengerRegister(LocalizationManager localizationManager)
     {
         WeakReferenceMessenger.Default.Register<LoginMessage>(this, async (r, m) => { UpdateProperties(); });
         WeakReferenceMessenger.Default.Register<LogoutMessage>(this, (r, m) =>

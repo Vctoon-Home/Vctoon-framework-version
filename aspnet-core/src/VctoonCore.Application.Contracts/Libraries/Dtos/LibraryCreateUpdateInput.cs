@@ -1,16 +1,18 @@
+using System.Collections;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using VctoonCore.Enums;
+using Volo.Abp.Validation;
+using Volo.Abp.Validation.Localization;
 
 namespace VctoonCore.Libraries.Dtos;
 
 [Serializable]
 public class LibraryCreateUpdateInput
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Required]
-    public string Name { get; set; }
+    public string Name { get; set; } = "";
 
     /// <summary>
     /// 
