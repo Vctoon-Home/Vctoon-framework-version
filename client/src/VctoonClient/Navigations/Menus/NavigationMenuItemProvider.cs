@@ -6,7 +6,6 @@ using Abp.Localization.Avalonia;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using VctoonClient.Messages;
-using VctoonClient.Views;
 using VctoonCore.Enums;
 using VctoonCore.Libraries;
 using HomeView = VctoonClient.Views.Homes.HomeView;

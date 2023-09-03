@@ -1,12 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Abp.Localization.Avalonia;
 using Avalonia.Controls.Notifications;
-using Microsoft.Extensions.Localization;
 using VctoonCore.Libraries;
 using VctoonCore.Libraries.Dtos;
-using Volo.Abp.Identity.Localization;
 using Volo.Abp.Validation;
 
 namespace VctoonClient.ViewModels.Libraries;

@@ -6,8 +6,10 @@ using System.Linq;
 using Microsoft.Extensions.Options;
 using Volo.Abp.Validation;
 
-namespace VctoonClient;
+namespace VctoonClient.Validations;
 
+[Dependency(ReplaceServices = true)]
+// [ExposeServices(typeof(IObjectValidationContributor))]
 public class VctoonClientDataAnnotationObjectValidationContributor : DataAnnotationObjectValidationContributor,
     ITransientDependency
 {
@@ -16,8 +18,12 @@ public class VctoonClientDataAnnotationObjectValidationContributor : DataAnnotat
     {
     }
 
-    protected override void AddPropertyErrors(object validatingObject, PropertyDescriptor property, List<ValidationResult> errors)
+    protected override void AddPropertyErrors(object validatingObject, PropertyDescriptor property,
+        List<ValidationResult> errors)
     {
+        // only add one error
+        if (!errors.IsNullOrEmpty()) return;
+        
         var validationAttributes = property.Attributes.OfType<ValidationAttribute>().ToArray();
         if (validationAttributes.IsNullOrEmpty())
         {
@@ -30,13 +36,18 @@ public class VctoonClientDataAnnotationObjectValidationContributor : DataAnnotat
             MemberName = property.Name
         };
 
-        var attributeValidationResultProvider = ServiceProvider.GetRequiredService<IAttributeValidationResultProvider>();
+        var attributeValidationResultProvider =
+            ServiceProvider.GetRequiredService<IAttributeValidationResultProvider>();
         foreach (var attribute in validationAttributes)
         {
-            var result = attributeValidationResultProvider.GetOrDefault(attribute, property.GetValue(validatingObject), validationContext);
+            var result = attributeValidationResultProvider.GetOrDefault(attribute, property.GetValue(validatingObject),
+                validationContext);
             if (result != null)
             {
                 errors.Add(result);
+                
+                // only add one error
+                return;
             }
         }
     }

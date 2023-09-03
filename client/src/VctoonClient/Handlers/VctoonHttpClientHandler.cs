@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Abp.Localization.Avalonia;
-using Volo.Abp.Localization;
 
 namespace VctoonClient.Handlers;
 

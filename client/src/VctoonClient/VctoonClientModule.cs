@@ -4,18 +4,17 @@ using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using NativeAppStore.Extensions;
-using VctoonClient.Handlers;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
+using VctoonClient.Validations;
 using VctoonCore;
 using VctoonCore.Localization;
 using Volo.Abp.Account.Localization;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Http.Client;
+using Volo.Abp.Collections;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity.Localization;
 using Volo.Abp.Localization;
@@ -54,6 +53,15 @@ public class VctoonClientModule : AbpModule
         context.Services.AddTransient<ICurrentPrincipalAccessor, AvaloniaCurrentPrincipalAccessor>();
         context.Services.AddSingleton<IVctoonNavigationRouter, VctoonStackNavigationRouter>();
 
+        Configure<AbpValidationOptions>(options =>
+        {
+            options.ObjectValidationContributors = new TypeList()
+            {
+                typeof(VctoonClientDataAnnotationObjectValidationContributor)
+            };
+        });
+
+
         ConfigureOidcClient(context, configuration);
 
 
@@ -85,17 +93,15 @@ public class VctoonClientModule : AbpModule
     {
         Configure<AbpLocalizationOptions>(options =>
         {
-            
             options.Resources
                 .Get<VctoonCoreResource>()
                 .AddBaseTypes(typeof(IdentityResource))
                 .AddBaseTypes(typeof(AbpValidationResource))
                 .AddBaseTypes(typeof(AccountResource))
                 .AddBaseTypes(typeof(AbpUiResource));
-            
+
             options.DefaultResourceType = typeof(VctoonCoreResource);
-            
-            
+
             options.Languages.Add(new LanguageInfo("ar", "ar", "العربية", "ae"));
             options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
             options.Languages.Add(new LanguageInfo("en", "en", "English"));
@@ -113,7 +119,6 @@ public class VctoonClientModule : AbpModule
             options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
             options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
             options.Languages.Add(new LanguageInfo("es", "es", "Español"));
-            
         });
     }
 }

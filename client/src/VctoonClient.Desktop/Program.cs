@@ -1,14 +1,11 @@
 ﻿using Avalonia;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using IdentityModel.Client;
 using NativeAppStore;
 using Projektanker.Icons.Avalonia;
 using Projektanker.Icons.Avalonia.FontAwesome;
 using Projektanker.Icons.Avalonia.MaterialDesign;
 using VctoonClient.Desktop.Oidc;
-using VctoonClient.Oidc;
 
 namespace VctoonClient.Desktop;
 

@@ -10,6 +10,7 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using VctoonClient.Navigations.Router;
+using VctoonClient.Validations;
 using VctoonClient.Views;
 using Volo.Abp;
 using Volo.Abp.Autofac;
