@@ -26,7 +26,6 @@ public partial class HomeViewModel : ViewModelBase, ITransientDependency
         }
         catch (AbpValidationException e)
         {
-            var vaild = new VctoonClientDataAnnotationsValidationPlugin();
         }
     }
 
