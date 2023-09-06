@@ -8,6 +8,7 @@
              xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:vctoonClient="clr-namespace:VctoonClient"
+             xmlns:libraries1="clr-namespace:VctoonClient.Views.Libraries"
              x:Class="VctoonClient.Views.Libraries.LibraryCreateView"
              x:DataType="libraries:LibraryCreateViewModel">
 
@@ -15,14 +16,41 @@
 
         <Label Classes="H6" FontSize="40" Theme="{StaticResource TitleLabel}" Content="{L:Localized AddLibrary}"></Label>
 
-        <TextBox InnerLeftContent="Name" Text="{Binding Library.Name, Mode=TwoWay}" Margin="10">
-        </TextBox>
-        
-        
+
+        <Border Theme="{StaticResource CardBorder}">
+            <StackPanel>
+
+                <TextBox InnerLeftContent="Name" Text="{Binding Library.Name, Mode=TwoWay}" Margin="10">
+                </TextBox>
+                <Button HorizontalAlignment="Right" Content="{L:Localized AddFolder}" Command="{Binding ShowAddFolderDialog}"></Button>
+                <ItemsControl ItemsSource="{Binding Library.Paths,Mode=TwoWay}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="x:String">
+                            <DockPanel Margin="0,10,0,0">
+                                <Button DockPanel.Dock="Right" Content="{L:Localized Remove}"
+                                        Command="{Binding ((libraries:LibraryCreateViewModel)DataContext).RemoveFolder, RelativeSource={RelativeSource AncestorType=libraries1:LibraryCreateView}}"
+                                        CommandParameter="{Binding .}"
+                                        Classes="Danger"
+                                        Margin="10,0,0,0">
+                                </Button>
+                                <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                       Classes="Code"
+                                       Content="{Binding}">
+                                </Label>
+
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button FontSize="18" Content="{L:Localized Cancel}" Command="{Binding Cancel}" Margin="10" />
-            <Button FontSize="18" Content="{L:Localized Submit,AbpUi}" Command="{Binding Create}" Margin="10" />
+            <!-- <Button Theme="{DynamicResource SolidButton}" Content="{L:Localized Cancel}" Command="{Binding Cancel}" -->
+            <!--         Margin="10" /> -->
+            <Button Theme="{DynamicResource SolidButton}" Content="{L:Localized Submit,AbpUi}"
+                    Command="{Binding CreateLibrary}" Margin="10" />
         </StackPanel>
     </StackPanel>
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using IdentityModel.Client;
 using Volo.Abp.Http.Client.Authentication;
 

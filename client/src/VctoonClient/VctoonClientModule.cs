@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using Abp.Localization.Avalonia;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
@@ -6,6 +6,8 @@ using Localization.Resources.AbpUi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using NativeAppStore.Extensions;
+using Polly;
+using VctoonClient.Handlers;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonClient.Validations;
@@ -15,6 +17,7 @@ using Volo.Abp.Account.Localization;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Collections;
+using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Identity.Localization;
 using Volo.Abp.Localization;
@@ -38,6 +41,15 @@ public class VctoonClientModule : AbpModule
 {
     public async override Task PreConfigureServicesAsync(ServiceConfigurationContext context)
     {
+        PreConfigure<AbpHttpClientBuilderOptions>(options =>
+        {
+            options.ProxyClientBuildActions.Add((remoteServiceName, clientBuilder) =>
+            {
+                clientBuilder.AddTransientHttpErrorPolicy(
+                    policyBuilder => policyBuilder.WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Pow(2, i)))
+                );
+            });
+        });
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -67,8 +79,6 @@ public class VctoonClientModule : AbpModule
 
         Configure<AbpAutoMapperOptions>(options => { options.AddMaps<VctoonClientModule>(); });
 
-        // services.
-        //
         // services.AddHttpClient("Client")
         //     .AddHttpMessageHandler<VctoonHttpClientHandler>();
     }

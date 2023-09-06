@@ -72,7 +72,7 @@ public class LibraryAppService : CrudAppService<Library, LibraryDto, Guid, Libra
     public override async Task<LibraryDto> CreateAsync(LibraryCreateUpdateInput input)
     {
         await CheckGetPolicyAsync();
-        var library = await _libraryManager.CreateAsync(input.Name, input.Paths, input.LibraryType);
+        var library = await _libraryManager.CreateAsync(input.Name, input.Paths.ToArray(), input.LibraryType);
         return await MapToGetOutputDtoAsync(library);
     }
 

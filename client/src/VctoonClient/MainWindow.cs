@@ -16,8 +16,8 @@ public class MainWindow : Window, ISingletonDependency
 
         Content = mainView;
 
-        #if DEBUG
-                this.AttachDevTools();
-        #endif
+        // #if DEBUG
+        //         this.AttachDevTools();
+        // #endif
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Avalonia.Controls.Notifications;
+using DialogHostAvalonia;
 using VctoonClient.Helpers;
+using VctoonClient.Views.Libraries;
 using VctoonCore.Libraries;
 using VctoonCore.Libraries.Dtos;
-using Volo.Abp.Validation;
 
 namespace VctoonClient.ViewModels.Libraries;
 
@@ -14,28 +12,49 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
-    private LibraryCreateUpdateInput _library = new();
-
+    private LibraryCreateUpdateInputViewModel _library = new();
 
     public LibraryCreateViewModel(ILibraryAppService libraryAppService)
     {
         _libraryAppService = libraryAppService;
+
+        Library.ErrorsChanged += (sender, args) => { OnPropertyChanged(nameof(CanCreateLibrary)); };
+
+        Library.PropertyChanged += (sender, args) => { OnPropertyChanged(nameof(CanCreateLibrary)); };
+        Library.Paths.CollectionChanged += (sender, args) => { OnPropertyChanged(nameof(CanCreateLibrary)); };
     }
 
-
-    public async void Create()
+    public async void CreateLibrary()
     {
         if (!ValidHelper.IsValid(Library))
             return;
         try
         {
-            await _libraryAppService.CreateAsync(Library);
+            await _libraryAppService.CreateAsync(
+                ObjectMapper.Map<LibraryCreateUpdateInputViewModel, LibraryCreateUpdateInput>(Library));
         }
         catch (Exception e)
         {
             App.NotificationManager.Show(new Notification("", e.Message, NotificationType.Error));
         }
     }
+
+    public bool CanCreateLibrary()
+    {
+        return ValidHelper.IsValid(Library);
+    }
+
+    public async void ShowAddFolderDialog()
+    {
+        var dialogViewModel = App.Services.GetRequiredService<DialogLibraryPathSelectView>();
+        var res = await DialogManager.ShowCloseOnClickAwayAsync<DialogLibraryPathSelectViewModel>(dialogViewModel);
+    }
+
+    public void RemoveFolder(string path)
+    {
+        Library.Paths.Remove(path);
+    }
+
 
     public async void Cancel()
     {

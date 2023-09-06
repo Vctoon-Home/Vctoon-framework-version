@@ -3,7 +3,7 @@ using Avalonia.Controls.Templates;
 
 namespace VctoonClient.Navigations.Router;
 
-public class ViewLocator : IDataTemplate
+public class RouterViewLocator : IDataTemplate
 {
     public Control? Build(object? data)
     {

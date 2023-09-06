@@ -25,12 +25,13 @@
         <!--     </DataValidationErrors.Error> -->
         <!-- </AutoCompleteBox> -->
 
-
-        <TextBox Text="{Binding Library.Name}">
-        </TextBox>
+        <!-- -->
+        <!-- <TextBox Text="{Binding Library.Name}"> -->
+        <!-- </TextBox> -->
+        <!-- -->
+        <!-- <Button Command="{Binding Validation}">Valid</Button> -->
         
-        <Button Command="{Binding Validation}">Valid</Button>
-        
+        <Button Command="{Binding ShowLoading}">ShowLoading</Button>
 
         <Button Command="{Binding ShowDialog}">Dialog</Button>
         <Button Click="Notification_Click">Notification</Button>

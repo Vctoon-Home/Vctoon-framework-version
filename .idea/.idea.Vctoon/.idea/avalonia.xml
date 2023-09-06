@@ -6,6 +6,10 @@
         <entry key="client/src/VctoonClient/App.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Components/LangaugeSelect.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Components/LanguageSelect.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Dialogs/VctoonClientDialogHostStyles.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Dialogs/VctoonClientDialogOverlayPopupHost.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Dialogs/VctoonClientDialogOverlayPopupHost.axaml.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Dialogs/VctoonDialogHostStyles.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Layouts/Main/MainContent.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Layouts/Main/MainHeader.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Layouts/Main/MainNavigationBar.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
@@ -17,6 +21,7 @@
         <entry key="client/src/VctoonClient/Views/HomeView1.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/HomeView2.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Homes/HomeView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Views/Libraries/DialogLibraryPathSelectView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Libraries/LibraryCreateView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Libraries/LibraryEditView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Libraries/LibraryView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />

@@ -4,16 +4,19 @@
              xmlns:labs="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
              xmlns:navigations="clr-namespace:VctoonClient.Navigations"
              xmlns:router="clr-namespace:VctoonClient.Navigations.Router"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             xmlns:dialogs="clr-namespace:VctoonClient.Dialogs"
              x:Class="VctoonClient.App"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-             <!-- <Application.DataTemplates> -->
-             <!--     <router:ViewLocator/> -->
-             <!-- </Application.DataTemplates> -->
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+    <!-- <Application.DataTemplates> -->
+    <!--     <vctoonClient:ViewLocator/> -->
+    <!-- </Application.DataTemplates> -->
     <Application.Styles>
         <FluentTheme />
-        <labs:ControlThemes/>
+        <labs:ControlThemes />
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <StyleInclude Source="avares://Ursa.Themes.Semi/Index.axaml" />
+        <dialogHostAvalonia:DialogHostStyles />
     </Application.Styles>
 </Application>

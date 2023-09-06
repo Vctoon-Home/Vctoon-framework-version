@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Abp.Localization.Avalonia;
+using VctoonClient.Dialogs;
 using VctoonClient.Messages;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
@@ -18,6 +19,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     private NavigationMenuItemProvider _navigationMenuItemProvider;
 
     private readonly ILibraryAppService _libraryAppService;
+    private readonly DialogManager _dialogManager;
 
     [ObservableProperty]
     public bool _collapsed;
@@ -40,9 +42,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
         _libraryAppService = libraryAppService;
         Router = router;
 
-
         MessengerRegister(localizationManager);
-
         Initialize();
     }
 

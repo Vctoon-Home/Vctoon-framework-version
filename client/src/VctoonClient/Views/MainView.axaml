@@ -2,34 +2,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
-             xmlns:vctoonClient="clr-namespace:VctoonClient"
-             xmlns:views="clr-namespace:VctoonClient.Views"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
-             xmlns:bases="clr-namespace:VctoonClient.ViewModels.Bases"
-             xmlns:labs="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
-             xmlns:u="https://irihi.tech/ursa"
-             xmlns:com="clr-namespace:VctoonClient.Components;assembly=VctoonClient"
-             xmlns:navigations="clr-namespace:VctoonClient.Navigations"
-             xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:main="clr-namespace:VctoonClient.Layouts.Main"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             xmlns:libraries="clr-namespace:VctoonClient.ViewModels.Libraries"
+             xmlns:systems="clr-namespace:VctoonCore.Systems;assembly=VctoonCore.Application.Contracts"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:dialogs="clr-namespace:VctoonClient.Dialogs"
              mc:Ignorable="d"
              d:DesignWidth="1000"
              d:DesignHeight="450"
              x:DataType="viewModels:MainViewModel"
              x:Class="VctoonClient.Views.MainView">
 
-    <Grid ColumnDefinitions="AUto, *" RowDefinitions="Auto, *">
-        <main:MainHeader Grid.Row="0"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="2" />
-        <main:MainNavigationBar Grid.Row="1" Grid.Column="0" />
-        <main:MainContent Grid.Row="1"
-                          Grid.Column="1"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch" />
 
-    </Grid>
+    <u:LoadingContainer x:Name="LoadingContainer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <dialogHostAvalonia:DialogHost Identifier="{x:Static dialogs:DialogConsts.MainViewDefaultIdentifier}">
+            <Grid ColumnDefinitions="AUto, *" RowDefinitions="Auto, *">
+                <main:MainHeader Grid.Row="0"
+                                 Grid.Column="0"
+                                 Grid.ColumnSpan="2" />
+                <main:MainNavigationBar Grid.Row="1" Grid.Column="0" />
+                <main:MainContent Grid.Row="1"
+                                  Grid.Column="1"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch" />
+
+            </Grid>
+
+        </dialogHostAvalonia:DialogHost>
+    </u:LoadingContainer>
 
 
 </UserControl>

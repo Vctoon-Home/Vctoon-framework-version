@@ -1,4 +1,5 @@
-﻿using VctoonCore.Libraries.Dtos;
+﻿using Avalonia.Controls;
+using VctoonCore.Libraries.Dtos;
 using Volo.Abp.Validation;
 
 namespace VctoonClient.ViewModels.Homes;
@@ -28,5 +29,12 @@ public partial class HomeViewModel : ViewModelBase, ITransientDependency
 
     public async void ShowDialog()
     {
+    }
+
+    public async void ShowLoading()
+    {
+        using var loading = DialogManager.ShowLoading("");
+
+        await Task.Delay(1000);
     }
 }

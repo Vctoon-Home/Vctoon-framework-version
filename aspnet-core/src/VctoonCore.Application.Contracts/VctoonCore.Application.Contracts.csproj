@@ -22,4 +22,5 @@
     <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="$(AbpPackageVersion)" />
   </ItemGroup>
 
+
 </Project>

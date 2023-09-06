@@ -22,7 +22,7 @@ public class VctoonClientDataAnnotationObjectValidationContributor : DataAnnotat
         List<ValidationResult> errors)
     {
         // only add one error
-        if (!errors.IsNullOrEmpty()) return;
+        // if (!errors.IsNullOrEmpty()) return;
         
         var validationAttributes = property.Attributes.OfType<ValidationAttribute>().ToArray();
         if (validationAttributes.IsNullOrEmpty())
@@ -47,7 +47,7 @@ public class VctoonClientDataAnnotationObjectValidationContributor : DataAnnotat
                 errors.Add(result);
                 
                 // only add one error
-                return;
+                // return;
             }
         }
     }

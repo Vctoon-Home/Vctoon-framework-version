@@ -4,7 +4,6 @@ using Autofac;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Controls.Notifications;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.Configuration;
@@ -24,9 +23,9 @@ public partial class App : Application
     public static IServiceProvider Services;
 
     public static IVctoonNavigationRouter Router => Services.GetRequiredService<IVctoonNavigationRouter>();
-
-
     public static WindowNotificationManager NotificationManager { get; private set; }
+
+    public static MainView MainView { get; private set; }
 
     public override void Initialize()
     {
@@ -65,10 +64,9 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        
-        BindingPlugins.DataValidators.RemoveAt(0);
-        BindingPlugins.DataValidators.Add(new VctoonClientDataAnnotationsValidationPlugin());
-        
+        // BindingPlugins.DataValidators.RemoveAt(0);
+        // BindingPlugins.DataValidators.Add(new VctoonClientDataAnnotationsValidationPlugin());
+
         Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
             .Initialize(Services);
 

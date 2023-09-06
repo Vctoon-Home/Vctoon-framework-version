@@ -7,14 +7,14 @@ namespace VctoonCore.Libraries.Dtos;
 public class LibraryCreateUpdateInput
 {
     [Required]
-    public string Name { get; set; } = "";
+    public string Name { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
     [Required]
     [MinLength(1)]
-    public string[] Paths { get; set; }
+    public List<string> Paths { get; set; } = new List<string>();
 
     public LibraryType LibraryType { get; set; }
 }

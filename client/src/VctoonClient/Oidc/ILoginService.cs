@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using IdentityModel.OidcClient;
+﻿using IdentityModel.OidcClient;
 
 namespace VctoonClient.Oidc;
 

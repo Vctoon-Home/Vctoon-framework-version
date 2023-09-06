@@ -1,6 +1,5 @@
 ﻿using System.Net.Http;
 using System.Threading;
-using System.Threading.Tasks;
 using Abp.Localization.Avalonia;
 
 namespace VctoonClient.Handlers;
