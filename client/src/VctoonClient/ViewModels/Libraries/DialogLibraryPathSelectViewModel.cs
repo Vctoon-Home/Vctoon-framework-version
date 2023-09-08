@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using EasyDialog.Avalonia.Dialogs;
 using VctoonClient.Dialogs;
 using VctoonCore.Systems;
 
@@ -10,11 +12,20 @@ public partial class DialogLibraryPathSelectViewModel : ViewModelBase, ITransien
     private readonly ISystemAppService _systemAppService;
 
     [ObservableProperty]
-    private ObservableCollection<SystemFolderDto> _folders = new();
+    private ObservableCollection<SystemFolderDtoViewModel> folders = new();
+
+    [ObservableProperty]
+    private SystemFolderDtoViewModel selectedFolder;
+
+
+    [ObservableProperty]
+    private bool isLoading;
+
+    public string CurrentIdentifier { get; set; } = nameof(DialogLibraryPathSelectViewModel);
 
     public DialogLibraryPathSelectViewModel(ISystemAppService systemAppService)
     {
-        _systemAppService = systemAppService;
+        this._systemAppService = systemAppService;
         Initialize();
     }
 
@@ -26,19 +37,41 @@ public partial class DialogLibraryPathSelectViewModel : ViewModelBase, ITransien
 
     public async Task LoadData(SystemFolderDto folder = null)
     {
-        var dialogManager = (DialogManager ?? App.Services.GetRequiredService<DialogManager>());
-
-        using var loading = dialogManager.ShowLoading();
-
+        var dialogService = DialogService;
+        IsLoading = true;
         try
         {
-            var folders = await _systemAppService.GetSystemFolder(folder?.Path);
+            var folders =
+                ObjectMapper.Map<List<SystemFolderDto>, ObservableCollection<SystemFolderDtoViewModel>>(
+                    // TODO: remove ?? @$"D:\\"
+                    await _systemAppService.GetSystemFolder(folder?.Path ?? @$"D:\\"));
 
-            _folders = new ObservableCollection<SystemFolderDto>(folders);
+            foreach (var systemFolderDto in folders)
+            {
+                if (systemFolderDto.HasChildren)
+                {
+                    systemFolderDto.Children = new ObservableCollection<SystemFolderDtoViewModel>()
+                    {
+                        new SystemFolderDtoViewModel()
+                        {
+                            Name = "Loading...",
+                            HasChildren = false
+                        }
+                    };
+                }
+            }
+
+            Folders = folders;
         }
         catch (Exception e)
         {
             App.NotificationManager.Show(new Notification("", e.Message, NotificationType.Error));
         }
+
+        IsLoading = false;
+    }
+
+    public async Task Submit()
+    {
     }
 }

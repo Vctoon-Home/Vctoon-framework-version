@@ -45,6 +45,44 @@
                                             <!-- </DropDownButton> -->
 
 
+                                            <DropDownButton Theme="{StaticResource BorderlessButton}"
+                                                            DockPanel.Dock="Right"
+                                                            i:Attached.Icon="fa-ellipsis-vertical"
+                                                            IsVisible="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).IsResource}">
+                                                <DropDownButton.Styles>
+                                                    <Style Selector="Button:pointerover">
+                                                        <Setter Property="Background"
+                                                                Value="{DynamicResource ButtonDefaultBackground}" />
+                                                        <Setter Property="BorderBrush"
+                                                                Value="{DynamicResource ButtonDefaultBackground}" />
+                                                    </Style>
+                                                </DropDownButton.Styles>
+
+                                                <DropDownButton.Flyout>
+                                                    <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                                        <MenuItem Icon="fa-magnifying-glass">
+                                                            <MenuItem.Header>
+                                                                <Grid ColumnDefinitions="30,*" >
+                                                                    <TextBlock  Text="🔍" Margin="0,0,10,0" />
+                                                                    <TextBlock Grid.Column="1" Text="Scan" />
+                                                                </Grid>
+                                                            </MenuItem.Header>
+                                                        </MenuItem>
+
+                                                        <MenuItem Icon="fa-magnifying-glass" Command="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).Delete}">
+                                                            <MenuItem.Header>
+                                                                <Grid ColumnDefinitions="Auto,*" >
+                                                                    <i:Icon Value="fa-trash" Margin="0,0,10,0"></i:Icon>
+                                                                    <TextBlock Grid.Column="1" Text="Delete" />
+                                                                </Grid>
+                                                            </MenuItem.Header>
+                                                        </MenuItem>
+
+                                                    </MenuFlyout>
+                                                </DropDownButton.Flyout>
+
+                                            </DropDownButton>
+
                                             <Button Theme="{StaticResource BorderlessButton}" DockPanel.Dock="Right"
                                                     i:Attached.Icon="mdi-plus-thick"
                                                     Click="NavigationToCreateLibraryView_ClickAsync"

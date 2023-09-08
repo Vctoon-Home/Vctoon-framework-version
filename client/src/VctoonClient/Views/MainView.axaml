@@ -4,34 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:main="clr-namespace:VctoonClient.Layouts.Main"
-             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
-             xmlns:libraries="clr-namespace:VctoonClient.ViewModels.Libraries"
-             xmlns:systems="clr-namespace:VctoonCore.Systems;assembly=VctoonCore.Application.Contracts"
-             xmlns:u="https://irihi.tech/ursa"
-             xmlns:dialogs="clr-namespace:VctoonClient.Dialogs"
              mc:Ignorable="d"
              d:DesignWidth="1000"
              d:DesignHeight="450"
              x:DataType="viewModels:MainViewModel"
              x:Class="VctoonClient.Views.MainView">
+    <Grid ColumnDefinitions="AUto, *" RowDefinitions="Auto, *">
+        <main:MainHeader Grid.Row="0"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="2" />
+        <main:MainNavigationBar Grid.Row="1" Grid.Column="0" />
+        <main:MainContent Grid.Row="1"
+                          Grid.Column="1"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch" />
 
-
-    <u:LoadingContainer x:Name="LoadingContainer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-        <dialogHostAvalonia:DialogHost Identifier="{x:Static dialogs:DialogConsts.MainViewDefaultIdentifier}">
-            <Grid ColumnDefinitions="AUto, *" RowDefinitions="Auto, *">
-                <main:MainHeader Grid.Row="0"
-                                 Grid.Column="0"
-                                 Grid.ColumnSpan="2" />
-                <main:MainNavigationBar Grid.Row="1" Grid.Column="0" />
-                <main:MainContent Grid.Row="1"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch" />
-
-            </Grid>
-
-        </dialogHostAvalonia:DialogHost>
-    </u:LoadingContainer>
+    </Grid>
 
 
 </UserControl>

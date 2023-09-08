@@ -3,25 +3,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:libraries="clr-namespace:VctoonClient.ViewModels.Libraries"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:systems="clr-namespace:VctoonCore.Systems;assembly=VctoonCore.Application.Contracts"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:u="https://irihi.tech/ursa"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
              x:Class="VctoonClient.Views.Libraries.DialogLibraryPathSelectView"
 
              x:DataType="libraries:DialogLibraryPathSelectViewModel">
-    <Grid>
 
-        <TreeView ItemsSource="{Binding Folders}">
-            <TreeView.ItemTemplate>
-                <TreeDataTemplate DataType="systems:SystemFolderDto"
-                                  ItemsSource="{Binding Children}">
-                    <TreeViewItem>
-                        <TextBlock Text="{Binding Name}" />
-                    </TreeViewItem>
-                </TreeDataTemplate>
 
-            </TreeView.ItemTemplate>
-        </TreeView>
+    <u:LoadingContainer IsLoading="{Binding IsLoading}">
+        <StackPanel Spacing="15" MinWidth="400">
+            <TextBlock HorizontalAlignment="Center" FontSize="25" FontWeight="Bold">Select Dir</TextBlock>
+            <ScrollViewer MaxHeight="400">
+                <StackPanel Spacing="10" HorizontalAlignment="Stretch">
+                    <!-- TODO: wait avalonia provider ExpandedEvent -->
+                    <TreeView x:Name="TreeView" ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
 
-    </Grid>
+                    </TreeView>
+
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel>
+                <Button
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=dialogHostAvalonia:DialogHost}, Path=CloseDialogCommand}"
+                    CommandParameter="{Binding SelectedFolder.Path}">
+                    Submit
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </u:LoadingContainer>
+
 </UserControl>

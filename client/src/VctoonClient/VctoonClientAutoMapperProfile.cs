@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using VctoonClient.ViewModels.Libraries;
 using VctoonCore.Libraries.Dtos;
+using VctoonCore.Systems;
 
 namespace VctoonClient;
 
@@ -10,5 +11,8 @@ public class VctoonClientAutoMapperProfile : Profile
     {
         CreateMap<LibraryCreateUpdateInput, LibraryCreateUpdateInputViewModel>();
         CreateMap<LibraryCreateUpdateInputViewModel, LibraryCreateUpdateInput>();
+
+        CreateMap<SystemFolderDto, SystemFolderDtoViewModel>();
+
     }
 }

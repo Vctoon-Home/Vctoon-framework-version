@@ -9,7 +9,6 @@ namespace VctoonClient.Views.Homes;
 public partial class HomeView : UserControl, ITransientDependency
 {
     private readonly HomeViewModel _vm;
-    private WindowNotificationManager? _manager;
 
     public HomeView()
     {
@@ -19,19 +18,10 @@ public partial class HomeView : UserControl, ITransientDependency
         DataContext = _vm;
     }
 
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
-    {
-        base.OnAttachedToVisualTree(e);
-
-        var topLevel = TopLevel.GetTopLevel(this);
-        _manager = new WindowNotificationManager(topLevel) {MaxItems = 5};
-    }
 
     private void Notification_Click(object? sender, RoutedEventArgs e)
     {
-        _manager?.Show(new Notification("666", "This is message", NotificationType.Error));
+        App.NotificationManager?.Show(new Notification("666", "This is message", NotificationType.Error));
     }
-
-  
     
 }

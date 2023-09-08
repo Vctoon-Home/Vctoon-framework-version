@@ -13,28 +13,16 @@
              xmlns:u="https://irihi.tech/ursa"
              x:Class="VctoonClient.Layouts.Main.MainContent"
              x:DataType="viewModels:MainViewModel">
+    <ScrollViewer>
+        <ContentControl
+            Margin="12"
+            Content="{Binding Router.CurrentPage}">
+            <ContentControl.ContentTemplate>
+                <router:RouterViewLocator />
+            </ContentControl.ContentTemplate>
+        </ContentControl>
 
-
-    <!-- <dialogHostAvalonia:DialogHost Identifier="{x:Static dialogs:DialogConsts.MainViewContextLoadingIdentifier}" -->
-    <!--                                ZIndex="100" Classes="NoBoxShadow"> -->
-
-    <!-- switch DialogHost loading to LoadingContainer for better performance -->
-    <u:LoadingContainer x:Name="LoadingContainer"
-        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-        HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-        <ScrollViewer>
-            <ContentControl
-                Margin="12"
-                Content="{Binding Router.CurrentPage}">
-                <ContentControl.ContentTemplate>
-                    <router:RouterViewLocator />
-                </ContentControl.ContentTemplate>
-            </ContentControl>
-
-        </ScrollViewer>
-    </u:LoadingContainer>
-    <!-- </dialogHostAvalonia:DialogHost> -->
-    <!-- Content -->
+    </ScrollViewer>
 
 
 </UserControl>

@@ -6,6 +6,8 @@
              xmlns:router="clr-namespace:VctoonClient.Navigations.Router"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:dialogs="clr-namespace:VctoonClient.Dialogs"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             xmlns:avalonia="clr-namespace:EasyDialog.Avalonia;assembly=EasyDialog.Avalonia"
              x:Class="VctoonClient.App"
              RequestedThemeVariant="Default">
     <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -17,6 +19,6 @@
         <labs:ControlThemes />
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <StyleInclude Source="avares://Ursa.Themes.Semi/Index.axaml" />
-        <dialogHostAvalonia:DialogHostStyles />
+        <avalonia:EasyDialog />
     </Application.Styles>
 </Application>

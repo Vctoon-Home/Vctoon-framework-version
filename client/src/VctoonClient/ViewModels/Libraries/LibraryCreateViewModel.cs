@@ -1,6 +1,7 @@
 ﻿using System;
 using DialogHostAvalonia;
 using VctoonClient.Helpers;
+using VctoonClient.Messages;
 using VctoonClient.Views.Libraries;
 using VctoonCore.Libraries;
 using VctoonCore.Libraries.Dtos;
@@ -12,7 +13,7 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
-    private LibraryCreateUpdateInputViewModel _library = new();
+    private LibraryCreateUpdateInputViewModel library = new();
 
     public LibraryCreateViewModel(ILibraryAppService libraryAppService)
     {
@@ -30,8 +31,15 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
             return;
         try
         {
-            await _libraryAppService.CreateAsync(
+            var library = await _libraryAppService.CreateAsync(
                 ObjectMapper.Map<LibraryCreateUpdateInputViewModel, LibraryCreateUpdateInput>(Library));
+
+            WeakReferenceMessenger.Default.Send(new LibraryCreatedMessage()
+            {
+                Library = library
+            });
+
+            await App.Router.BackAsync();
         }
         catch (Exception e)
         {
@@ -44,10 +52,17 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
         return ValidHelper.IsValid(Library);
     }
 
-    public async void ShowAddFolderDialog()
+    public async void AddFolderWithDialog()
     {
-        var dialogViewModel = App.Services.GetRequiredService<DialogLibraryPathSelectView>();
-        var res = await DialogManager.ShowCloseOnClickAwayAsync<DialogLibraryPathSelectViewModel>(dialogViewModel);
+        var pathSelectView = App.Services.GetRequiredService<DialogLibraryPathSelectView>();
+ 
+        var path = await DialogService.ShowAsync<string>(pathSelectView, options:
+            opt => { opt.CloseOnClickAway = true; });
+
+        if (path.IsNullOrEmpty())
+            return;
+
+        Library.Paths.Add(path!);
     }
 
     public void RemoveFolder(string path)

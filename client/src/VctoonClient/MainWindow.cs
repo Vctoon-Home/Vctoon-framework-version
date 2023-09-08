@@ -14,10 +14,18 @@ public class MainWindow : Window, ISingletonDependency
         Title = "VctoonClient";
 
 
+        // var grid = new Grid()
+        // {
+        //     Children =
+        //     {
+        //         mainView
+        //     }
+        // };
+
         Content = mainView;
 
-        // #if DEBUG
-        //         this.AttachDevTools();
-        // #endif
+        #if DEBUG
+                this.AttachDevTools();
+        #endif
     }
 }

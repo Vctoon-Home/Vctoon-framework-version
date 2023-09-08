@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using VctoonClient.Dialogs;
 using VctoonCore.Libraries.Dtos;
 using Volo.Abp.Validation;
 
@@ -33,7 +34,7 @@ public partial class HomeViewModel : ViewModelBase, ITransientDependency
 
     public async void ShowLoading()
     {
-        using var loading = DialogManager.ShowLoading("");
+        using var loading = DialogService.ShowLoading();
 
         await Task.Delay(1000);
     }

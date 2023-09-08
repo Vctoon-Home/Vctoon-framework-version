@@ -25,8 +25,6 @@ public partial class App : Application
     public static IVctoonNavigationRouter Router => Services.GetRequiredService<IVctoonNavigationRouter>();
     public static WindowNotificationManager NotificationManager { get; private set; }
 
-    public static MainView MainView { get; private set; }
-
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -64,8 +62,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        // BindingPlugins.DataValidators.RemoveAt(0);
-        // BindingPlugins.DataValidators.Add(new VctoonClientDataAnnotationsValidationPlugin());
+        BindingPlugins.DataValidators.RemoveAt(0);
+        BindingPlugins.DataValidators.Add(new VctoonClientDataAnnotationsValidationPlugin());
 
         Services.GetRequiredService<IAbpApplicationWithExternalServiceProvider>()
             .Initialize(Services);
@@ -73,7 +71,6 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = Services.GetRequiredService<MainWindow>();
-
             SetWindowNotificationManager((UserControl) desktop.MainWindow!.Content!);
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

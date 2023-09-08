@@ -22,7 +22,7 @@
 
                 <TextBox InnerLeftContent="Name" Text="{Binding Library.Name, Mode=TwoWay}" Margin="10">
                 </TextBox>
-                <Button HorizontalAlignment="Right" Content="{L:Localized AddFolder}" Command="{Binding ShowAddFolderDialog}"></Button>
+                <Button HorizontalAlignment="Right" Content="{L:Localized AddFolder}" Command="{Binding AddFolderWithDialog}"></Button>
                 <ItemsControl ItemsSource="{Binding Library.Paths,Mode=TwoWay}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="x:String">

@@ -9,7 +9,7 @@ public partial class LibraryCreateUpdateInputViewModel : ObservableValidator
 {
     [Required]
     [ObservableProperty]
-    string _name;
+    string name;
 
     /// <summary>
     /// 

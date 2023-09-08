@@ -1,5 +1,6 @@
 ﻿using System;
 using Abp.Localization.Avalonia;
+using EasyDialog.Avalonia.Dialogs;
 using VctoonClient.Dialogs;
 using Volo.Abp.ObjectMapping;
 using Volo.Abp.Users;
@@ -9,18 +10,12 @@ namespace VctoonClient.ViewModels.Bases;
 public abstract class ViewModelBase : ObservableObject
 {
     public IAbpLazyServiceProvider? LazyServiceProvider { get; set; }
-    
+
     public ICurrentUser CurrentUser => LazyServiceProvider?.LazyGetRequiredService<ICurrentUser>()!;
-    
-    protected ILocalizationManager L => LazyServiceProvider?.LazyGetRequiredService<ILocalizationManager>()!;
 
-    protected DialogManager DialogManager => LazyServiceProvider?.LazyGetRequiredService<DialogManager>()!;
+    protected ILocalizationManager L => App.Services.GetRequiredService<ILocalizationManager>();
 
-    protected Type? ObjectMapperContext { get; set; }
+    protected DialogService DialogService => App.Services.GetRequiredService<DialogService>();
 
-    protected IObjectMapper ObjectMapper => LazyServiceProvider.LazyGetService<IObjectMapper>(provider =>
-        ObjectMapperContext == null
-            ? provider.GetRequiredService<IObjectMapper>()
-            : (IObjectMapper) provider.GetRequiredService(
-                typeof(IObjectMapper<>).MakeGenericType(ObjectMapperContext)));
+    protected IObjectMapper ObjectMapper => App.Services.GetRequiredService<IObjectMapper>();
 }

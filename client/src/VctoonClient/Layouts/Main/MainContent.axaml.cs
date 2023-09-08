@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
+using EasyDialog.Avalonia.Dialogs;
 using VctoonClient.Dialogs;
 using VctoonClient.ViewModels;
 
@@ -12,17 +13,10 @@ public partial class MainContent : UserControl
     public MainContent()
     {
         InitializeComponent();
+        this.UseEasyLoading(DialogConsts.MainViewContentIdentifier)
+            .UseEasyDialog(DialogConsts.MainViewContentIdentifier);
         _vm = App.Services.GetService<MainViewModel>()!;
         this.DataContext = _vm;
-
-        App.Services.GetRequiredService<DialogManager>().OnDialogShowLoadingHandler += (s, options, isLoading) =>
-        {
-            if (s == DialogConsts.MainViewContextLoadingIdentifier)
-            {
-                options?.Invoke(this.LoadingContainer);
-                this.LoadingContainer.IsLoading = isLoading;
-            }
-        };
     }
 
     protected override void OnLoaded(RoutedEventArgs e)

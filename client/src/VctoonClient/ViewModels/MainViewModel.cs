@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Abp.Localization.Avalonia;
+using EasyDialog.Avalonia.Dialogs;
 using VctoonClient.Dialogs;
 using VctoonClient.Messages;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
 using VctoonClient.Stores.Users;
 using VctoonCore.Libraries;
-using NavigationMenuItemProvider = VctoonClient.Navigations.Menus.NavigationMenuItemProvider;
+using NavigationMenuItemProvider=VctoonClient.Navigations.Menus.NavigationMenuItemProvider;
 
 namespace VctoonClient.ViewModels;
 
@@ -14,22 +15,21 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
 {
     private readonly ILoginService _loginService;
     private readonly UserStore _userStore;
+    private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
     private NavigationMenuItemProvider _navigationMenuItemProvider;
 
-    private readonly ILibraryAppService _libraryAppService;
-    private readonly DialogManager _dialogManager;
 
     [ObservableProperty]
-    public bool _collapsed;
+    private bool collapsed;
 
     [ObservableProperty]
-    private IVctoonNavigationRouter _router;
+    private IVctoonNavigationRouter router;
 
     public bool IsLogin => CurrentUser.IsAuthenticated;
 
-    public string UserName => CurrentUser.UserName;
+    public string? UserName => CurrentUser?.UserName;
     public bool RouterCanGoBack => Router.CanGoBack;
 
     public MainViewModel(ILoginService loginService, LocalizationManager localizationManager, UserStore userStore,
@@ -75,7 +75,6 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     {
         await _loginService.LogoutAsync();
     }
-
 
     private void UpdateProperties()
     {

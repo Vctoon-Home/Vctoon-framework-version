@@ -1,5 +1,6 @@
 ﻿using System;
 using Abp.Localization.Avalonia;
+using EasyDialog.Avalonia.Dialogs;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Localization.Resources.AbpUi;
@@ -64,6 +65,7 @@ public class VctoonClientModule : AbpModule
 
         context.Services.AddTransient<ICurrentPrincipalAccessor, AvaloniaCurrentPrincipalAccessor>();
         context.Services.AddSingleton<IVctoonNavigationRouter, VctoonStackNavigationRouter>();
+        context.Services.AddEasyDialogService();
 
         Configure<AbpValidationOptions>(options =>
         {

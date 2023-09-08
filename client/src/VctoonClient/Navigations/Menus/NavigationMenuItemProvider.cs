@@ -28,13 +28,11 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
         _libraryAppService = libraryAppService;
         MenuItems = GetMenuItems();
 
-        localizationManager.CurrentCultureChanged += (sender, args) =>
-        {
-            MenuItems = GetMenuItems();
-            NotifyMenuItemsChanged();
-        };
+        localizationManager.CurrentCultureChanged += (sender, args) => { HttpRequestMenuItems(); };
 
-        WeakReferenceMessenger.Default.Register<LoginMessage>(this, (_, _) => { MenuItems = GetMenuItems(); });
+        WeakReferenceMessenger.Default.Register<LoginMessage>(this, (_, _) => { HttpRequestMenuItems(); });
+        WeakReferenceMessenger.Default.Register<LibraryCreatedMessage>(this, (_, _) => { HttpRequestMenuItems(); });
+        WeakReferenceMessenger.Default.Register<LibraryDeleteMessage>(this, (_, _) => { HttpRequestMenuItems(); });
     }
 
     private ObservableCollection<MenuItemViewModel> GetMenuItems()
@@ -99,6 +97,7 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
 
         var menus = libraries.Select(l => new MenuItemViewModel()
         {
+            LibraryId = l.Id,
             IsResource = true,
             Header = l.Name,
             Icon = l.LibraryType == LibraryType.Comic ? "mdi-bookshelf" : "mdi-movie-filter",
@@ -150,5 +149,12 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
         }
 
         return null;
+    }
+
+
+    private void HttpRequestMenuItems()
+    {
+        MenuItems = GetMenuItems();
+        NotifyMenuItemsChanged();
     }
 }

@@ -9,7 +9,7 @@ namespace VctoonClient.Layouts.Main;
 
 public partial class MainNavigationBar : UserControl
 {
-    private MainViewModel _vm;
+    private readonly MainViewModel _vm;
 
     public MainNavigationBar()
     {
@@ -59,6 +59,5 @@ public partial class MainNavigationBar : UserControl
     private async void NavigationToCreateLibraryView_ClickAsync(object? sender, RoutedEventArgs e)
     {
         await App.Router.NavigateToAsync(App.Services.GetRequiredService<LibraryCreateView>());
-
     }
 }
