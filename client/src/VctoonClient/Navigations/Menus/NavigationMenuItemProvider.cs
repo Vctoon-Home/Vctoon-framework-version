@@ -33,6 +33,7 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
         WeakReferenceMessenger.Default.Register<LoginMessage>(this, (_, _) => { HttpRequestMenuItems(); });
         WeakReferenceMessenger.Default.Register<LibraryCreatedMessage>(this, (_, _) => { HttpRequestMenuItems(); });
         WeakReferenceMessenger.Default.Register<LibraryDeleteMessage>(this, (_, _) => { HttpRequestMenuItems(); });
+        WeakReferenceMessenger.Default.Register<LibraryUpdatedMessage>(this, (_, _) => { HttpRequestMenuItems(); });
     }
 
     private ObservableCollection<MenuItemViewModel> GetMenuItems()

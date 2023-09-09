@@ -6,7 +6,7 @@
              xmlns:navigations="clr-namespace:VctoonClient.Navigations"
              xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
-             mc:Ignorable="d"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
              xmlns:menus="clr-namespace:VctoonClient.Navigations.Menus"
              x:Class="VctoonClient.Layouts.Main.MainNavigationBar"
@@ -62,18 +62,29 @@
                                                     <MenuFlyout Placement="BottomEdgeAlignedRight">
                                                         <MenuItem Icon="fa-magnifying-glass">
                                                             <MenuItem.Header>
-                                                                <Grid ColumnDefinitions="30,*" >
-                                                                    <TextBlock  Text="🔍" Margin="0,0,10,0" />
+                                                                <Grid ColumnDefinitions="Auto,*" >
+                                                                    <i:Icon Value="fa-searchengin" Margin="0,0,10,0"></i:Icon>
                                                                     <TextBlock Grid.Column="1" Text="Scan" />
+                                                                </Grid>
+                                                            </MenuItem.Header>
+                                                        </MenuItem>
+                                                        
+                                                        <MenuItem Icon="fa-magnifying-glass" Command="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).Edit}">
+                                                            <MenuItem.Header>
+                                                                <Grid ColumnDefinitions="Auto,*" >
+                                                                    <i:Icon Value="fa-pen-to-square" Margin="0,0,10,0"></i:Icon>
+                                                                    <TextBlock Grid.Column="1" Text="Edit" />
                                                                 </Grid>
                                                             </MenuItem.Header>
                                                         </MenuItem>
 
                                                         <MenuItem Icon="fa-magnifying-glass" Command="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).Delete}">
-                                                            <MenuItem.Header>
+                                                            <MenuItem.Header >
                                                                 <Grid ColumnDefinitions="Auto,*" >
-                                                                    <i:Icon Value="fa-trash" Margin="0,0,10,0"></i:Icon>
-                                                                    <TextBlock Grid.Column="1" Text="Delete" />
+                                                                    <i:Icon Foreground="Red" Value="fa-trash" Margin="0,0,10,0"></i:Icon>
+                                                                    <TextBlock Foreground="Red" Grid.Column="1" Text="Delete" >
+                                                                        
+                                                                    </TextBlock>
                                                                 </Grid>
                                                             </MenuItem.Header>
                                                         </MenuItem>

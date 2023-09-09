@@ -58,6 +58,7 @@ public partial class MainNavigationBar : UserControl
 
     private async void NavigationToCreateLibraryView_ClickAsync(object? sender, RoutedEventArgs e)
     {
-        await App.Router.NavigateToAsync(App.Services.GetRequiredService<LibraryCreateView>());
+        var view = App.Services.GetRequiredService<LibraryCreateUpdateView>();
+        await App.Router.NavigateToAsync(view);
     }
 }

@@ -4,7 +4,11 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using EasyDialog.Avalonia.Dialogs;
 using VctoonClient.Messages;
+using VctoonClient.Navigations.Router;
+using VctoonClient.ViewModels.Libraries;
+using VctoonClient.Views.Libraries;
 using VctoonCore.Libraries;
+using VctoonCore.Libraries.Dtos;
 
 namespace VctoonClient.Navigations.Menus;
 
@@ -51,6 +55,34 @@ public class MenuItemViewModel : ViewModelBase
             await appService.DeleteAsync(LibraryId);
             WeakReferenceMessenger.Default.Send<LibraryDeleteMessage>();
 
+        }
+        catch (Exception e)
+        {
+            App.NotificationManager.Show(new Notification("", e.Message, NotificationType.Error));
+        }
+    }
+
+    public async void Edit()
+    {
+        var dialogService = App.Services.GetRequiredService<DialogService>();
+
+        using var _ = dialogService.ShowLoading();
+
+        var appService = App.Services.GetRequiredService<ILibraryAppService>();
+
+        try
+        {
+            var libraryDto = await appService.GetAsync(LibraryId);
+            WeakReferenceMessenger.Default.Send<LibraryDeleteMessage>();
+
+            var library = ObjectMapper.Map<LibraryDto, LibraryCreateUpdateInputViewModel>(libraryDto);
+
+            await App.Router.NavigateToAsync(App.Services.GetRequiredService<LibraryCreateUpdateView>(),
+                new Dictionary<string, object>()
+                {
+                    {"LibraryId", LibraryId},
+                    {"Library", library}
+                });
         }
         catch (Exception e)
         {

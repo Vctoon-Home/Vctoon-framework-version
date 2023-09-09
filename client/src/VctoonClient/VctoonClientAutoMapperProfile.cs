@@ -11,6 +11,7 @@ public class VctoonClientAutoMapperProfile : Profile
     {
         CreateMap<LibraryCreateUpdateInput, LibraryCreateUpdateInputViewModel>();
         CreateMap<LibraryCreateUpdateInputViewModel, LibraryCreateUpdateInput>();
+        CreateMap<LibraryDto, LibraryCreateUpdateInputViewModel>();
 
         CreateMap<SystemFolderDto, SystemFolderDtoViewModel>();
 

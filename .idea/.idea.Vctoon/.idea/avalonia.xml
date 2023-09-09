@@ -22,6 +22,7 @@
         <entry key="client/src/VctoonClient/Views/HomeView2.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Homes/HomeView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Libraries/DialogLibraryPathSelectView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
+        <entry key="client/src/VctoonClient/Views/Libraries/LibraryCreateUpdateView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Libraries/LibraryCreateView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Libraries/LibraryEditView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />
         <entry key="client/src/VctoonClient/Views/Libraries/LibraryView.axaml" value="client/src/VctoonClient.Desktop/VctoonClient.Desktop.csproj" />

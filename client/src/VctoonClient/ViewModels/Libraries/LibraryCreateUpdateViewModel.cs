@@ -1,21 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using DialogHostAvalonia;
 using VctoonClient.Helpers;
 using VctoonClient.Messages;
+using VctoonClient.Navigations.Query;
 using VctoonClient.Views.Libraries;
 using VctoonCore.Libraries;
 using VctoonCore.Libraries.Dtos;
+using VctoonCore.Localization;
 
 namespace VctoonClient.ViewModels.Libraries;
 
-public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependency
+[QueryProperty(nameof(Library)),QueryProperty(nameof(LibraryId))]
+public partial class LibraryCreateUpdateViewModel : ViewModelBase, ITransientDependency
 {
+
     private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
     private LibraryCreateUpdateInputViewModel library = new();
 
-    public LibraryCreateViewModel(ILibraryAppService libraryAppService)
+
+    [ObservableProperty]
+    private Guid? libraryId;
+
+    public string Title => LibraryId == null ? L.GetResource<LibraryResource>()["AddLibrary"] : L.GetResource<LibraryResource>()["EditLibrary"];
+
+    public LibraryCreateUpdateViewModel(ILibraryAppService libraryAppService)
     {
         _libraryAppService = libraryAppService;
 
@@ -23,6 +34,14 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
 
         Library.PropertyChanged += (sender, args) => { OnPropertyChanged(nameof(CanCreateLibrary)); };
         Library.Paths.CollectionChanged += (sender, args) => { OnPropertyChanged(nameof(CanCreateLibrary)); };
+    }
+
+    public void Submit()
+    {
+        if (LibraryId == null)
+            CreateLibrary();
+        else
+            UpdateLibrary();
     }
 
     public async void CreateLibrary()
@@ -47,6 +66,28 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
         }
     }
 
+    public async void UpdateLibrary()
+    {
+        if (!ValidHelper.IsValid(Library))
+            return;
+        try
+        {
+            var library = await _libraryAppService.UpdateAsync(libraryId!.Value,
+                ObjectMapper.Map<LibraryCreateUpdateInputViewModel, LibraryCreateUpdateInput>(Library));
+
+            WeakReferenceMessenger.Default.Send(new LibraryUpdatedMessage()
+            {
+                Library = library
+            });
+
+            await App.Router.BackAsync();
+        }
+        catch (Exception e)
+        {
+            App.NotificationManager.Show(new Notification("", e.Message, NotificationType.Error));
+        }
+    }
+
     public bool CanCreateLibrary()
     {
         return ValidHelper.IsValid(Library);
@@ -55,7 +96,7 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     public async void AddFolderWithDialog()
     {
         var pathSelectView = App.Services.GetRequiredService<DialogLibraryPathSelectView>();
- 
+
         var path = await DialogService.ShowAsync<string>(pathSelectView, options:
             opt => { opt.CloseOnClickAway = true; });
 
@@ -69,7 +110,6 @@ public partial class LibraryCreateViewModel : ViewModelBase, ITransientDependenc
     {
         Library.Paths.Remove(path);
     }
-
 
     public async void Cancel()
     {

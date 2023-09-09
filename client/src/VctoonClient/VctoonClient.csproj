@@ -54,7 +54,7 @@
             <DependentUpon>NavigationBar.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\Libraries\LibraryCreateView.axaml.cs">
+        <Compile Update="Views\Libraries\LibraryCreateUpdateView.axaml.cs">
             <DependentUpon>LibraryCreateView.axaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
