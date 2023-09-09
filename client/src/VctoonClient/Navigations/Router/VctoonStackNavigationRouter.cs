@@ -149,6 +149,7 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
         if (vm != null)
         {
             // QueryPropertyAttribute
+            if (!paras.IsNullOrEmpty())
             {
                 // TODO: cache
                 var queryProperties = vm.GetType().GetCustomAttributes(typeof(QueryPropertyAttribute), true)
@@ -160,15 +161,16 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
                     {
                         if (value != null)
                         {
-                            vm.GetType().GetProperty(queryProperty.Name)?.SetValue(vm, value);
+                            var vmType = vm.GetType();
+                            vmType.GetProperty(queryProperty.Name)?.SetValue(vm, value);
                         }
                     }
                 }
             }
 
             // IQueryAttributable
-            if (vm is IQueryAttributable navigationQuery)
-                navigationQuery.ApplyQueryAttributes(paras);
+            if (vm is IQueryAttributable vmNavigationQuery)
+                vmNavigationQuery.ApplyQueryAttributes(paras);
         }
 
         // if (data is string)
