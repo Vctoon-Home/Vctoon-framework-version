@@ -2,7 +2,7 @@
 
 namespace VctoonCore.Resources;
 
-public interface IResourceAppService
+public interface IResourceAppService : IRemoteService
 {
     Task<Stream> GetComicImageStream(Guid comicImageId, int? width = null, int? height = null);
 }

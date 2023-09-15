@@ -5,10 +5,11 @@ using Abp.Localization.Avalonia;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using VctoonClient.Messages;
+using VctoonClient.Views.Tags;
 using VctoonCore.Enums;
 using VctoonCore.Libraries;
-using HomeView = VctoonClient.Views.Homes.HomeView;
-using LibraryView = VctoonClient.Views.Libraries.LibraryView;
+using HomeView=VctoonClient.Views.Homes.HomeView;
+using LibraryView=VctoonClient.Views.Libraries.LibraryView;
 
 namespace VctoonClient.Navigations.Menus;
 
@@ -49,10 +50,13 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
         {
             new()
             {
-                Header = _localizationManager["Menu:Home"], Path = "//home", Icon = "mdi-home",
-                ViewType = typeof(HomeView)
+                Header = _localizationManager["Menu:Home"], Path = "//home", Icon = "mdi-home", ViewType = typeof(HomeView)
             },
-            RootResourceItem
+            RootResourceItem,
+            new()
+            {
+                Header = _localizationManager["Menu:Tags"], Path = "//tag", Icon = "fa-tag", ViewType = typeof(TagView)
+            }
         };
 
 
@@ -98,14 +102,14 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
 
         var menus = libraries.Select(l => new MenuItemViewModel()
         {
-            LibraryId = l.Id,
+            Library = l,
             IsResource = true,
             Header = l.Name,
             Icon = l.LibraryType == LibraryType.Comic ? "mdi-bookshelf" : "mdi-movie-filter",
             Path = $"//library/{l.Id}",
             ClickNavigationParameters = new Dictionary<string, object>()
             {
-                {"LibraryId", l.Id},
+                {"Library", l},
             },
             ViewType = typeof(LibraryView)
         }).ToList();

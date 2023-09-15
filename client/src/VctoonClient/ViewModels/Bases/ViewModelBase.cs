@@ -13,9 +13,13 @@ public abstract class ViewModelBase : ObservableObject
 
     public ICurrentUser CurrentUser => LazyServiceProvider?.LazyGetRequiredService<ICurrentUser>()!;
 
-    protected ILocalizationManager L => App.Services.GetRequiredService<ILocalizationManager>();
+    private Lazy<ILocalizationManager> l => new Lazy<ILocalizationManager>(() => App.Services.GetRequiredService<ILocalizationManager>()!);
+    protected ILocalizationManager L => l.Value;
 
-    protected DialogService DialogService => App.Services.GetRequiredService<DialogService>();
+
+    private Lazy<DialogService> dialogService => new Lazy<DialogService>(() => App.Services.GetRequiredService<DialogService>());
+    protected DialogService Dialog => dialogService.Value;
+
 
     protected IObjectMapper ObjectMapper => App.Services.GetRequiredService<IObjectMapper>();
 }

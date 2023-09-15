@@ -7,4 +7,5 @@ public interface ITagAppService : ICrudAppService<
     Guid>
 {
     Task<List<TagDto>> GetAllAsync();
+    Task Deletes(Guid[] ids);
 }

@@ -1,6 +1,6 @@
 ﻿namespace VctoonCore.Resources;
 
-public interface IVideoAppService
+public interface IVideoAppService: IRemoteService
 {
     Task DeleteAsync(Guid id, bool deleteInRealFileSystem = false);
     Task<VideoDto> GetAsync(Guid id);

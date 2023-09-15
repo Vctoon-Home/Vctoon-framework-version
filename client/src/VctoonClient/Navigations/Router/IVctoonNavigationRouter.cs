@@ -19,4 +19,7 @@ public interface IVctoonNavigationRouter : INavigationRouter
 
     Task NavigateToAsync(object? pathOrView, Dictionary<string, object>? paras = null,
         NavigationMode navigationMode = NavigationMode.Normal);
+
+    Task BackAsync(Dictionary<string, object>? paras);
+
 }

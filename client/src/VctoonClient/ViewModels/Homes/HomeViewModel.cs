@@ -34,7 +34,7 @@ public partial class HomeViewModel : ViewModelBase, ITransientDependency
 
     public async void ShowLoading()
     {
-        using var loading = DialogService.ShowLoading();
+        using var loading = Dialog.ShowLoading();
 
         await Task.Delay(1000);
     }

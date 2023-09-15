@@ -22,4 +22,12 @@ public class TagAppService : CrudAppService<Tag, TagDto, Guid>, ITagAppService
         var tags = await Repository.GetListAsync();
         return ObjectMapper.Map<List<Tag>, List<TagDto>>(tags);
     }
+
+    [HttpPost]
+    public async Task Deletes(Guid[] ids)
+    {
+        await CheckDeletePolicyAsync();
+        await Repository.DeleteManyAsync(ids);
+    }
+
 }

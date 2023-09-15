@@ -59,10 +59,47 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
         if (CanGoBack || AllowEmpty)
         {
             CurrentPage = _backStack!.Pop();
-            // WeakReferenceMessenger.Default.Send(
-            //     new NavigationMessage(CurrentPage as UserControl, CurrentPageParameters));
         }
     }
+
+    public async Task BackAsync(Dictionary<string, object>? paras)
+    {
+        if (CanGoBack || AllowEmpty)
+        {
+            CurrentPage = _backStack!.Pop();
+
+            var vm = CurrentPage?.View?.DataContext;
+
+            if (vm != null)
+            {
+                // QueryPropertyAttribute
+                if (!paras.IsNullOrEmpty())
+                {
+                    // TODO: cache
+                    var queryProperties = vm.GetType().GetCustomAttributes(typeof(QueryPropertyAttribute), true)
+                        .Select(v => v as QueryPropertyAttribute).Where(v => v != null);
+
+                    foreach (var queryProperty in queryProperties)
+                    {
+                        if (paras.TryGetValue(queryProperty.QueryId, out var value))
+                        {
+                            if (value != null)
+                            {
+                                var vmType = vm.GetType();
+                                vmType.GetProperty(queryProperty.Name)?.SetValue(vm, value);
+                            }
+                        }
+                    }
+                }
+
+                // IQueryAttributable
+                if (vm is IQueryAttributable vmNavigationQuery)
+                    vmNavigationQuery.ApplyQueryAttributes(paras, true);
+            }
+
+        }
+    }
+
 
 
     public Task NavigateToAsync(string path, Dictionary<string, object>? paras = null,
@@ -170,13 +207,8 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
 
             // IQueryAttributable
             if (vm is IQueryAttributable vmNavigationQuery)
-                vmNavigationQuery.ApplyQueryAttributes(paras);
+                vmNavigationQuery.ApplyQueryAttributes(paras, false);
         }
-
-        // if (data is string)
-        //     WeakReferenceMessenger.Default.Send(new NavigationMessage(viewPath, paras));
-        // else if (data is UserControl)
-        //     WeakReferenceMessenger.Default.Send(new NavigationMessage(view, paras));
 
         return view;
     }

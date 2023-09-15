@@ -11,7 +11,8 @@ using VctoonCore.Localization;
 
 namespace VctoonClient.ViewModels.Libraries;
 
-[QueryProperty(nameof(Library)),QueryProperty(nameof(LibraryId))]
+[QueryProperty(nameof(Library))]
+[QueryProperty(nameof(LibraryId))]
 public partial class LibraryCreateUpdateViewModel : ViewModelBase, ITransientDependency
 {
 
@@ -22,6 +23,7 @@ public partial class LibraryCreateUpdateViewModel : ViewModelBase, ITransientDep
 
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(Title))]
     private Guid? libraryId;
 
     public string Title => LibraryId == null ? L.GetResource<LibraryResource>()["AddLibrary"] : L.GetResource<LibraryResource>()["EditLibrary"];
@@ -97,7 +99,7 @@ public partial class LibraryCreateUpdateViewModel : ViewModelBase, ITransientDep
     {
         var pathSelectView = App.Services.GetRequiredService<DialogLibraryPathSelectView>();
 
-        var path = await DialogService.ShowAsync<string>(pathSelectView, options:
+        var path = await Dialog.ShowAsync<string>(pathSelectView, options:
             opt => { opt.CloseOnClickAway = true; });
 
         if (path.IsNullOrEmpty())

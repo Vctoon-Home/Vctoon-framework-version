@@ -14,7 +14,7 @@ namespace VctoonClient.Navigations.Menus;
 
 public class MenuItemViewModel : ViewModelBase
 {
-    public Guid LibraryId { get; set; }
+    public LibraryDto? Library { get; set; }
     public string Header { get; set; }
     public string Path { get; set; }
     public string? Icon { get; set; }
@@ -52,7 +52,7 @@ public class MenuItemViewModel : ViewModelBase
 
         try
         {
-            await appService.DeleteAsync(LibraryId);
+            await appService.DeleteAsync(Library!.Id);
             WeakReferenceMessenger.Default.Send<LibraryDeleteMessage>();
 
         }
@@ -72,7 +72,7 @@ public class MenuItemViewModel : ViewModelBase
 
         try
         {
-            var libraryDto = await appService.GetAsync(LibraryId);
+            var libraryDto = await appService.GetAsync(Library!.Id);
             WeakReferenceMessenger.Default.Send<LibraryDeleteMessage>();
 
             var library = ObjectMapper.Map<LibraryDto, LibraryCreateUpdateInputViewModel>(libraryDto);
@@ -80,7 +80,7 @@ public class MenuItemViewModel : ViewModelBase
             await App.Router.NavigateToAsync(App.Services.GetRequiredService<LibraryCreateUpdateView>(),
                 new Dictionary<string, object>()
                 {
-                    {"LibraryId", LibraryId},
+                    {"LibraryId", Library!.Id},
                     {"Library", library}
                 });
         }

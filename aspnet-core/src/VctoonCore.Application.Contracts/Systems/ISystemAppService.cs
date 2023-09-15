@@ -1,5 +1,3 @@
-using Volo.Abp;
-
 namespace VctoonCore.Systems;
 
 public interface ISystemAppService : IRemoteService

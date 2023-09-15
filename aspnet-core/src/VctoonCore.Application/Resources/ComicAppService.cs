@@ -3,7 +3,7 @@ using Volo.Abp;
 
 namespace VctoonCore.Resources;
 
-public class ComicAppService : CrudAppService<Comic, ComicDto, Guid, GetComicsInput>, IComicAppService
+public class ComicAppService : CrudAppService<Comic, ComicDto, Guid, GetComicListInput>, IComicAppService
 {
     protected override string GetPolicyName { get; set; } = VctoonCorePermissions.Comic.Default;
     protected override string GetListPolicyName { get; set; } = VctoonCorePermissions.Comic.Default;

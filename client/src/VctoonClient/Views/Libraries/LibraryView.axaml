@@ -6,4 +6,5 @@
              x:Class="VctoonClient.Views.Libraries.LibraryView">
     
     <TextBlock Classes="H5"> LibraryView!</TextBlock>
+    
 </UserControl>

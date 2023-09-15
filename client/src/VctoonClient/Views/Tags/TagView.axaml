@@ -1,0 +1,58 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
+             xmlns:tags="clr-namespace:VctoonClient.ViewModels.Tags"
+             xmlns:dtos="clr-namespace:VctoonCore.Resources.Dtos;assembly=VctoonCore.Application.Contracts"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+             Padding="24"
+             x:DataType="tags:TagViewModel"
+             x:Class="VctoonClient.Views.Tags.TagView">
+
+    <StackPanel Spacing="20">
+        <Grid ColumnDefinitions="*,Auto">
+            <TextBox InnerLeftContent="{L:Localized Name}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Button Margin="8,0,0,0" Grid.Column="1" Content="{L:Localized Search}"></Button>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Spacing="24">
+            <Button Content="{L:Localized Create}" Command="{Binding ToCreateView}"></Button>
+            <Button IsVisible="{Binding HasSelected}" Classes="Danger"
+                    Content="{L:Localized Remove}" Command="{Binding DeleteSelected}">
+            </Button>
+        </StackPanel>
+
+        <ItemsControl ItemsSource="{Binding Tags}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Margin="-5,0" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="tags:TagDtoViewModel">
+
+
+                    <Label FontSize="16" Margin="5,5,0,0" DataContext="{Binding .}"
+                           BorderThickness="{Binding BorderThickness}"
+                           BorderBrush="Yellow" PointerPressed="InputElement_OnPointerPressed" Classes="Large"
+                           Theme="{StaticResource TagLabel}" Content="{Binding Tag.Name}">
+
+                        <Label.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuItem Header="Edit" Icon="fa-pen-to-square" Command="{Binding ToEditView}"
+                                          CommandParameter="{Binding Tag}">
+                                </MenuItem>
+                            </MenuFlyout>
+                        </Label.ContextFlyout>
+
+                    </Label>
+
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+
+</UserControl>

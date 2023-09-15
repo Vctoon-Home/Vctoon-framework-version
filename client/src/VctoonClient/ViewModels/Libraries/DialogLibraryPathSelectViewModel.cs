@@ -37,7 +37,7 @@ public partial class DialogLibraryPathSelectViewModel : ViewModelBase, ITransien
 
     public async Task LoadData(SystemFolderDto folder = null)
     {
-        var dialogService = DialogService;
+        var dialogService = Dialog;
         IsLoading = true;
         try
         {
