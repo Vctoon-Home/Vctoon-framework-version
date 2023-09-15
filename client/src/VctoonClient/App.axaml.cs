@@ -30,6 +30,7 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
     }
 
+
     public override void RegisterServices()
     {
         base.RegisterServices();
@@ -43,7 +44,7 @@ public partial class App : Application
         {
             options.Services.ReplaceConfiguration(configureConfiguration);
         });
-        var factory = new AbpAutofacServiceProviderFactory(new Autofac.ContainerBuilder());
+        var factory = new AbpAutofacServiceProviderFactory(new ContainerBuilder());
 
         var builder = factory.CreateBuilder(ServiceCollection);
 
@@ -57,7 +58,7 @@ public partial class App : Application
     {
         var assembly = typeof(App).GetTypeInfo().Assembly;
         builder
-            .AddJsonFile(new EmbeddedFileProvider(assembly), "appsettings.json", optional: false, false);
+            .AddJsonFile(new EmbeddedFileProvider(assembly), "appsettings.json", false, false);
     }
 
     public override void OnFrameworkInitializationCompleted()
@@ -79,10 +80,11 @@ public partial class App : Application
             SetWindowNotificationManager((UserControl) singleViewPlatform.MainView);
         }
 
+
         base.OnFrameworkInitializationCompleted();
     }
 
-    void SetWindowNotificationManager(UserControl topView)
+    private void SetWindowNotificationManager(UserControl topView)
     {
         topView.AttachedToVisualTree += (_, _) =>
         {

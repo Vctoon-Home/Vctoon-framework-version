@@ -5,5 +5,5 @@ namespace VctoonCore.Localization;
 [LocalizationResourceName("Library")]
 public class LibraryResource
 {
-    
+
 }

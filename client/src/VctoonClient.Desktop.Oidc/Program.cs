@@ -15,7 +15,7 @@ internal class Program
     private static async Task ProcessCallback(string args)
     {
         var response = new AuthorizeResponse(args);
-        if (!String.IsNullOrWhiteSpace(response.State))
+        if (!string.IsNullOrWhiteSpace(response.State))
         {
             Console.WriteLine($"Found state: {response.State}");
             var callbackManager = new CallbackManager(response.State);

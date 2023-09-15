@@ -26,7 +26,7 @@ public static class LibraryEfCoreQueryableExtensions
         }
 
         return queryable
-                .Include(x=> x.Files)
+                .Include(x => x.Files)
             // .Include(x => x.xxx) // TODO: AbpHelper generated
             ;
     }

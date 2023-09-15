@@ -36,10 +36,7 @@ public class ArchiveDataResolve : IDisposable
 
     public string ArchivePath { get; set; }
 
-    public string ArchiveFileName
-    {
-        get => Path.GetFileName(ArchivePath);
-    }
+    public string ArchiveFileName => Path.GetFileName(ArchivePath);
 
     public IArchive Archive { get; }
 

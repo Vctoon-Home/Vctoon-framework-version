@@ -3,8 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:libraries="clr-namespace:VctoonClient.ViewModels.Libraries"
-             xmlns:i="https://github.com/projektanker/icons.avalonia"
-             xmlns:systems="clr-namespace:VctoonCore.Systems;assembly=VctoonCore.Application.Contracts"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              xmlns:u="https://irihi.tech/ursa"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"

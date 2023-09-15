@@ -16,7 +16,7 @@ public partial class MainContent : UserControl
         this.UseEasyLoading(DialogConsts.MainViewContentIdentifier)
             .UseEasyDialog(DialogConsts.MainViewContentIdentifier);
         _vm = App.Services.GetService<MainViewModel>()!;
-        this.DataContext = _vm;
+        DataContext = _vm;
     }
 
     protected override void OnLoaded(RoutedEventArgs e)

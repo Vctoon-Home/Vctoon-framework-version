@@ -8,11 +8,11 @@ public class ArchiveHelper
     {
         // Possible extensions for RAR volumes
         List<string> rarVolumeExtensions = Enumerable.Range(0, 100).Select(i => $".r{i:D2}").ToList();
-        rarVolumeExtensions.Insert(0, ".rar"); // Insert .rar as the main volume
+        rarVolumeExtensions.Insert(0, ".rar");// Insert .rar as the main volume
 
         // Possible extensions for ZIP volumes
         List<string> zipVolumeExtensions = Enumerable.Range(1, 100).Select(i => $".z{i:D2}").ToList();
-        zipVolumeExtensions.Add(".zip"); // .zip is the last volume
+        zipVolumeExtensions.Add(".zip");// .zip is the last volume
 
         // Possible extensions for 7z volumes
         List<string> sevenZVolumeExtensions = Enumerable.Range(1, 100).Select(i => $".7z.{i:D3}").ToList();
@@ -22,7 +22,7 @@ public class ArchiveHelper
         AllVolumeExtensions.AddRange(zipVolumeExtensions);
         AllVolumeExtensions.AddRange(sevenZVolumeExtensions);
     }
-    static readonly List<string> AllVolumeExtensions = new List<string>();
+    private static readonly List<string> AllVolumeExtensions = new List<string>();
     public static List<FileInfo> GetArchiveVolumeFiles(string archiveFilePath)
     {
         if (!File.Exists(archiveFilePath))
@@ -46,13 +46,13 @@ public class ArchiveHelper
         List<FileInfo> volumes = new List<FileInfo>();
 
         // The name of the main volume, without extension
-        string mainVolumeName = archiveFile.Name.Replace(archiveFile.Extension, "");
+        var mainVolumeName = archiveFile.Name.Replace(archiveFile.Extension, "");
 
 
-        foreach (FileInfo file in files)
+        foreach (var file in files)
         {
             // The file name without extension
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file.Name);
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file.Name);
 
             // If the file name starts with the main volume name, and the file's extension is in the volume extension list, then it might be a volume
             if (fileNameWithoutExtension.StartsWith(mainVolumeName) && AllVolumeExtensions.Contains(file.Extension))

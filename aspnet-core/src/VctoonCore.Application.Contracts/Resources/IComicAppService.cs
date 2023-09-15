@@ -1,5 +1,4 @@
-﻿
-namespace VctoonCore.Resources;
+﻿namespace VctoonCore.Resources;
 
 public interface IComicAppService : IRemoteService
 {

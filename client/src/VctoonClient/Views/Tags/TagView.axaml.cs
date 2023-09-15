@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 using VctoonClient.ViewModels.Tags;
 
 namespace VctoonClient.Views.Tags;
@@ -15,16 +12,16 @@ public partial class TagView : UserControl, ITransientDependency
         InitializeComponent();
 
         _vm = App.Services.GetRequiredService<TagViewModel>();
-        this.DataContext = _vm;
+        DataContext = _vm;
     }
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        
-        if(e.GetCurrentPoint(this).Properties.PointerUpdateKind != PointerUpdateKind.LeftButtonPressed)
+
+        if (e.GetCurrentPoint(this).Properties.PointerUpdateKind != PointerUpdateKind.LeftButtonPressed)
             return;
-        
-        
-        Label border = sender as Label;
+
+
+        var border = sender as Label;
 
         if (border is null)
             return;
@@ -33,9 +30,6 @@ public partial class TagView : UserControl, ITransientDependency
 
         if (tagDtoViewModel is null)
             return;
-
-
         tagDtoViewModel.Selected = !tagDtoViewModel.Selected;
-        _vm.HasSelected = _vm.Tags.Any(x => x.Selected);
     }
 }

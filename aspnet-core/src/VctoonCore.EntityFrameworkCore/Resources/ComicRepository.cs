@@ -6,7 +6,7 @@ public class ComicRepository : EfCoreRepository<VctoonCoreDbContext, Comic, Guid
     public ComicRepository(IDbContextProvider<VctoonCoreDbContext> dbContextProvider) : base(dbContextProvider)
     {
     }
-    
+
     public override async Task<IQueryable<Comic>> WithDetailsAsync()
     {
         return (await GetQueryableAsync()).IncludeDetails();

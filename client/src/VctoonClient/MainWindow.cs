@@ -13,19 +13,10 @@ public class MainWindow : Window, ISingletonDependency
         Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://VctoonClient/Assets/avalonia-logo.ico")));
         Title = "VctoonClient";
 
-
-        // var grid = new Grid()
-        // {
-        //     Children =
-        //     {
-        //         mainView
-        //     }
-        // };
-
         Content = mainView;
 
         #if DEBUG
-                this.AttachDevTools();
+        this.AttachDevTools();
         #endif
     }
 }

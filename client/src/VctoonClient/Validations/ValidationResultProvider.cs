@@ -37,7 +37,7 @@ public class ValidationResultProvider : ITransientDependency
         var cultureErrorMessage = GetCultureErrorMessage(errorMessageString!, localizer);
 
 // 获取FieldInfo
-        FieldInfo fieldInfo = typeof(ValidationAttribute).GetField("_errorMessageResourceAccessor",
+        var fieldInfo = typeof(ValidationAttribute).GetField("_errorMessageResourceAccessor",
             BindingFlags.NonPublic | BindingFlags.Instance)!;
 
         Func<string> cultureAccessor = () => cultureErrorMessage;

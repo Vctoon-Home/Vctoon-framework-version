@@ -1,6 +1,4 @@
 ﻿using VctoonCore.EntityFrameworkCore;
-using Volo.Abp.Autofac;
-using Volo.Abp.Modularity;
 
 namespace VctoonCore.DbMigrator;
 
@@ -8,7 +6,7 @@ namespace VctoonCore.DbMigrator;
     typeof(AbpAutofacModule),
     typeof(VctoonCoreEntityFrameworkCoreModule),
     typeof(VctoonCoreApplicationContractsModule)
-    )]
+)]
 public class VctoonCoreDbMigratorModule : AbpModule
 {
 

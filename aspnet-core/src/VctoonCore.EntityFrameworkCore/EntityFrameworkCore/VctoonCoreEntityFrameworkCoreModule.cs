@@ -38,7 +38,8 @@ public class VctoonCoreEntityFrameworkCoreModule : AbpModule
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddAbpDbContext<VctoonCoreDbContext>(options => {
+        context.Services.AddAbpDbContext<VctoonCoreDbContext>(options =>
+        {
             /* Remove "includeAllEntities: true" to create
              * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
@@ -57,7 +58,8 @@ public class VctoonCoreEntityFrameworkCoreModule : AbpModule
 
         });
 
-        Configure<AbpDbContextOptions>(options => {
+        Configure<AbpDbContextOptions>(options =>
+        {
             /* The main point to change your DBMS.
              * See also VctoonCoreMigrationsDbContextFactory for EF Core tooling. */
             options.UseNpgsql();

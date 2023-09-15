@@ -13,14 +13,14 @@ public class SystemFolderDto
     {
         Name = directoryInfo.Name;
         Path = directoryInfo.FullName;
-        HasChildren = directoryInfo.EnumerateDirectories().IsNullOrEmpty();
+        HasChildren = !directoryInfo.EnumerateDirectories().IsNullOrEmpty();
     }
 
     public SystemFolderDto(DriveInfo driveInfo)
     {
         Name = driveInfo.Name;
         Path = driveInfo.Name;
-        HasChildren = driveInfo.RootDirectory.EnumerateDirectories().IsNullOrEmpty();
+        HasChildren = !driveInfo.RootDirectory.EnumerateDirectories().IsNullOrEmpty();
     }
 
 

@@ -51,8 +51,10 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
         _backStack = new Stack<NavigationRouterPageModel?>();
     }
 
-    public Task NavigateToAsync(object? destination, NavigationMode mode = NavigationMode.Normal) =>
-        NavigateToAsync(destination, null, mode);
+    public Task NavigateToAsync(object? destination, NavigationMode mode = NavigationMode.Normal)
+    {
+        return NavigateToAsync(destination, null, mode);
+    }
 
     public async Task BackAsync()
     {
@@ -103,13 +105,17 @@ public class VctoonStackNavigationRouter : StyledElement, IVctoonNavigationRoute
 
 
     public Task NavigateToAsync(string path, Dictionary<string, object>? paras = null,
-        NavigationMode navigationMode = NavigationMode.Normal) =>
-        NavigateToAsync((object) path, paras, navigationMode);
+        NavigationMode navigationMode = NavigationMode.Normal)
+    {
+        return NavigateToAsync((object) path, paras, navigationMode);
+    }
 
 
     public Task NavigateToAsync(UserControl? view, Dictionary<string, object>? paras = null,
-        NavigationMode navigationMode = NavigationMode.Normal) =>
-        NavigateToAsync((object) view, paras, navigationMode);
+        NavigationMode navigationMode = NavigationMode.Normal)
+    {
+        return NavigateToAsync((object) view, paras, navigationMode);
+    }
 
     public async Task NavigateToAsync(object? pathOrView, Dictionary<string, object>? paras = null,
         NavigationMode navigationMode = NavigationMode.Normal)

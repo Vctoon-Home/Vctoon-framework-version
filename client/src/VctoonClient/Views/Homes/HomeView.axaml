@@ -2,9 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
              xmlns:homes="clr-namespace:VctoonClient.ViewModels.Homes"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="VctoonClient.Views.Homes.HomeView"
              x:DataType="homes:HomeViewModel">
@@ -30,13 +28,13 @@
         <!-- </TextBox> -->
         <!-- -->
         <!-- <Button Command="{Binding Validation}">Valid</Button> -->
-        
+
         <Button Command="{Binding ShowLoading}">ShowLoading</Button>
 
         <Button Command="{Binding ShowDialog}">Dialog</Button>
         <Button Click="Notification_Click">Notification</Button>
-        <TextBox></TextBox>
-        <CheckBox></CheckBox>
+        <TextBox />
+        <CheckBox />
         <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
         <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>
         <TextBlock FontSize="60">Welcome to Avalonia!</TextBlock>

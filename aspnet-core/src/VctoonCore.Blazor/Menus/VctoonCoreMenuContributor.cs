@@ -30,8 +30,8 @@ public class VctoonCoreMenuContributor : IMenuContributor
                 VctoonCoreMenus.Home,
                 l["Menu:Home"],
                 "/",
-                icon: "fas fa-home",
-                order: 0
+                "fas fa-home",
+                0
             )
         );
 

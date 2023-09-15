@@ -20,8 +20,8 @@ public class ConsoleTestAppHostedService : IHostedService
     {
         using (var application = await AbpApplicationFactory.CreateAsync<VctoonCoreConsoleApiClientModule>(options =>
         {
-           options.Services.ReplaceConfiguration(_configuration);
-           options.UseAutofac();
+            options.Services.ReplaceConfiguration(_configuration);
+            options.UseAutofac();
         }))
         {
             await application.InitializeAsync();

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using DialogHostAvalonia;
 using VctoonClient.Helpers;
 using VctoonClient.Messages;
 using VctoonClient.Navigations.Query;
@@ -19,7 +17,7 @@ public partial class LibraryCreateUpdateViewModel : ViewModelBase, ITransientDep
     private readonly ILibraryAppService _libraryAppService;
 
     [ObservableProperty]
-    private LibraryCreateUpdateInputViewModel library = new();
+    private LibraryCreateUpdateInputViewModel library = new LibraryCreateUpdateInputViewModel();
 
 
     [ObservableProperty]

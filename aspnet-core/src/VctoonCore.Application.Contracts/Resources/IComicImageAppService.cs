@@ -1,6 +1,6 @@
 ﻿namespace VctoonCore.Resources;
 
-public interface IComicImageAppService: IRemoteService
+public interface IComicImageAppService : IRemoteService
 {
     Task DeleteAsync(Guid id, bool deleteInRealFileSystem = false);
     Task<ComicImageDto> GetAsync(Guid id);

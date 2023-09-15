@@ -12,7 +12,7 @@ namespace VctoonCore.HttpApi.Client.ConsoleTestApp;
     typeof(AbpAutofacModule),
     typeof(VctoonCoreHttpApiClientModule),
     typeof(AbpHttpClientIdentityModelModule)
-    )]
+)]
 public class VctoonCoreConsoleApiClientModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

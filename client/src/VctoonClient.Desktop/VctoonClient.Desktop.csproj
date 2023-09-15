@@ -8,8 +8,8 @@
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
-<!--        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>-->
-<!--        <PublishAot>true</PublishAot>-->
+        <!--        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>-->
+        <!--        <PublishAot>true</PublishAot>-->
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,12 +17,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <RdXmlFile Include="rd.xml" />
+        <RdXmlFile Include="rd.xml"/>
     </ItemGroup>
 
     <ItemGroup>
         <!--<ProjectReference Include="..\VctoonClient.Desktop.Oidc\VctoonClient.Desktop.Oidc.csproj"/>-->
-        <ProjectReference Include="..\VctoonClient.Desktop.Oidc\VctoonClient.Desktop.Oidc.csproj" />
+        <ProjectReference Include="..\VctoonClient.Desktop.Oidc\VctoonClient.Desktop.Oidc.csproj"/>
         <ProjectReference Include="..\VctoonClient\VctoonClient.csproj"/>
     </ItemGroup>
 </Project>

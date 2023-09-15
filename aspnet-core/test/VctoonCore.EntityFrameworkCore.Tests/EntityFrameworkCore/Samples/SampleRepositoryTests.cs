@@ -1,11 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using System;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
-using Volo.Abp.Domain.Repositories;
-using Volo.Abp.Identity;
-using Xunit;
 
 namespace VctoonCore.EntityFrameworkCore.Samples;
 
@@ -31,13 +25,13 @@ public class SampleRepositoryTests : VctoonCoreEntityFrameworkCoreTestBase
          */
         await WithUnitOfWorkAsync(async () =>
         {
-                //Act
-                var adminUser = await (await _appUserRepository.GetQueryableAsync())
+            //Act
+            var adminUser = await (await _appUserRepository.GetQueryableAsync())
                 .Where(u => u.UserName == "admin")
                 .FirstOrDefaultAsync();
 
-                //Assert
-                adminUser.ShouldNotBeNull();
+            //Assert
+            adminUser.ShouldNotBeNull();
         });
     }
 }

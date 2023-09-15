@@ -9,7 +9,7 @@ public class Library : AggregateRoot<Guid>
 
     public LibraryType LibraryType { get; init; }
 
-    internal protected void SetName(string name)
+    protected internal void SetName(string name)
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
         Name = name;

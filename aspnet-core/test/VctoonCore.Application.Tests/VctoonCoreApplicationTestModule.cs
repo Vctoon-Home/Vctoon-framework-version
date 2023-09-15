@@ -1,7 +1,4 @@
-﻿using Volo.Abp.BackgroundJobs;
-using Volo.Abp.Modularity;
-
-namespace VctoonCore;
+﻿namespace VctoonCore;
 
 [DependsOn(
     typeof(VctoonCoreApplicationModule),

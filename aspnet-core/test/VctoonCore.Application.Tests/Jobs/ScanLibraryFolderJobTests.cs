@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using VctoonCore.JobModels;
-using VctoonCore.Libraries;
 using VctoonCore.Libraries.Jobs;
-using VctoonCore.Resources;
-using VctoonCore.TestDatas;
-using Volo.Abp.Uow;
-using Xunit;
 
 namespace VctoonCore.Jobs;
 
@@ -42,7 +35,7 @@ public class ScanLibraryFolderJobTests : VctoonCoreApplicationTestBase
         {
         }
 
-        
+
         using var uow = _unitOfWorkManager.Begin();
 
         try
@@ -53,7 +46,7 @@ public class ScanLibraryFolderJobTests : VctoonCoreApplicationTestBase
         }
         catch (Exception e)
         {
-            
+
         }
 
         await uow.CompleteAsync();

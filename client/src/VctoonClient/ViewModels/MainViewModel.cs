@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using Abp.Localization.Avalonia;
-using EasyDialog.Avalonia.Dialogs;
-using VctoonClient.Dialogs;
 using VctoonClient.Messages;
 using VctoonClient.Navigations.Router;
 using VctoonClient.Oidc;
@@ -52,7 +50,7 @@ public partial class MainViewModel : ViewModelBase, ISingletonDependency
     }
 
 
-    void MessengerRegister(LocalizationManager localizationManager)
+    private void MessengerRegister(LocalizationManager localizationManager)
     {
         WeakReferenceMessenger.Default.Register<LoginMessage>(this, async (r, m) => { UpdateProperties(); });
         WeakReferenceMessenger.Default.Register<LogoutMessage>(this, (r, m) =>

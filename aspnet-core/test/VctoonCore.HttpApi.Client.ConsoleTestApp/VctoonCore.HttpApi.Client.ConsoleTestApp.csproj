@@ -1,35 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\..\..\core.props" />
+    <Import Project="..\..\..\core.props"/>
 
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net7.0</TargetFramework>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
 
-	</PropertyGroup>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Remove="appsettings.json" />
-		<Content Include="appsettings.json">
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<None Remove="appsettings.secrets.json" />
-		<Content Include="appsettings.secrets.json">
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <None Remove="appsettings.json"/>
+        <Content Include="appsettings.json">
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <None Remove="appsettings.secrets.json"/>
+        <Content Include="appsettings.secrets.json">
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="$(AbpPackageVersion)" />
-		<PackageReference Include="Volo.Abp.Autofac" Version="$(AbpPackageVersion)" />
-		<ProjectReference Include="..\..\src\VctoonCore.HttpApi.Client\VctoonCore.HttpApi.Client.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="$(AbpPackageVersion)"/>
+        <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpPackageVersion)"/>
+        <ProjectReference Include="..\..\src\VctoonCore.HttpApi.Client\VctoonCore.HttpApi.Client.csproj"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftPackageVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="$(MicrosoftPackageVersion)" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftPackageVersion)"/>
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="$(MicrosoftPackageVersion)"/>
+    </ItemGroup>
 
 </Project>

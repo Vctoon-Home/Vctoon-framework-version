@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <Import Project="..\..\..\client.props" />
+    <Import Project="..\..\..\client.props"/>
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
@@ -10,7 +10,7 @@
         <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
     <ItemGroup>
-      <ProjectReference Include="..\VctoonClient\VctoonClient.csproj" />
+        <ProjectReference Include="..\VctoonClient\VctoonClient.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,2 +1,2 @@
 ﻿using System.Runtime.CompilerServices;
-[assembly:InternalsVisibleToAttribute("VctoonCore.Application.Tests")]
+[assembly: InternalsVisibleToAttribute("VctoonCore.Application.Tests")]

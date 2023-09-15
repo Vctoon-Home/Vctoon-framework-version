@@ -21,7 +21,7 @@ public class LoginService : ILoginService, ITransientDependency
         _userStore = userStore;
     }
 
-    void WindowFocus()
+    private void WindowFocus()
     {
         // focus on the window
         if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

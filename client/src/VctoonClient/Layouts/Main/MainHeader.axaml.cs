@@ -15,7 +15,7 @@ public partial class MainHeader : UserControl
         InitializeComponent();
 
         _vm = App.Services.GetService<MainViewModel>()!;
-        this.DataContext = _vm;
+        DataContext = _vm;
     }
 
     private void ToggleButton_ThemeVariantChanged(object sender, RoutedEventArgs e)

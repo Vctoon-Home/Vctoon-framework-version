@@ -11,6 +11,6 @@ public partial class LibraryCreateUpdateView : UserControl, ITransientDependency
     {
         InitializeComponent();
         _vm = App.Services.GetRequiredService<LibraryCreateUpdateViewModel>();
-        this.DataContext = _vm;
+        DataContext = _vm;
     }
 }

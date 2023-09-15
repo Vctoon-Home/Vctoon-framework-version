@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using EasyDialog.Avalonia.Dialogs;
 using VctoonClient.Messages;
-using VctoonClient.Navigations.Router;
 using VctoonClient.ViewModels.Libraries;
 using VctoonClient.Views.Libraries;
 using VctoonCore.Libraries;
@@ -20,7 +19,7 @@ public class MenuItemViewModel : ViewModelBase
     public string? Icon { get; set; }
 
     public bool IsSeparator { get; set; }
-    public ObservableCollection<MenuItemViewModel> Children { get; set; } = new();
+    public ObservableCollection<MenuItemViewModel> Children { get; set; } = new ObservableCollection<MenuItemViewModel>();
 
     public ICommand? ActivateCommand { get; set; }
 

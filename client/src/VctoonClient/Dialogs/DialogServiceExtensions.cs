@@ -6,5 +6,7 @@ namespace VctoonClient.Dialogs;
 public static class DialogServiceExtensions
 {
     public static IDisposable ShowContentLoading(this DialogService dialogService)
-        => dialogService.ShowLoading(DialogConsts.MainViewContentIdentifier);
+    {
+        return dialogService.ShowLoading(DialogConsts.MainViewContentIdentifier);
+    }
 }

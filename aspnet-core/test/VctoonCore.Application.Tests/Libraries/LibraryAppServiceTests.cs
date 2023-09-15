@@ -1,9 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Shouldly;
-using VctoonCore.Libraries.Dtos;
-using VctoonCore.TestDatas;
-using Volo.Abp.Domain.Repositories;
-using Xunit;
 
 namespace VctoonCore.Libraries;
 
@@ -13,17 +8,17 @@ public class LibraryAppServiceTests : VctoonCoreApplicationTestBase
 
     public LibraryAppServiceTests()
     {
-        
+
     }
 
     [Fact]
     public async Task Should_Get_List_Of_Libraries()
     {
-        
-       var _libraryRepository = GetRequiredService<ILibraryRepository>();
+
+        var _libraryRepository = GetRequiredService<ILibraryRepository>();
 
 
-       var libs = await _libraryRepository.ToListAsync();
+        var libs = await _libraryRepository.ToListAsync();
 
 
         // Arrange

@@ -1,7 +1,5 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
-using VctoonClient.Dialogs;
 using VctoonClient.ViewModels.Homes;
 
 namespace VctoonClient.Views.Homes;
@@ -23,5 +21,5 @@ public partial class HomeView : UserControl, ITransientDependency
     {
         App.NotificationManager?.Show(new Notification("666", "This is message", NotificationType.Error));
     }
-    
+
 }

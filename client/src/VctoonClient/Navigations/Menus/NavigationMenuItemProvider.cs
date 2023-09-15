@@ -39,21 +39,21 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
 
     private ObservableCollection<MenuItemViewModel> GetMenuItems()
     {
-        RootResourceItem = new()
+        RootResourceItem = new MenuItemViewModel
         {
             Header = _localizationManager["Menu:Libraries"], Icon = "fa-landmark-flag",
-            IsRootResource = true,
+            IsRootResource = true
         };
 
 
         var items = new ObservableCollection<MenuItemViewModel>()
         {
-            new()
+            new MenuItemViewModel
             {
                 Header = _localizationManager["Menu:Home"], Path = "//home", Icon = "mdi-home", ViewType = typeof(HomeView)
             },
             RootResourceItem,
-            new()
+            new MenuItemViewModel
             {
                 Header = _localizationManager["Menu:Tags"], Path = "//tag", Icon = "fa-tag", ViewType = typeof(TagView)
             }
@@ -109,7 +109,7 @@ public partial class NavigationMenuItemProvider : ObservableObject, ISingletonDe
             Path = $"//library/{l.Id}",
             ClickNavigationParameters = new Dictionary<string, object>()
             {
-                {"Library", l},
+                {"Library", l}
             },
             ViewType = typeof(LibraryView)
         }).ToList();

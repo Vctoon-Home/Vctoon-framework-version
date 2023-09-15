@@ -32,7 +32,7 @@ public static class VctoonCorePermissions
         public const string Update = Default + ".Update";
         public const string Delete = Default + ".Delete";
     }
-    
+
     public const string ComicChapterGroupName = GroupName + ".ComicChapter";
 
     public class ComicChapter
@@ -41,7 +41,7 @@ public static class VctoonCorePermissions
         public const string Update = Default + ".Update";
         public const string Delete = Default + ".Delete";
     }
-    
+
     public const string ComicImageGroupName = GroupName + ".ComicImage";
 
     public class ComicImage
@@ -50,7 +50,7 @@ public static class VctoonCorePermissions
         public const string Update = Default + ".Update";
         public const string Delete = Default + ".Delete";
     }
-    
+
     public const string VideoGroupName = GroupName + ".Video";
 
     public class Video

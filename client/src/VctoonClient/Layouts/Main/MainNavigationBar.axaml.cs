@@ -16,7 +16,7 @@ public partial class MainNavigationBar : UserControl
         InitializeComponent();
 
         _vm = App.Services.GetRequiredService<MainViewModel>();
-        this.DataContext = _vm;
+        DataContext = _vm;
 
 
         SetRootBorderHasPadding(!Menu.IsClosed);
@@ -38,7 +38,7 @@ public partial class MainNavigationBar : UserControl
     public void UpdateSelectItem(object navigationRouterPageModel)
     {
         var model = navigationRouterPageModel as NavigationRouterPageModel;
-        if (model?.Path is { } path)
+        if (model?.Path is {} path)
             Menu.SelectedItem = _vm.NavigationMenuItemProvider.GetMenuItemByPath(path);
         else Menu.SelectedItem = null;
     }
@@ -48,11 +48,11 @@ public partial class MainNavigationBar : UserControl
     {
         if (hasPadding)
         {
-            this.Border.Padding = new Thickness(8, 0, 8, 0);
+            Border.Padding = new Thickness(8, 0, 8, 0);
         }
         else
         {
-            this.Border.Padding = new Thickness();
+            Border.Padding = new Thickness();
         }
     }
 

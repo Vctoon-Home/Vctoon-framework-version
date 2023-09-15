@@ -51,7 +51,7 @@ namespace VctoonCore.Blazor;
     typeof(AbpIdentityBlazorServerModule),
     typeof(AbpTenantManagementBlazorServerModule),
     typeof(AbpSettingManagementBlazorServerModule)
-   )]
+)]
 public class VctoonCoreBlazorModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -156,7 +156,7 @@ public class VctoonCoreBlazorModule : AbpModule
         services.AddAbpSwaggerGen(
             options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "VctoonCore API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo {Title = "VctoonCore API", Version = "v1"});
                 options.DocInclusionPredicate((docName, description) => true);
                 options.CustomSchemaIds(type => type.FullName);
             }

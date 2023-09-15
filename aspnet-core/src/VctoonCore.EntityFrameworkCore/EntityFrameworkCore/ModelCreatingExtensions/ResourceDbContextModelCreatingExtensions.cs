@@ -22,7 +22,7 @@ public static class ResourceDbContextModelCreatingExtensions
         builder.Entity<Comic>(b =>
         {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "Comics", VctoonCoreConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
+            b.ConfigureByConvention();//auto configure for the base class props
 
             b.HasMany(e => e.Tags).WithMany();
             b.HasMany(e => e.Chapters).WithOne().OnDelete(DeleteBehavior.Cascade);
@@ -31,7 +31,7 @@ public static class ResourceDbContextModelCreatingExtensions
         builder.Entity<Video>(b =>
         {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "Videos", VctoonCoreConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
+            b.ConfigureByConvention();//auto configure for the base class props
 
             b.HasMany(e => e.Tags).WithMany();
         });
@@ -39,7 +39,7 @@ public static class ResourceDbContextModelCreatingExtensions
         builder.Entity<Tag>(b =>
         {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "Tags", VctoonCoreConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
+            b.ConfigureByConvention();//auto configure for the base class props
 
             b.HasIndex(e => e.Name).IsUnique();
         });
@@ -47,7 +47,7 @@ public static class ResourceDbContextModelCreatingExtensions
         builder.Entity<ComicChapter>(b =>
         {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "ComicChapters", VctoonCoreConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
+            b.ConfigureByConvention();//auto configure for the base class props
             b.HasOne<LibraryPath>().WithMany().HasForeignKey(e => e.LibraryPathId).OnDelete(DeleteBehavior.Cascade);
             b.HasMany(e => e.Images).WithOne().HasForeignKey(e => e.ComicChapterId).OnDelete(DeleteBehavior.Cascade);
         });
@@ -55,7 +55,7 @@ public static class ResourceDbContextModelCreatingExtensions
         builder.Entity<ComicImage>(b =>
         {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "ComicImages", VctoonCoreConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
+            b.ConfigureByConvention();//auto configure for the base class props
         });
     }
 }

@@ -38,7 +38,8 @@ public class ComicArchiveFileScanHandler : IScanHandler
                 await _comicChapterRepository.DeleteManyAsync(deletes);
 
             if (!adds.IsNullOrEmpty())
-                await _comicRepository.InsertManyAsync(adds.Select(c => {
+                await _comicRepository.InsertManyAsync(adds.Select(c =>
+                {
                     var comic = new Comic(_guidGenerator.Create(), c.Title,
                         libraryPath.LibraryId);
 
@@ -51,7 +52,7 @@ public class ComicArchiveFileScanHandler : IScanHandler
         }
     }
 
-    async Task<(List<ComicChapter> addChapters, List<ComicChapter> deleteChapters, List<ComicChapter> updateChapters)>
+    private async Task<(List<ComicChapter> addChapters, List<ComicChapter> deleteChapters, List<ComicChapter> updateChapters)>
         GetArchiveFileData(LibraryFile libraryFile, Guid libraryPathId)
     {
         var volumes = ArchiveHelper.GetArchiveVolumeFiles(new FileInfo(libraryFile.FilePath));
@@ -91,7 +92,7 @@ public class ComicArchiveFileScanHandler : IScanHandler
         return (addComicChapters, deleteComicChapters, updateComicChapters);
     }
 
-    async Task<bool> ComicChapterIsChanged(ComicChapter oldComicChapter, ComicChapter newComicChapter)
+    private async Task<bool> ComicChapterIsChanged(ComicChapter oldComicChapter, ComicChapter newComicChapter)
     {
         if (oldComicChapter.IsArchive != newComicChapter.IsArchive)
             return true;

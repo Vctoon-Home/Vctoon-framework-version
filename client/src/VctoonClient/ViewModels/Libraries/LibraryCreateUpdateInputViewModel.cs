@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using VctoonCore.Enums;
 
@@ -9,7 +8,7 @@ public partial class LibraryCreateUpdateInputViewModel : ObservableValidator
 {
     [Required]
     [ObservableProperty]
-    string name;
+    private string name;
 
     /// <summary>
     /// 
@@ -19,5 +18,5 @@ public partial class LibraryCreateUpdateInputViewModel : ObservableValidator
     public ObservableCollection<string> Paths { get; set; } = new ObservableCollection<string>();
 
     [ObservableProperty]
-    LibraryType _libraryType;
+    private LibraryType _libraryType;
 }

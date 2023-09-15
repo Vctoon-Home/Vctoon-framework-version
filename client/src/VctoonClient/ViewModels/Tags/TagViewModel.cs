@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using VctoonClient.Dialogs;
+using VctoonClient.Extensions;
 using VctoonClient.Navigations.Query;
 using VctoonClient.Views.Tags;
 using VctoonCore.Resources;
-using VctoonCore.Resources.Dtos;
+using Volo.Abp.Http.Client;
 
 namespace VctoonClient.ViewModels.Tags;
 
@@ -16,17 +16,29 @@ public partial class TagViewModel : ViewModelBase, ITransientDependency, IQueryA
     private readonly ITagAppService _tagAppService;
 
     [ObservableProperty]
-    ObservableCollection<TagDtoViewModel> tags;
+    [NotifyPropertyChangedFor(nameof(HasSelected), nameof(SelectedTags))]
+    private ObservableCollection<TagDtoViewModel> tags = new ObservableCollection<TagDtoViewModel>();
+
+    public bool HasSelected => Tags.Any(t => t.Selected);
 
 
-    [ObservableProperty]
-    private bool hasSelected;
+    public ObservableCollection<TagDtoViewModel> SelectedTags => new ObservableCollection<TagDtoViewModel>(Tags.Where(x => x.Selected));
+
 
     public TagViewModel(ITagAppService tagAppService)
     {
         _tagAppService = tagAppService;
+        Initialize();
 
-        LoadData();
+        Tags.CollectionChanged += (sender, args) =>
+        {
+            UpdateProperties();
+        };
+    }
+
+    public async void Initialize()
+    {
+        await LoadData();
     }
 
 
@@ -34,29 +46,28 @@ public partial class TagViewModel : ViewModelBase, ITransientDependency, IQueryA
     {
         using var _ = Dialog.ShowContentLoading();
 
-        var tags = await _tagAppService.GetAllAsync();
-        // var tags = await MockData();
-
-        Tags = new ObservableCollection<TagDtoViewModel>(tags.Select(t => new TagDtoViewModel()
+        try
         {
-            Tag = t
-        }));
-        HasSelected = false;
-    }
-
-    public async Task<List<TagDto>> MockData()
-    {
-        var tags = new List<TagDto>();
-        for (int i = 0; i < 10; i++)
-        {
-            tags.Add(new TagDto()
+            var tagDtos = await _tagAppService.GetAllAsync();
+            Tags = new ObservableCollection<TagDtoViewModel>(tagDtos.Select(t => new TagDtoViewModel()
             {
-                Id = Guid.NewGuid(),
-                Name = $"Tag {i}"
-            });
+                Tag = t
+            }));
+
+            foreach (var tagDtoViewModel in Tags)
+            {
+                tagDtoViewModel.PropertyChanged += (sender, args) =>
+                {
+                    UpdateProperties();
+                };
+            }
+        }
+        catch (AbpRemoteCallException e)
+        {
+            e.Notify();
         }
 
-        return tags;
+
     }
 
 
@@ -70,6 +81,7 @@ public partial class TagViewModel : ViewModelBase, ITransientDependency, IQueryA
 
         var confirm = await Dialog.ShowConfirmAsync(options: opt =>
         {
+            // TODO: to localized
             opt.Message = "Are you sure to delete selected tags?";
             opt.ConfirmBtnText = "Yes";
             opt.CancelBtnText = "No";
@@ -92,12 +104,23 @@ public partial class TagViewModel : ViewModelBase, ITransientDependency, IQueryA
         await LoadData();
 
     }
-    public void ApplyQueryAttributes(Dictionary<string, object>? paras, bool isBack)
+    public async void ApplyQueryAttributes(Dictionary<string, object>? paras, bool isBack)
     {
+
+        if (paras is null)
+            return;
+
         if (isBack && paras.TryGetValue("Succeeded", out var success) && (bool) success)
         {
-            LoadData();
+            await LoadData();
         }
     }
+
+    public void UpdateProperties()
+    {
+        OnPropertyChanged(nameof(HasSelected));
+        OnPropertyChanged(nameof(SelectedTags));
+    }
+
 
 }

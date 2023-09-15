@@ -76,12 +76,12 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
     }
 
     // TODO: signalR notification
-    async Task ScanDirectoryStructureAndFiles(LibraryPath libraryPath)
+    private async Task ScanDirectoryStructureAndFiles(LibraryPath libraryPath)
     {
         if (!libraryPath.ExistInRealFileSystem())
             return;
 
-        DirectoryInfo dirInfo = new DirectoryInfo(libraryPath.Path);
+        var dirInfo = new DirectoryInfo(libraryPath.Path);
 
         // if directory is changed
         if (dirInfo.LastWriteTimeUtc != libraryPath.LastResolveTime)// check files in this directory
@@ -131,7 +131,7 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
         libraryPath.SetLastModifyTime(dirInfo.LastWriteTimeUtc);
     }
 
-    async Task ResolveDirectoryFiles(LibraryPath libraryPath, List<IScanHandler> handlers)
+    private async Task ResolveDirectoryFiles(LibraryPath libraryPath, List<IScanHandler> handlers)
     {
         if (!libraryPath.ExistInRealFileSystem())
             return;
@@ -148,7 +148,7 @@ public class ScanLibraryFolderJob : BackgroundJob<ScanLibraryFolderArgs>, ITrans
         libraryPath.SetAllFilesLastResolveTime();
     }
 
-    List<IScanHandler> GetScanHandlerByLibrary(Library library)
+    private List<IScanHandler> GetScanHandlerByLibrary(Library library)
     {
         return _resourceHandlers.Where(h => h.SupportLibraryType == library.LibraryType).ToList();
     }

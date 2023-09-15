@@ -26,7 +26,7 @@ public static class ResourceEfCoreQueryableExtensions
         }
 
         return queryable
-            .Include(q => q.Images)
+                .Include(q => q.Images)
             ;
     }
 

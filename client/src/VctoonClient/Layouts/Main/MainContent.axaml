@@ -2,15 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
-             xmlns:vctoonClient="clr-namespace:VctoonClient"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:viewModels="clr-namespace:VctoonClient.ViewModels"
-             xmlns:navigations="clr-namespace:VctoonClient.Navigations"
              xmlns:router="clr-namespace:VctoonClient.Navigations.Router"
-             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
-             xmlns:dialogs="clr-namespace:VctoonClient.Dialogs"
-             xmlns:u="https://irihi.tech/ursa"
              x:Class="VctoonClient.Layouts.Main.MainContent"
              x:DataType="viewModels:MainViewModel">
     <ScrollViewer>

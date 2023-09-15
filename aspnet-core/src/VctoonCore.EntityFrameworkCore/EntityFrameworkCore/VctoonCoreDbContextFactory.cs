@@ -27,7 +27,7 @@ public class VctoonCoreDbContextFactory : IDesignTimeDbContextFactory<VctoonCore
     {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../VctoonCore.DbMigrator/"))
-            .AddJsonFile("appsettings.json", optional: false);
+            .AddJsonFile("appsettings.json", false);
 
         return builder.Build();
     }

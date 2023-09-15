@@ -17,7 +17,7 @@ public class AvaloniaCurrentUser : ICurrentUser, ITransientDependency
         get
         {
             var claim = FindClaim("sub")?.Value;
-            return claim != null ? Guid.Parse(claim) : (Guid?)null;
+            return claim != null ? Guid.Parse(claim) : (Guid?) null;
         }
     }
 
@@ -25,9 +25,9 @@ public class AvaloniaCurrentUser : ICurrentUser, ITransientDependency
 
     public virtual string? Name => FindClaim("given_name")?.Value;
 
-    public virtual string? SurName => null; // no provided information
+    public virtual string? SurName => null;// no provided information
 
-    public virtual string? PhoneNumber => null; // no provided information
+    public virtual string? PhoneNumber => null;// no provided information
 
     public virtual bool PhoneNumberVerified => bool.Parse(FindClaim("phone_number_verified")?.Value ?? "false");
 
@@ -35,7 +35,7 @@ public class AvaloniaCurrentUser : ICurrentUser, ITransientDependency
 
     public virtual bool EmailVerified => bool.Parse(FindClaim("email_verified")?.Value ?? "false");
 
-    public virtual Guid? TenantId => null; // no provided information
+    public virtual Guid? TenantId => null;// no provided information
 
     public virtual string[] Roles => FindClaims("role").Select(c => c.Value).ToArray();
 

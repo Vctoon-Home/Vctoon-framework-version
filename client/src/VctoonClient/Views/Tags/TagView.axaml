@@ -4,24 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:L="clr-namespace:Abp.Localization.Avalonia;assembly=Abp.Localization.Avalonia"
              xmlns:tags="clr-namespace:VctoonClient.ViewModels.Tags"
-             xmlns:dtos="clr-namespace:VctoonCore.Resources.Dtos;assembly=VctoonCore.Application.Contracts"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
              Padding="24"
              x:DataType="tags:TagViewModel"
              x:Class="VctoonClient.Views.Tags.TagView">
 
     <StackPanel Spacing="20">
-        <Grid ColumnDefinitions="*,Auto">
-            <TextBox InnerLeftContent="{L:Localized Name}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            <Button Margin="8,0,0,0" Grid.Column="1" Content="{L:Localized Search}"></Button>
-        </Grid>
+
+        <Border IsVisible="{Binding HasSelected}" Theme="{StaticResource CardBorder}">
+            <ItemsControl ItemsSource="{Binding SelectedTags}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Margin="-5,0" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="tags:TagDtoViewModel">
+                        <Label FontSize="16" Margin="5,5,0,0" DataContext="{Binding .}"
+                               PointerPressed="InputElement_OnPointerPressed" Classes="Large"
+                               Theme="{StaticResource TagLabel}" Content="{Binding Tag.Name}">
+
+                            <Label.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuItem Header="Edit" Icon="fa-pen-to-square" Command="{Binding ToEditView}"
+                                              CommandParameter="{Binding Tag}" />
+                                </MenuFlyout>
+                            </Label.ContextFlyout>
+                        </Label>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </Border>
 
         <StackPanel Orientation="Horizontal" Spacing="24">
-            <Button Content="{L:Localized Create}" Command="{Binding ToCreateView}"></Button>
+            <Button Content="{L:Localized Refresh}" Command="{Binding LoadData}" />
+            <Button Content="{L:Localized Create}" Command="{Binding ToCreateView}" />
             <Button IsVisible="{Binding HasSelected}" Classes="Danger"
-                    Content="{L:Localized Remove}" Command="{Binding DeleteSelected}">
-            </Button>
+                    Content="{L:Localized Remove}" Command="{Binding DeleteSelected}" />
         </StackPanel>
+
+        <!-- <Grid ColumnDefinitions="*,Auto"> -->
+        <!--     <AutoCompleteBox ItemsSource="{Binding Tags}"> -->
+        <!--     </AutoCompleteBox> -->
+        <!--     <TextBox InnerLeftContent="{L:Localized Name}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" /> -->
+        <!--     <Button Margin="8,0,0,0" Grid.Column="1" Content="{L:Localized Search}"></Button> -->
+        <!-- </Grid> -->
+
 
         <ItemsControl ItemsSource="{Binding Tags}">
             <ItemsControl.ItemsPanel>
@@ -42,8 +72,7 @@
                         <Label.ContextFlyout>
                             <MenuFlyout>
                                 <MenuItem Header="Edit" Icon="fa-pen-to-square" Command="{Binding ToEditView}"
-                                          CommandParameter="{Binding Tag}">
-                                </MenuItem>
+                                          CommandParameter="{Binding Tag}" />
                             </MenuFlyout>
                         </Label.ContextFlyout>
 

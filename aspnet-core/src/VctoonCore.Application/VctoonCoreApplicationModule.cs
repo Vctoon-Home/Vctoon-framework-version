@@ -18,7 +18,7 @@ namespace VctoonCore;
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
     typeof(AbpSettingManagementApplicationModule)
-    )]
+)]
 public class VctoonCoreApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

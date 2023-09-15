@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Avalonia;
-using VctoonClient.Navigations.Query;
 using VctoonClient.Views.Tags;
 using VctoonCore.Resources.Dtos;
 
@@ -25,7 +23,7 @@ public partial class TagDtoViewModel : ObservableObject
         await App.Router.NavigateToAsync(App.Services.GetRequiredService<TagCreateUpdateView>(), new Dictionary<string, object>()
         {
             {nameof(TagCreateUpdateViewModel.TagId), tag.Id},
-            {nameof(TagCreateUpdateViewModel.Tag), Tag},
+            {nameof(TagCreateUpdateViewModel.Tag), Tag}
         });
     }
 

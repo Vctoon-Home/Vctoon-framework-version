@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using EasyDialog.Avalonia.Dialogs;
-using VctoonClient.Dialogs;
 using VctoonCore.Systems;
 
 namespace VctoonClient.ViewModels.Libraries;
@@ -12,11 +10,10 @@ public partial class DialogLibraryPathSelectViewModel : ViewModelBase, ITransien
     private readonly ISystemAppService _systemAppService;
 
     [ObservableProperty]
-    private ObservableCollection<SystemFolderDtoViewModel> folders = new();
+    private ObservableCollection<SystemFolderDtoViewModel> folders = new ObservableCollection<SystemFolderDtoViewModel>();
 
     [ObservableProperty]
-    private SystemFolderDtoViewModel selectedFolder;
-
+    private SystemFolderDtoViewModel? selectedFolder;
 
     [ObservableProperty]
     private bool isLoading;
@@ -25,28 +22,28 @@ public partial class DialogLibraryPathSelectViewModel : ViewModelBase, ITransien
 
     public DialogLibraryPathSelectViewModel(ISystemAppService systemAppService)
     {
-        this._systemAppService = systemAppService;
+        _systemAppService = systemAppService;
         Initialize();
     }
 
     public async void Initialize()
     {
-        await LoadData();
+        Folders = await LoadData();
     }
 
 
-    public async Task LoadData(SystemFolderDto folder = null)
+    public async Task<ObservableCollection<SystemFolderDtoViewModel>> LoadData(string path = null)
     {
-        var dialogService = Dialog;
+        ObservableCollection<SystemFolderDtoViewModel>? folderDtos = null;
         IsLoading = true;
         try
         {
-            var folders =
+            folderDtos =
                 ObjectMapper.Map<List<SystemFolderDto>, ObservableCollection<SystemFolderDtoViewModel>>(
                     // TODO: remove ?? @$"D:\\"
-                    await _systemAppService.GetSystemFolder(folder?.Path ?? @$"D:\\"));
+                    await _systemAppService.GetSystemFolder(path ?? @$"E:\\"));
 
-            foreach (var systemFolderDto in folders)
+            foreach (var systemFolderDto in folderDtos)
             {
                 if (systemFolderDto.HasChildren)
                 {
@@ -58,17 +55,25 @@ public partial class DialogLibraryPathSelectViewModel : ViewModelBase, ITransien
                             HasChildren = false
                         }
                     };
+
+                    systemFolderDto.PropertyChanged += async (sender, args) =>
+                    {
+                        if (args.PropertyName == nameof(SystemFolderDtoViewModel.IsExpanded) && systemFolderDto.IsExpanded)
+                        {
+                            systemFolderDto.Children = await LoadData(systemFolderDto.Path);
+                        }
+                    };
+
                 }
             }
-
-            Folders = folders;
         }
         catch (Exception e)
         {
+
             App.NotificationManager.Show(new Notification("", e.Message, NotificationType.Error));
         }
-
         IsLoading = false;
+        return folderDtos ?? new ObservableCollection<SystemFolderDtoViewModel>();
     }
 
     public async Task Submit()

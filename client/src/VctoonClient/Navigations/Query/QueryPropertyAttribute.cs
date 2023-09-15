@@ -17,7 +17,7 @@ public class QueryPropertyAttribute : Attribute
         Name = name;
         QueryId = queryId;
     }
-    
+
     public QueryPropertyAttribute(string name)
     {
         Name = name;

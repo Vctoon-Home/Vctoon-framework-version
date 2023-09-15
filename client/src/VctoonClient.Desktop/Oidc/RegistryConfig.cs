@@ -13,7 +13,7 @@ public class RegistryConfig
 
         if (CommandKeyValueValue.IsNullOrEmpty())
         {
-            var currentPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            var currentPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
 
 
             if (Os.IsWindows)
@@ -21,7 +21,7 @@ public class RegistryConfig
                 var oidcServerExePath = Path.Combine(currentPath,
                     "VctoonClient.Desktop.Oidc.exe");
 
-                CommandKeyValueValue = String.Format(CommandKeyValueFormat, oidcServerExePath);
+                CommandKeyValueValue = string.Format(CommandKeyValueFormat, oidcServerExePath);
             }
         }
     }
@@ -33,26 +33,26 @@ public class RegistryConfig
 
     private string CustomUriScheme { get; }
 
-    string CustomUriSchemeKeyPath => RootKeyPath + @"\" + CustomUriScheme;
-    string CustomUriSchemeKeyValueValue => "URL:" + CustomUriScheme;
-    string CommandKeyPath => CustomUriSchemeKeyPath + @"\shell\open\command";
+    private string CustomUriSchemeKeyPath => RootKeyPath + @"\" + CustomUriScheme;
+    private string CustomUriSchemeKeyValueValue => "URL:" + CustomUriScheme;
+    private string CommandKeyPath => CustomUriSchemeKeyPath + @"\shell\open\command";
 
-    const string RootKeyPath = @"Software\Classes";
+    private const string RootKeyPath = @"Software\Classes";
 
-    const string CustomUriSchemeKeyValueName = "";
+    private const string CustomUriSchemeKeyValueName = "";
 
-    const string ShellKeyName = "shell";
-    const string OpenKeyName = "open";
-    const string CommandKeyName = "command";
+    private const string ShellKeyName = "shell";
+    private const string OpenKeyName = "open";
+    private const string CommandKeyName = "command";
 
-    const string CommandKeyValueName = "";
-    const string CommandKeyValueFormat = "\"{0}\" \"%1\"";
-    static string CommandKeyValueValue = null;
+    private const string CommandKeyValueName = "";
+    private const string CommandKeyValueFormat = "\"{0}\" \"%1\"";
+    private static string CommandKeyValueValue = null;
 
-    const string UrlProtocolValueName = "URL Protocol";
-    const string UrlProtocolValueValue = "";
+    private const string UrlProtocolValueName = "URL Protocol";
+    private const string UrlProtocolValueValue = "";
 
-    bool NeedToAddKeys()
+    private bool NeedToAddKeys()
     {
         var addKeys = false;
 
@@ -74,7 +74,7 @@ public class RegistryConfig
         return addKeys;
     }
 
-    void AddRegKeys()
+    private void AddRegKeys()
     {
         using (var classesKey = Registry.CurrentUser.OpenSubKey(RootKeyPath, true))
         {

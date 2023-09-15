@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using VctoonClient.Navigations.Query;
-using VctoonCore.Enums;
 using VctoonCore.Libraries.Dtos;
 using VctoonCore.Resources;
 using VctoonCore.Resources.Dtos;

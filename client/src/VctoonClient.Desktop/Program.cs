@@ -22,6 +22,7 @@ internal class Program
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
 
+
         StoreSaveExecutor.SaveAllStores();
     }
 

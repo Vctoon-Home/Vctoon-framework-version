@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using VctoonClient.Dialogs;
+using VctoonClient.Extensions;
 using VctoonClient.Navigations.Query;
+using VctoonCore.Localization;
 using VctoonCore.Resources;
 using VctoonCore.Resources.Dtos;
+using Volo.Abp.Http.Client;
+using Volo.Abp.Validation;
 
 namespace VctoonClient.ViewModels.Tags;
 
@@ -19,6 +23,8 @@ public partial class TagCreateUpdateViewModel : ViewModelBase, ITransientDepende
 
     private readonly ITagAppService _tagService;
 
+    public string Title => TagId == null ? L.GetResource<LibraryResource>()["AddTag"] : L.GetResource<LibraryResource>()["EditTag"];
+
 
     public TagCreateUpdateViewModel()
     {
@@ -29,19 +35,32 @@ public partial class TagCreateUpdateViewModel : ViewModelBase, ITransientDepende
     {
         using var _ = Dialog.ShowContentLoading();
 
-        if (TagId.HasValue)
+        try
         {
-            await Update();
+            if (TagId.HasValue)
+            {
+                await Update();
+            }
+            else
+            {
+                await Create();
+            }
+
+            await App.Router.BackAsync(new Dictionary<string, object>()
+            {
+                {"Succeeded", true}
+            });
         }
-        else
+        catch (AbpRemoteCallException e)
         {
-            await Create();
+            e.Notify();
+        }
+        catch (AbpValidationException e)
+        {
+            e.Notify();
         }
 
-        await App.Router.BackAsync(new Dictionary<string, object>()
-        {
-            {"Succeeded", true}
-        });
+
     }
 
     public async Task Create()

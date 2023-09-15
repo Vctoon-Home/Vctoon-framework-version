@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using VctoonCore.Systems;
+﻿using System.Collections.ObjectModel;
 
 namespace VctoonClient.ViewModels.Libraries;
 
@@ -16,5 +14,7 @@ public partial class SystemFolderDtoViewModel : ObservableObject
     private bool isExpanded;
 
     [ObservableProperty]
-    ObservableCollection<SystemFolderDtoViewModel> children;
+    private ObservableCollection<SystemFolderDtoViewModel> children;
+
+
 }

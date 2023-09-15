@@ -31,7 +31,7 @@ public class VctoonClientDataAnnotationsValidationPlugin : IDataValidationPlugin
         }
         else
         {
-            PropertyInfo? runtimeProperty = target.GetType().GetRuntimeProperty(memberName);
+            var runtimeProperty = target.GetType().GetRuntimeProperty(memberName);
             nullable = runtimeProperty != null
                 ? new bool?(runtimeProperty.GetCustomAttributes<ValidationAttribute>().Any<ValidationAttribute>())
                 : new bool?();
@@ -65,8 +65,8 @@ public class VctoonClientDataAnnotationsValidationPlugin : IDataValidationPlugin
             object target;
             if (!reference.TryGetTarget(out target))
                 return;
-            this._context = new ValidationContext(target);
-            this._context.MemberName = name;
+            _context = new ValidationContext(target);
+            _context.MemberName = name;
 
             _validationLocalizer = App.Services.GetRequiredService<ILocalizationManager>()
                 .GetResource<AbpValidationResource>();
@@ -75,13 +75,13 @@ public class VctoonClientDataAnnotationsValidationPlugin : IDataValidationPlugin
 
         protected override void InnerValueChanged(object? value)
         {
-            if (this._context == null)
+            if (_context == null)
                 return;
             var errors = _objectValidator
-                .GetErrorsAsync(this._context.ObjectInstance, this._context.MemberName).GetAwaiter()
+                .GetErrorsAsync(_context.ObjectInstance, _context.MemberName).GetAwaiter()
                 .GetResult();
-            
-            if (errors.IsNullOrEmpty() || !errors.Any(e=> e.MemberNames.Any(m=> m.Contains(this._context.MemberName!))))
+
+            if (errors.IsNullOrEmpty() || !errors.Any(e => e.MemberNames.Any(m => m.Contains(_context.MemberName!))))
                 base.InnerValueChanged(value);
             else
                 base.InnerValueChanged(new BindingNotification(

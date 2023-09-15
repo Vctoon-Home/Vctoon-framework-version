@@ -1,7 +1,6 @@
 ﻿using System;
 using Abp.Localization.Avalonia;
 using EasyDialog.Avalonia.Dialogs;
-using VctoonClient.Dialogs;
 using Volo.Abp.ObjectMapping;
 using Volo.Abp.Users;
 

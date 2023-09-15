@@ -1,6 +1,4 @@
-﻿using Avalonia.Controls;
-using VctoonClient.Dialogs;
-using VctoonCore.Libraries.Dtos;
+﻿using VctoonCore.Libraries.Dtos;
 using Volo.Abp.Validation;
 
 namespace VctoonClient.ViewModels.Homes;

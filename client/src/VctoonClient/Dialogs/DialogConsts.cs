@@ -1,5 +1,4 @@
 ﻿using VctoonClient.Layouts.Main;
-using VctoonClient.Views;
 
 namespace VctoonClient.Dialogs;
 

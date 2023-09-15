@@ -8,11 +8,11 @@
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
-        <TrimmerRootDescriptor Include="Roots.xml" />
+        <TrimmerRootDescriptor Include="Roots.xml"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="$(AvaloniaPackageVersion)" />
+        <PackageReference Include="Avalonia" Version="$(AvaloniaPackageVersion)"/>
         <PackageReference Include="Avalonia.Labs.Controls" Version="11.0.0-rc2.2"/>
         <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaPackageVersion)"/>
         <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaPackageVersion)"/>
@@ -20,7 +20,7 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
         <PackageReference Include="Irihi.Ursa" Version="0.1.0-beta20230702"/>
         <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="0.1.0-beta20230702"/>
-        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="$(MicrosoftPackageVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="$(MicrosoftPackageVersion)"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="8.2.0"/>
         <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="8.2.0"/>
@@ -36,8 +36,8 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0"/>
         <PackageReference Include="Zyknow.Abp.Localization.Avalonia" Version="2.0.0"/>
         <PackageReference Include="NativeAppStore" Version="1.0.0-alpha.2"/>
-        <PackageReference Include="EasyDialog.Avalonia" Version="1.0.0-alpha.7" />
-        
+        <PackageReference Include="EasyDialog.Avalonia" Version="1.0.0-alpha.7"/>
+
     </ItemGroup>
 
     <ItemGroup>

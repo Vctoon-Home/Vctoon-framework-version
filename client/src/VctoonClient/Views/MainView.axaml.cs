@@ -1,7 +1,5 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using EasyDialog.Avalonia.Dialogs;
-using VctoonClient.Dialogs;
 using VctoonClient.ViewModels;
 
 namespace VctoonClient.Views;
@@ -16,6 +14,6 @@ public partial class MainView : UserControl, ISingletonDependency
         InitializeComponent();
         this.UseEasyLoading().UseEasyDialog();
         _vm = App.Services.GetService<MainViewModel>()!;
-        this.DataContext = _vm;
+        DataContext = _vm;
     }
 }

@@ -3,14 +3,13 @@ using Volo.Abp.Application.Services;
 
 namespace VctoonCore.Libraries;
 
-
 /// <summary>
 /// 
 /// </summary>
 public interface ILibraryAppService :
-    ICrudAppService< 
-        LibraryDto, 
-        Guid, 
+    ICrudAppService<
+        LibraryDto,
+        Guid,
         LibraryGetListInput,
         LibraryCreateUpdateInput,
         LibraryCreateUpdateInput>

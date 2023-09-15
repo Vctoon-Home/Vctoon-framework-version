@@ -14,7 +14,7 @@ namespace VctoonCore;
     typeof(AbpTestBaseModule),
     typeof(AbpAuthorizationModule),
     typeof(VctoonCoreDomainModule)
-    )]
+)]
 public class VctoonCoreTestBaseModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

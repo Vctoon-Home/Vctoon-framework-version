@@ -14,18 +14,17 @@
         <DockPanel>
 
             <StackPanel Spacing="8" Orientation="Horizontal" DockPanel.Dock="Right">
-                <components:LanguageSelect></components:LanguageSelect>
+                <components:LanguageSelect />
 
-                <Button IsVisible="{Binding !IsLogin}" Command="{Binding Login}" Content="{L:Localized Login}"></Button>
+                <Button IsVisible="{Binding !IsLogin}" Command="{Binding Login}" Content="{L:Localized Login}" />
 
                 <Menu>
                     <MenuItem IsVisible="{Binding IsLogin}" Header="{Binding UserName}">
-                        <MenuItem Header="{L:Localized LoggedOutTitle}" Command="{Binding Logout}"></MenuItem>
+                        <MenuItem Header="{L:Localized LoggedOutTitle}" Command="{Binding Logout}" />
                     </MenuItem>
                 </Menu>
 
                 <ToggleSwitch
-                    Grid.Column="1"
                     Padding="4"
                     IsCheckedChanged="ToggleButton_ThemeVariantChanged"
                     Theme="{DynamicResource ButtonToggleSwitch}">
@@ -49,8 +48,7 @@
 
             <StackPanel Spacing="16" Orientation="Horizontal">
                 <ToggleButton Theme="{DynamicResource BorderlessButton}" i:Attached.Icon="mdi-menu"
-                              IsChecked="{Binding Collapsed}">
-                </ToggleButton>
+                              IsChecked="{Binding Collapsed}" />
 
                 <TextBlock
                     VerticalAlignment="Center"
@@ -60,13 +58,11 @@
 
                 <Button Theme="{DynamicResource BorderlessButton}" Command="{Binding Router.BackAsync}"
                         IsEnabled="{Binding RouterCanGoBack}"
-                        i:Attached.Icon="mdi-keyboard-backspace" FontSize="20">
-
-                </Button>
+                        i:Attached.Icon="mdi-keyboard-backspace" FontSize="20" />
 
                 <TextBox Width="350" MinWidth="50" FontSize="20">
                     <TextBox.InnerLeftContent>
-                        <i:Icon  Value="mdi-magnify"></i:Icon>
+                        <i:Icon Value="mdi-magnify" />
                     </TextBox.InnerLeftContent>
                 </TextBox>
 

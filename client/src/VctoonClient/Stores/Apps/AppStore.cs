@@ -13,7 +13,7 @@ public partial class AppStore : VctoonStoreBase
     private string CultureName { get; set; }
 
     [ObservableProperty]
-    bool _collapsed;
+    private bool _collapsed;
 
     public AppStore(ILocalizationManager localizationManager)
     {

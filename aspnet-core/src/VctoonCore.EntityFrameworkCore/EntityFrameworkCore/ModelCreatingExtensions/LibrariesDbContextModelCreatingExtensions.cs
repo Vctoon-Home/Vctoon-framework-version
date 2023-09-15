@@ -18,7 +18,8 @@ public static class LibrariesDbContextModelCreatingExtensions
         //    //...
         //});
 
-        builder.Entity<Library>(b => {
+        builder.Entity<Library>(b =>
+        {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "Libraries", VctoonCoreConsts.DbSchema);
             b.ConfigureByConvention();//auto configure for the base class props
 
@@ -28,11 +29,12 @@ public static class LibrariesDbContextModelCreatingExtensions
             b.HasMany<Video>().WithOne().HasForeignKey(e => e.LibraryId).OnDelete(DeleteBehavior.Cascade);
             b.HasMany<Comic>().WithOne().HasForeignKey(e => e.LibraryId).OnDelete(DeleteBehavior.Cascade);
 
-            b.Property(e => e.LibraryType).HasConversion(v => v.ToString(), v => (LibraryType)Enum.Parse(typeof(LibraryType), v));
+            b.Property(e => e.LibraryType).HasConversion(v => v.ToString(), v => (LibraryType) Enum.Parse(typeof(LibraryType), v));
 
         });
 
-        builder.Entity<LibraryPath>(b => {
+        builder.Entity<LibraryPath>(b =>
+        {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "LibraryPaths", VctoonCoreConsts.DbSchema);
             b.ConfigureByConvention();//auto configure for the base class props
 
@@ -43,7 +45,8 @@ public static class LibrariesDbContextModelCreatingExtensions
 
 
         // LibraryFile
-        builder.Entity<LibraryFile>(b => {
+        builder.Entity<LibraryFile>(b =>
+        {
             b.ToTable(VctoonCoreConsts.DbTablePrefix + "LibraryFiles", VctoonCoreConsts.DbSchema);
             b.ConfigureByConvention();//auto configure for the base class props
         });
