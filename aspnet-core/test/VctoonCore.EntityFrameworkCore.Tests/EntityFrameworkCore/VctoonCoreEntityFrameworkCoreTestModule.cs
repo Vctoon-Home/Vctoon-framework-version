@@ -1,4 +1,17 @@
-﻿namespace VctoonCore.EntityFrameworkCore;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Sqlite;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.Uow;
+
+namespace VctoonCore.EntityFrameworkCore;
 
 [DependsOn(
     typeof(VctoonCoreEntityFrameworkCoreModule),
