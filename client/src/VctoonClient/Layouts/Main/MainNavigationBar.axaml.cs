@@ -19,14 +19,14 @@ public partial class MainNavigationBar : UserControl
         DataContext = _vm;
 
 
-        SetRootBorderHasPadding(!Menu.IsClosed);
-        Menu.PropertyChanged += (sender, args) =>
-        {
-            if (args.Property.Name == nameof(Menu.IsClosed))
-            {
-                SetRootBorderHasPadding(args.NewValue is false);
-            }
-        };
+        //SetRootBorderHasPadding(!Menu.IsClosed);
+        //Menu.PropertyChanged += (sender, args) =>
+        //{
+        //    if (args.Property.Name == nameof(Menu.IsClosed))
+        //    {
+        //        SetRootBorderHasPadding(args.NewValue is false);
+        //    }
+        //};
 
         // var navigationRouter = App.Services.GetService<IVctoonNavigationRouter>()!;
 

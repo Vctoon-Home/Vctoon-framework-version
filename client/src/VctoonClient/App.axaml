@@ -1,5 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
              xmlns:labs="clr-namespace:Avalonia.Labs.Controls;assembly=Avalonia.Labs.Controls"
              xmlns:avalonia="clr-namespace:EasyDialog.Avalonia;assembly=EasyDialog.Avalonia"
              x:Class="VctoonClient.App"
@@ -12,7 +13,7 @@
         <FluentTheme />
         <labs:ControlThemes />
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
-        <StyleInclude Source="avares://Ursa.Themes.Semi/Index.axaml" />
+        <u-semi:SemiTheme Locale="zh-CN"/>
         <avalonia:EasyDialog />
     </Application.Styles>
 </Application>

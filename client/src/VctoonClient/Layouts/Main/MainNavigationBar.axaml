@@ -11,126 +11,118 @@
              x:CompileBindings="True"
              x:DataType="viewModels:MainViewModel">
 
-
-    <Border Margin="4,0,4,4" x:Name="Border" Theme="{StaticResource CardBorder}">
-        <u:NavigationMenu
-            Name="Menu"
-            ItemsSource="{Binding NavigationMenuItemProvider.MenuItems}"
-            IsClosed="{Binding Collapsed}"
-            ShowCollapseButton="False"
-            OpenedWidth="1000"
-            ClosedWidth="10">
-            <u:NavigationMenu.ItemTemplate>
-                <menus:MenuDataTemplateSelector>
-                    <menus:MenuDataTemplateSelector.MenuTemplate>
-                        <DataTemplate DataType="menus:MenuItemViewModel">
-                            <u:NavigationMenuItem Command="{Binding ActivateCommand}"
-                                                  Header="{Binding Header}"
-                                                  ItemsSource="{Binding Children}">
-                                <u:NavigationMenuItem.HeaderTemplate>
-                                    <DataTemplate DataType="x:String">
-                                        <DockPanel>
-                                            <!-- <DropDownButton DockPanel.Dock="Right" i:Attached.Icon="mdi-dots-vertical" -->
-                                            <!--                 Theme="{StaticResource BorderlessButton}"> -->
-                                            <!--     <DropDownButton.Flyout> -->
-                                            <!--         <MenuFlyout Placement="BottomEdgeAlignedRight"> -->
-                                            <!--             <MenuItem Header="{L:Localized AddLibrary}" /> -->
-                                            <!--             <MenuItem Header="{L:Localized ScanLibrary}" /> -->
-                                            <!-- -->
-                                            <!--         </MenuFlyout> -->
-                                            <!--     </DropDownButton.Flyout> -->
-                                            <!-- -->
-                                            <!-- </DropDownButton> -->
+	<Border Margin="4,0,4,4" Padding="0" x:Name="Border" Theme="{StaticResource CardBorder}">
 
 
-                                            <DropDownButton Theme="{StaticResource BorderlessButton}"
-                                                            DockPanel.Dock="Right"
-                                                            i:Attached.Icon="fa-ellipsis-vertical"
-                                                            IsVisible="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).IsResource}">
-                                                <DropDownButton.Styles>
-                                                    <Style Selector="Button:pointerover">
-                                                        <Setter Property="Background"
-                                                                Value="{DynamicResource ButtonDefaultBackground}" />
-                                                        <Setter Property="BorderBrush"
-                                                                Value="{DynamicResource ButtonDefaultBackground}" />
-                                                    </Style>
-                                                </DropDownButton.Styles>
-
-                                                <DropDownButton.Flyout>
-                                                    <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                        <MenuItem Icon="fa-magnifying-glass">
-                                                            <MenuItem.Header>
-                                                                <Grid ColumnDefinitions="Auto,*">
-                                                                    <i:Icon Value="fa-searchengin" Margin="0,0,10,0" />
-                                                                    <TextBlock Grid.Column="1" Text="Scan" />
-                                                                </Grid>
-                                                            </MenuItem.Header>
-                                                        </MenuItem>
-
-                                                        <MenuItem Icon="fa-magnifying-glass"
-                                                                  Command="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).Edit}">
-                                                            <MenuItem.Header>
-                                                                <Grid ColumnDefinitions="Auto,*">
-                                                                    <i:Icon Value="fa-pen-to-square" Margin="0,0,10,0" />
-                                                                    <TextBlock Grid.Column="1" Text="Edit" />
-                                                                </Grid>
-                                                            </MenuItem.Header>
-                                                        </MenuItem>
-
-                                                        <MenuItem Icon="fa-magnifying-glass"
-                                                                  Command="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).Delete}">
-                                                            <MenuItem.Header>
-                                                                <Grid ColumnDefinitions="Auto,*">
-                                                                    <i:Icon Foreground="Red" Value="fa-trash"
-                                                                            Margin="0,0,10,0" />
-                                                                    <TextBlock Foreground="Red" Grid.Column="1"
-                                                                               Text="Delete" />
-                                                                </Grid>
-                                                            </MenuItem.Header>
-                                                        </MenuItem>
-
-                                                    </MenuFlyout>
-                                                </DropDownButton.Flyout>
-
-                                            </DropDownButton>
-
-                                            <Button Theme="{StaticResource BorderlessButton}" DockPanel.Dock="Right"
-                                                    i:Attached.Icon="mdi-plus-thick"
-                                                    Click="NavigationToCreateLibraryView_ClickAsync"
-                                                    IsVisible="{Binding $parent[u:NavigationMenuItem].((menus:MenuItemViewModel)DataContext).IsRootResource}">
-                                                <Button.Styles>
-                                                    <Style Selector="Button:pointerover">
-                                                        <Setter Property="Background"
-                                                                Value="{DynamicResource ButtonDefaultBackground}" />
-                                                        <Setter Property="BorderBrush"
-                                                                Value="{DynamicResource ButtonDefaultBackground}" />
-                                                    </Style>
-                                                </Button.Styles>
-
-                                            </Button>
+		<u:NavMenu
+			Name="Menu"
+			ExpandWidth="400"
+			IsHorizontalCollapsed="{Binding Collapsed}"
+			ItemsSource="{Binding NavigationMenuItemProvider.MenuItems}"
+			CommandBinding="{Binding ActivateCommand}"
+			HeaderBinding="{Binding Header}"
+			>
+			<u:NavMenu.HeaderTemplate>
+				<DataTemplate DataType="x:String">
+					<DockPanel>
+						<!-- <DropDownButton DockPanel.Dock="Right" i:Attached.Icon="mdi-dots-vertical" -->
+						<!--                 Theme="{StaticResource BorderlessButton}"> -->
+						<!--     <DropDownButton.Flyout> -->
+						<!--         <MenuFlyout Placement="BottomEdgeAlignedRight"> -->
+						<!--             <MenuItem Header="{L:Localized AddLibrary}" /> -->
+						<!--             <MenuItem Header="{L:Localized ScanLibrary}" /> -->
+						<!-- -->
+						<!--         </MenuFlyout> -->
+						<!--     </DropDownButton.Flyout> -->
+						<!-- -->
+						<!-- </DropDownButton> -->
 
 
-                                            <TextBlock VerticalAlignment="Center" DockPanel.Dock="Left"
-                                                       Text="{Binding .}" />
-                                        </DockPanel>
-                                    </DataTemplate>
-                                </u:NavigationMenuItem.HeaderTemplate>
-                                <u:NavigationMenuItem.Icon>
-                                    <i:Icon FontSize="20"
-                                            Value="{Binding Icon}" />
-                                </u:NavigationMenuItem.Icon>
-                            </u:NavigationMenuItem>
-                        </DataTemplate>
-                    </menus:MenuDataTemplateSelector.MenuTemplate>
-                    <menus:MenuDataTemplateSelector.SeparatorTemplate>
-                        <!-- <DataTemplate DataType="navigations:MenuItemViewModel"> -->
-                        <!--     <u:NavigationMenuSeparator Header="{Binding MenuHeader}" /> -->
-                        <!-- </DataTemplate> -->
-                    </menus:MenuDataTemplateSelector.SeparatorTemplate>
-                </menus:MenuDataTemplateSelector>
-            </u:NavigationMenu.ItemTemplate>
-        </u:NavigationMenu>
-    </Border>
+						<DropDownButton Theme="{StaticResource BorderlessButton}"
+										DockPanel.Dock="Right"
+										i:Attached.Icon="fa-ellipsis-vertical"
+										IsVisible="{Binding $parent[u:NavMenuItem].((menus:MenuItemViewModel)DataContext).IsResource}">
+							<DropDownButton.Styles>
+								<Style Selector="Button:pointerover">
+									<Setter Property="Background"
+											Value="{DynamicResource ButtonDefaultBackground}" />
+									<Setter Property="BorderBrush"
+											Value="{DynamicResource ButtonDefaultBackground}" />
+								</Style>
+							</DropDownButton.Styles>
+
+							<DropDownButton.Flyout>
+								<MenuFlyout Placement="BottomEdgeAlignedRight">
+									<MenuItem Icon="fa-magnifying-glass">
+										<MenuItem.Header>
+											<Grid ColumnDefinitions="Auto,*">
+												<i:Icon Value="fa-searchengin" Margin="0,0,10,0" />
+												<TextBlock Grid.Column="1" Text="Scan" />
+											</Grid>
+										</MenuItem.Header>
+									</MenuItem>
+
+									<MenuItem Icon="fa-magnifying-glass"
+											  Command="{Binding $parent[u:NavMenuItem].((menus:MenuItemViewModel)DataContext).Edit}">
+										<MenuItem.Header>
+											<Grid ColumnDefinitions="Auto,*">
+												<i:Icon Value="fa-pen-to-square" Margin="0,0,10,0" />
+												<TextBlock Grid.Column="1" Text="Edit" />
+											</Grid>
+										</MenuItem.Header>
+									</MenuItem>
+
+									<MenuItem Icon="fa-magnifying-glass"
+											  Command="{Binding $parent[u:NavMenuItem].((menus:MenuItemViewModel)DataContext).Delete}">
+										<MenuItem.Header>
+											<Grid ColumnDefinitions="Auto,*">
+												<i:Icon Foreground="Red" Value="fa-trash"
+														Margin="0,0,10,0" />
+												<TextBlock Foreground="Red" Grid.Column="1"
+														   Text="Delete" />
+											</Grid>
+										</MenuItem.Header>
+									</MenuItem>
+
+								</MenuFlyout>
+							</DropDownButton.Flyout>
+
+						</DropDownButton>
+
+						<Button Theme="{StaticResource BorderlessButton}" DockPanel.Dock="Right"
+								i:Attached.Icon="mdi-plus-thick"
+								Click="NavigationToCreateLibraryView_ClickAsync"
+								IsVisible="{Binding $parent[u:NavMenuItem].((menus:MenuItemViewModel)DataContext).IsRootResource}">
+							<Button.Styles>
+								<Style Selector="Button:pointerover">
+									<Setter Property="Background"
+											Value="{DynamicResource ButtonDefaultBackground}" />
+									<Setter Property="BorderBrush"
+											Value="{DynamicResource ButtonDefaultBackground}" />
+								</Style>
+							</Button.Styles>
+
+						</Button>
+
+
+						<TextBlock VerticalAlignment="Center" DockPanel.Dock="Left"
+								   Text="{Binding .}" />
+					</DockPanel>
+				</DataTemplate>
+
+
+			</u:NavMenu.HeaderTemplate>
+
+			<u:NavMenu.IconTemplate>
+				<DataTemplate>
+					<i:Icon FontSize="20" Value="{Binding $parent[u:NavMenuItem].((menus:MenuItemViewModel)DataContext).Icon}" />
+				</DataTemplate>
+			</u:NavMenu.IconTemplate>
+
+
+
+		</u:NavMenu>
+	</Border>
 
 
 </UserControl>
