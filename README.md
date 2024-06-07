@@ -9,6 +9,8 @@
 Vctoon is an open-source app built with ABP Framework and Avalonia for managing and browsing video and comic files,
 offering a unique multimedia platform.
 
+**this project has rebuild to use blazor,please check this repository [Vctoon](https://github.com/zyknow/Vctoon) .**
+
 ## License
 
 > You can check out the full license [here](https://github.com/zyknow/Vctoon/blob/main/LICENSE)
